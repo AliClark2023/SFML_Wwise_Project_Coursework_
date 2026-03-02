@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 
+#include "Player/Player.h"
 #include "WwiseWrapper.h"
 
 int main()
@@ -54,20 +55,40 @@ int main()
 	}
 	//--------------------------------------------------------------------------
 
-	sf::RenderWindow window(sf::VideoMode({ 200, 200 }), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	// game initialisation
+	std::shared_ptr<sf::RenderWindow> window(new sf::RenderWindow (sf::VideoMode({ 1280, 720 }), "Audio Coursework"));
+	std::shared_ptr<sf::View> view(new sf::View);
+	view->setCenter(sf::Vector2f(0, 0));
+	view->setSize(sf::Vector2f(1280, 720));
+	window->setView(*view);
 
-	while (window.isOpen())
+	// Initialise objects for delta time
+	sf::Clock clock;
+
+	//testing
+	sf::CircleShape TestShape(100.f);
+	TestShape.setOrigin(sf::Vector2f(TestShape.getRadius(), TestShape.getRadius()));
+	TestShape.setPosition(window->getView().getCenter() * TestShape.getRadius());
+	TestShape.setFillColor(sf::Color::Green);
+	
+	
+	// move to level class
+	std::unique_ptr<Player> player(new Player(window,view));
+
+	while (window->isOpen())
 	{
-		while (const std::optional event = window.pollEvent())
+		// Calculate delta time. How much time has passed 
+		// since it was last calculated (in seconds) and restart the clock.
+		float deltaTime = clock.restart().asSeconds();
+		
+		while (const std::optional event = window->pollEvent())
 		{
 			if (event->is<sf::Event::Closed>())
-				window.close();
+				window->close();
 			else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
 			{
 				if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
-					window.close();
+					window->close();
 			}
 		}
 
@@ -76,9 +97,16 @@ int main()
 		AK::SoundEngine::RenderAudio();
 		//----------------------------------------------------------------------
 
-		window.clear();
-		window.draw(shape);
-		window.display();
+		// input cycle
+		player->handle_input(deltaTime);
+		// update cycle
+		player->update(deltaTime);
+		// render cycle
+		window->clear();
+		window->draw(TestShape);
+		window->draw(*player);
+		
+		window->display();
 	}
 
 	//--Wwise code--------------------------------------------------------------

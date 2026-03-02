@@ -1,0 +1,45 @@
+﻿#pragma once
+#include "SFML\Graphics.hpp"
+#include <memory>
+
+// uses circle class as base shape, can create other shape types from this class (triangles, squares etc)
+class GameObject : public sf::CircleShape
+{
+public:
+    GameObject(){}
+    ~GameObject() override {}
+    
+    virtual void handle_input(float dt) = 0;
+    virtual void update(float dt) = 0;
+    
+    // Control object speed and direction
+    void set_velocity(sf::Vector2f vel);
+    void set_velocity(float vx, float vy);
+    sf::Vector2f get_velocity() const {return velocity_;}
+    
+    // Object state
+    bool is_alive() const { return alive_; }
+    void set_alive(const bool b) { alive_ = b; }
+
+    // For Object collision, set collider box, get collider box, and dedicated virtual function for any collision responses
+    bool is_collider() const { return collider_; }
+    void set_collider(bool b) { collider_ = b; }
+    sf::FloatRect get_collision_box() const { return collision_box_; }
+    void set_collision_box(float x, float y, float width, float height) { collision_box_ = sf::FloatRect({ x, y }, { width, height }); }
+    void set_collision_box(const sf::FloatRect fr) { collision_box_ = fr; }
+    virtual void collision_response(GameObject* collider) = 0;
+    
+    // Set game components 
+    void set_window(const std::shared_ptr<sf::RenderWindow>& win) { window_ref_ = win; }
+    void set_view(const std::shared_ptr<sf::View>& v) { view_ref_ = v; }
+protected:
+    // properties
+    sf::Vector2f velocity_;
+    bool alive_;
+    // collision variables
+    sf::FloatRect collision_box_;
+    bool collider_;
+    
+    std::weak_ptr<sf::RenderWindow> window_ref_;
+    std::weak_ptr<sf::View> view_ref_;
+};
