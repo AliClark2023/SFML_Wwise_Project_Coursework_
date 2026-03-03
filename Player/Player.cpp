@@ -8,7 +8,9 @@ Player::Player(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_p
     setRadius(25.f);
     setOrigin(sf::Vector2f(getRadius(), getRadius()));
     setRotation(sf::degrees(45));
-    setPosition(win->getView().getCenter());
+    //spawn_point = win->getView().getCenter();
+    spawn_point = sf::Vector2f(win->getView().getCenter().x, win->getView().getCenter().y - 500.f);
+    setPosition(spawn_point);
     setFillColor(sf::Color::Yellow);
     
     //physics Initialisation
@@ -19,6 +21,10 @@ Player::Player(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_p
     is_jumping_ = false;
     //movement
     velocity_ = sf::Vector2f(2.f, 0) * VELOCITY_SCALE;
+    object_type_ = player_controlled;
+    
+    // collision setup
+    collision_box_ = getGlobalBounds();
 }
 
 Player::~Player()
@@ -47,6 +53,7 @@ void Player::handle_input(float dt)
                 y_velocity_ = jump_vector_;
                 is_jumping_ = true;
                 is_key_held_ = true;
+                is_on_ground_ = false;
             }
             else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && is_key_held_) {
                 is_key_held_ = false;
@@ -55,13 +62,14 @@ void Player::handle_input(float dt)
         
         window.reset();
     }
-    
 }
 
 void Player::update(float dt)
 {
     ////Updating gravity
     //s=ut + 1/2at^2
+    
+    if (is_on_ground_) y_velocity_ = sf::Vector2f(0, 0);
     sf::Vector2f pos = y_velocity_ * dt + 0.5f * gravity_ * dt * dt;
     // v = u +at note its += not =
     y_velocity_ += gravity_ * dt;
@@ -69,7 +77,16 @@ void Player::update(float dt)
     
 }
 
-void Player::collision_response(GameObject* collider)
+void Player::collision_response(GameObject* collider, const sf::Vector2f& mtv)
 {
-    
+    // place player on top
+    if (collider->get_object_type() == scenery)
+    {
+        setPosition(getPosition() - mtv);
+        if (mtv.y > 0)
+        {
+            y_velocity_.y = 0;
+            is_on_ground_ = true;
+        }
+    }
 }

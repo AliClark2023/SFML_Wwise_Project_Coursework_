@@ -4,6 +4,8 @@
 #include <string>
 
 #include "Player/Player.h"
+#include "Utilities/SATDetection.h"
+#include "Obstacles/Scenery.h"
 #include "WwiseWrapper.h"
 
 int main()
@@ -74,6 +76,7 @@ int main()
 	
 	// move to level class
 	std::unique_ptr<Player> player(new Player(window,view));
+	std::unique_ptr<Scenery> testLevel(new Scenery(window,view));
 
 	while (window->isOpen())
 	{
@@ -96,15 +99,25 @@ int main()
 		//Handle Wwise's audio rendering.
 		AK::SoundEngine::RenderAudio();
 		//----------------------------------------------------------------------
-
+		// (move to level class)
 		// input cycle
 		player->handle_input(deltaTime);
-		// update cycle
+		// update cycle 
 		player->update(deltaTime);
+		
+		// collision test
+		sf::Vector2f mtv;
+		if (sat_detection::sat_collision(*player, *testLevel, mtv))
+		{
+			player->collision_response(testLevel.get(), mtv);
+		}
+
 		// render cycle
 		window->clear();
-		window->draw(TestShape);
+		//window->draw(TestShape);
+		window->draw(*testLevel);
 		window->draw(*player);
+		
 		
 		window->display();
 	}

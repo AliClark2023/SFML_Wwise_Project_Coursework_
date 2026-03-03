@@ -2,11 +2,18 @@
 #include "SFML\Graphics.hpp"
 #include <memory>
 
+enum ObjectType
+{
+    player_controlled,
+    scenery,
+    obstacle,
+};
+
 // uses circle class as base shape, can create other shape types from this class (triangles, squares etc)
 class GameObject : public sf::CircleShape
 {
 public:
-    GameObject(){}
+    GameObject();
     ~GameObject() override {}
     
     virtual void handle_input(float dt) = 0;
@@ -27,16 +34,21 @@ public:
     sf::FloatRect get_collision_box() const { return collision_box_; }
     void set_collision_box(float x, float y, float width, float height) { collision_box_ = sf::FloatRect({ x, y }, { width, height }); }
     void set_collision_box(const sf::FloatRect fr) { collision_box_ = fr; }
-    virtual void collision_response(GameObject* collider) = 0;
+    virtual void collision_response(GameObject* collider, const sf::Vector2f& mtv) = 0;
     
     // Set game components 
     void set_window(const std::shared_ptr<sf::RenderWindow>& win) { window_ref_ = win; }
     void set_view(const std::shared_ptr<sf::View>& v) { view_ref_ = v; }
+    
+    // getting components
+    ObjectType get_object_type() const { return object_type_; }
 protected:
     // properties
     sf::Vector2f velocity_;
     bool alive_;
+    ObjectType object_type_;
     // collision variables
+    // not currently used (but could be used to define smaller/larger collision area)
     sf::FloatRect collision_box_;
     bool collider_;
     
