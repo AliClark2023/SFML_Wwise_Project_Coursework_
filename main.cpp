@@ -5,6 +5,7 @@
 
 #include "Player/Player.h"
 #include "Utilities/SATDetection.h"
+#include "LevelComponents/Level.h"
 #include "Obstacles/Scenery.h"
 #include "WwiseWrapper.h"
 
@@ -64,19 +65,10 @@ int main()
 	view->setSize(sf::Vector2f(1280, 720));
 	window->setView(*view);
 
+	std::unique_ptr<level> Level(new level(window,view));
+	
 	// Initialise objects for delta time
 	sf::Clock clock;
-
-	//testing
-	sf::CircleShape TestShape(100.f);
-	TestShape.setOrigin(sf::Vector2f(TestShape.getRadius(), TestShape.getRadius()));
-	TestShape.setPosition(window->getView().getCenter() * TestShape.getRadius());
-	TestShape.setFillColor(sf::Color::Green);
-	
-	
-	// move to level class
-	std::unique_ptr<Player> player(new Player(window,view));
-	std::unique_ptr<Scenery> testLevel(new Scenery(window,view));
 
 	while (window->isOpen())
 	{
@@ -99,25 +91,14 @@ int main()
 		//Handle Wwise's audio rendering.
 		AK::SoundEngine::RenderAudio();
 		//----------------------------------------------------------------------
-		// (move to level class)
-		// input cycle
-		player->handle_input(deltaTime);
-		// update cycle 
-		player->update(deltaTime);
-		
-		// collision test
-		sf::Vector2f mtv;
-		if (sat_detection::sat_collision(*player, *testLevel, mtv))
-		{
-			player->collision_response(testLevel.get(), mtv);
-		}
+	
+		Level->handle_input(deltaTime);
+		Level->update(deltaTime);
 
 		// render cycle
 		window->clear();
-		//window->draw(TestShape);
-		window->draw(*testLevel);
-		window->draw(*player);
-		
+
+		Level->render();
 		
 		window->display();
 	}

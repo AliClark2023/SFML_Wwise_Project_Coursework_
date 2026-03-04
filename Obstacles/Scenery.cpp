@@ -23,6 +23,8 @@ void Scenery::handle_input(float dt)
 
 void Scenery::update(float dt)
 {
+    // update position based on velocity
+    move(velocity_ * dt);
 }
 
 void Scenery::collision_response(GameObject* collider, const sf::Vector2f& mtv)

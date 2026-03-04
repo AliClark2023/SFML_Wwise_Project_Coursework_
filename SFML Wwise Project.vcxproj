@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseClasses\GameObject.cpp" />
+    <ClCompile Include="LevelComponents\Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obstacles\Scenery.cpp" />
     <ClCompile Include="Player\Player.cpp" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="BaseClasses\GameObject.h" />
     <ClInclude Include="Constants\PhysicsConsts.h" />
+    <ClInclude Include="LevelComponents\Level.h" />
     <ClInclude Include="Obstacles\Scenery.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="SoundEngine\Common\AkDefaultLowLevelIODispatcher.h" />

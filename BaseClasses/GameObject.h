@@ -20,8 +20,8 @@ public:
     virtual void update(float dt) = 0;
     
     // Control object speed and direction
-    void set_velocity(sf::Vector2f vel);
-    void set_velocity(float vx, float vy);
+    void set_velocity(const sf::Vector2f& vel) {velocity_ = vel;}
+    void set_velocity(const float& vx, const float& vy){velocity_.x = vx;velocity_.y = vy;}
     sf::Vector2f get_velocity() const {return velocity_;}
     
     // Object state
@@ -44,7 +44,7 @@ public:
     ObjectType get_object_type() const { return object_type_; }
 protected:
     // properties
-    sf::Vector2f velocity_;
+    sf::Vector2f velocity_{0.0f,0.0f };
     bool alive_;
     ObjectType object_type_;
     // collision variables
