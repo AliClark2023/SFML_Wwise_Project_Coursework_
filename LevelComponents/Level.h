@@ -18,5 +18,14 @@ private:
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Scenery> ground_;
-    std::vector<GameObject> obstacles_;
+    std::vector<std::unique_ptr<GameObject>> obstacles_;
+    
+    /*
+     * spawned object parameters
+     */
+    // speed variable to adjust all spawned objects by
+    float object_speed_ = 300.0f;
+    sf::Vector2f spawn_zone_min_ = sf::Vector2f(0.0f, 0.0f);
+    sf::Vector2f spawn_zone_max_ = sf::Vector2f(0.0f, 0.0f);
+    int object_count_ = 0;
 };
