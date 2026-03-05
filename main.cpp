@@ -61,7 +61,7 @@ int main()
 	// game initialisation
 	std::shared_ptr<sf::RenderWindow> window(new sf::RenderWindow (sf::VideoMode({ 1280, 720 }), "Audio Coursework"));
 	std::shared_ptr<sf::View> view(new sf::View);
-	view->setCenter(sf::Vector2f(0, 0));
+	view->setCenter(sf::Vector2f(window->getSize().x/2, window->getSize().y/2));
 	view->setSize(sf::Vector2f(1280, 720));
 	window->setView(*view);
 

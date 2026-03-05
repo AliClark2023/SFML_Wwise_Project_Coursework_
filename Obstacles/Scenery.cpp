@@ -13,6 +13,21 @@ Scenery::Scenery(const std::shared_ptr<sf::RenderWindow>& win, const std::shared
     object_type_ = scenery;
 }
 
+Scenery::Scenery(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v,
+    const scenery_config& config)
+{
+    set_window(win);
+    set_view(v);
+    setPointCount(config.point_count);
+    setRadius(config.radius);
+    setOrigin(config.origin);
+    setRotation(sf::degrees(config.rotation));
+    setPosition(config.position);
+    set_velocity(config.velocity);
+    setFillColor(config.color);
+    object_type_ = scenery;
+}
+
 Scenery::~Scenery()
 {
 }

@@ -79,14 +79,26 @@ void Player::update(float dt)
 
 void Player::collision_response(GameObject* collider, const sf::Vector2f& mtv)
 {
-    // place player on top
+    
     if (collider->get_object_type() == scenery)
     {
-        setPosition(getPosition() - mtv);
-        if (mtv.y > 0)
+        // moves player out of collision
+        setPosition(getPosition() + mtv);
+        
+        // adjusts velocity depending on collision side
+        float align = mtv.x * UP.x + mtv.y * UP.y;
+        //landing from above
+        if (align > 0.5f)
         {
             y_velocity_.y = 0;
             is_on_ground_ = true;
+        }// underside of object
+        else if (align < -0.5f)
+        {
+            if (y_velocity_.y < 0.f) y_velocity_.y = 0.f;
+        }else
+        {
+            
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿#include "SATDetection.h"
 
-std::vector <sf::Vector2f> sat_detection::get_transformed_points(const sf::CircleShape& shape)
+std::vector <sf::Vector2f> sat_detection::get_transformed_points(const sf::Shape& shape)
 {
     std::vector <sf::Vector2f> points(shape.getPointCount());
     for (unsigned int i = 0; i < points.size(); i++)
@@ -25,10 +25,10 @@ void sat_detection::project_onto_axis(const std::vector<sf::Vector2f>& pts, cons
 
 bool sat_detection::projection_overlap(const float min_a, const float max_a, const float min_b, const float max_b)
 {
-    return !(min_a < min_b || max_b < max_a);
+    return !(max_a < min_b || max_b < min_a);
 }
 
-bool sat_detection::sat_collision(const sf::CircleShape& shape_a, const sf::CircleShape& shape_b, sf::Vector2f& mtv)
+bool sat_detection::sat_collision(const sf::Shape& shape_a, const sf::Shape& shape_b, sf::Vector2f& mtv)
 {
     std::vector <sf::Vector2f> points_a = get_transformed_points(shape_a);
     std::vector <sf::Vector2f> points_b = get_transformed_points(shape_b);
@@ -73,7 +73,7 @@ bool sat_detection::sat_collision(const sf::CircleShape& shape_a, const sf::Circ
         // separating axis found, no collision 
         if (!projection_overlap(min_a, max_a, min_b, max_b)) return false;
         
-        float overlap = std::min(max_a, max_b) - std::min(min_a, min_b);
+        float overlap = std::min(max_a, max_b) - std::max(min_a, min_b);
         if (overlap < smallest_overlap)
         {
             smallest_overlap = overlap;
