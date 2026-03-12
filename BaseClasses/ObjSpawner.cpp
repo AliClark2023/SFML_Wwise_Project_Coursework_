@@ -74,6 +74,19 @@ void object_spawner::render_objects() const
         }
 }
 
+void object_spawner::detect_collision(const std::unique_ptr<Player>& player)
+{
+        for (const auto& object : objects_)
+        {
+                if (object->get_object_type() != scenery) return;
+                sf::Vector2f mtv2;
+                if (sat_detection::sat_collision(*player, *object, mtv2))
+                {
+                        player->collision_response(object.get(), mtv2);
+                }
+        }
+}
+
 void object_spawner::handle_input(float dt)
 {
 }
@@ -95,6 +108,7 @@ void object_spawner::update(float dt)
                         object->update(dt);
                 }else
                 {
+                        //erase her or in seperate search?
                         objects_.erase(objects_.begin());
                 }
         } 

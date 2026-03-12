@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <SFML/Graphics.hpp>
 #include "GameObject.h"
+#include "../Utilities/SATDetection.h"
+#include "../Player/Player.h"
 #include "../Obstacles/Scenery.h"
 /*
  * Base Class that spawns specified object type at a specified rate & speed
@@ -16,6 +18,7 @@ public:
     void set_object_speed(float);
     void set_object_speed(sf::Vector2f vel);
     void render_objects() const;
+    void detect_collision(const std::unique_ptr<Player>& player);
     // revert/remove
     void handle_input(float dt) override;
     void update(float dt) override;

@@ -26,7 +26,7 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     obstacles_.emplace_back(std::make_unique<Scenery>(win, v, obstacle_config));
     
     // spawner config
-    scene_spawner_ = std::make_unique<object_spawner>(win, v, ObjectType::scenery);
+    scene_spawner_ = std::make_unique<object_spawner>(win, v, scenery);
     scene_spawner_->setPosition( v->getCenter());
     scene_spawner_->set_spawn_rate(1.f);
 }
@@ -60,7 +60,10 @@ void level::update(float dt)
         }
     }
     
-    // testing with obstacle (change back to ground)
+    // spawned obstacle collision
+    scene_spawner_->detect_collision(player_);
+    
+    // ground collision
     sf::Vector2f mtv;
     if (sat_detection::sat_collision(*player_, *ground_, mtv))
     {
