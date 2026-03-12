@@ -29,6 +29,9 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     scene_spawner_ = std::make_unique<object_spawner>(win, v, scenery);
     scene_spawner_->setPosition( v->getCenter());
     scene_spawner_->set_spawn_rate(1.f);
+    
+    //clock start
+    clock_.restart();
 }
 
 void level::handle_input(float dt)
@@ -38,6 +41,7 @@ void level::handle_input(float dt)
 
 void level::update(float dt)
 {
+    elapsed_time_ = clock_.getElapsedTime();
     // object updates
     player_->update(dt);
     ground_->update(dt);

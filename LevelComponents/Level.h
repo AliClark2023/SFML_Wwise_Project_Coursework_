@@ -33,4 +33,7 @@ private:
     sf::Vector2f spawn_zone_min_ = sf::Vector2f(0.0f, 0.0f);
     sf::Vector2f spawn_zone_max_ = sf::Vector2f(0.0f, 0.0f);
     int object_count_ = 0;
+    
+    sf::Clock clock_;
+    sf::Time elapsed_time_ = sf::Time::Zero;
 };
