@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "../Player/Player.h"
 #include "../Obstacles/Scenery.h"
+#include "../BaseClasses/ObjSpawner.h"
 #include "../BaseClasses/GameObject.h"
 #include "../Utilities/SATDetection.h"
 
@@ -20,6 +21,10 @@ private:
     std::unique_ptr<Scenery> ground_;
     std::vector<std::unique_ptr<GameObject>> obstacles_;
     
+    /*
+     * spawners
+     */
+    std::unique_ptr<object_spawner> scene_spawner_;
     /*
      * spawned object parameters
      */

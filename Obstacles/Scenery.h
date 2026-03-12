@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "../BaseClasses/GameObject.h"
 
-
+// make general to use between obstacle types
 struct scenery_config
 {   // Needs to be in this precise order for collision to be accurate
     size_t point_count = 4;

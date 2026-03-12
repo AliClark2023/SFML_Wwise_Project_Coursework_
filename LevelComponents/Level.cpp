@@ -24,6 +24,11 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
    // obstacle_config.velocity = sf::Vector2f(-object_speed_, 0);
     obstacle_config.color = sf::Color::Cyan;
     obstacles_.emplace_back(std::make_unique<Scenery>(win, v, obstacle_config));
+    
+    // spawner config
+    scene_spawner_ = std::make_unique<object_spawner>(win, v, ObjectType::scenery);
+    scene_spawner_->setPosition( v->getCenter());
+    scene_spawner_->set_spawn_rate(1.f);
 }
 
 void level::handle_input(float dt)
@@ -36,6 +41,7 @@ void level::update(float dt)
     // object updates
     player_->update(dt);
     ground_->update(dt);
+    scene_spawner_->update(dt);
     for (const auto& obstacle : obstacles_)
     {
         obstacle->update(dt);
@@ -69,7 +75,7 @@ void level::render()
     {
         std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
         window->draw(*player_);
-        
+        scene_spawner_->render_objects();
         for (const auto& obstacle : obstacles_) window->draw(*obstacle);
         
         window->draw(*ground_);

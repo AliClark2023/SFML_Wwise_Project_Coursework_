@@ -35,35 +35,6 @@ void Player::handle_input(float dt)
 {
     if (!window_ref_.expired())
     {
-                   
-        // debug side movements
-#ifdef NDEBUG
-        // release build
-        std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
-        if(window->hasFocus())
-        {
-            //jumping
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !is_key_held_) {
-                if (!is_jumping_) {
-                    /*
-                    y_velocity_ = jump_vector_;
-                    is_jumping_ = true;
-                    is_key_held_ = true;
-                    //jump sound
-                    */
-                }
-                
-                // testing jumping 
-                y_velocity_ = jump_vector_;
-                is_jumping_ = true;
-                is_key_held_ = true;
-                is_on_ground_ = false;
-            }
-            else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && is_key_held_) {
-                is_key_held_ = false;
-            }
-        }
-#else
         // debug code
         std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
         if(window->hasFocus())
@@ -88,6 +59,7 @@ void Player::handle_input(float dt)
             else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && is_key_held_) {
                 is_key_held_ = false;
             }
+            // debug functions
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
                 move(-velocity_ * dt);
             }
@@ -95,8 +67,6 @@ void Player::handle_input(float dt)
                 move(velocity_ * dt);
             }
         }
-#endif
-       
         window.reset();
     }
 }
