@@ -6,7 +6,7 @@ enum ObjectType
 {
     player_controlled,
     scenery,
-    obstacle,
+    hazard,
 };
 
 // uses circle class as base shape, can create other shape types from this class (triangles, squares etc)
