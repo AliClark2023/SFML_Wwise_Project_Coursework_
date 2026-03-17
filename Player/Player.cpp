@@ -59,7 +59,7 @@ void Player::handle_input(float dt)
             else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && is_key_held_) {
                 is_key_held_ = false;
             }
-            // debug functions
+            // debug functions or keep ?
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
                 move(-velocity_ * dt);
             }

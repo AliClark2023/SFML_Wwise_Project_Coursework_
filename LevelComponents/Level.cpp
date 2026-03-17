@@ -1,5 +1,8 @@
 ﻿#include "Level.h"
 
+// debug mode
+#include "../Constants/DebugMode.h"
+
 level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v)
 {
     window_ref_ = win;
@@ -13,8 +16,9 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     spawn_zone_min_.y = spawn_zone_min_.y - 50.f;
     spawn_zone_max_ = sf::Vector2f(0.0f, 0.0f);
     
+#ifdef DEBUGMODE
     // testing obstacles
-    /*
+    
     scenery_config obstacle_config;
     obstacle_config.point_count = 4;
     obstacle_config.radius = 20;
@@ -25,10 +29,11 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
    // obstacle_config.velocity = sf::Vector2f(-object_speed_, 0);
     obstacle_config.color = sf::Color::Cyan;
     obstacles_.emplace_back(std::make_unique<Scenery>(win, v, obstacle_config));
-    */
     
+#endif
+    
+#ifndef DEBUGMODE
     // spawner config
-    
     // add these to constants (make unique pos for different spawners)
     sf::Vector2f spawnerPositions = sf::Vector2f(v->getCenter().x + v->getSize().x, v->getCenter().y);
     sf::Vector2f despawn_pos = sf::Vector2f(v->getCenter().x - v->getSize().x, v->getCenter().y);
@@ -38,6 +43,7 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     scene_spawner_->set_spawn_rate(1.f);
     scene_spawner_->set_score_threshold(v->getCenter());
     scene_spawner_->set_despawn_threshold(despawn_pos);
+#endif
     
     //timer attributes (debug only, comment out in release)
     timer_.get_text()->setString("Time: 0.00");
@@ -58,9 +64,11 @@ void level::handle_input(float dt)
 {
     player_->handle_input(dt);
     
+#ifdef  DEBUGMODE
     // testing
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)) score_.add_to_score(1);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2)) score_.sub_from_score(1);
+#endif
 }
 
 void level::update(float dt)
@@ -69,17 +77,18 @@ void level::update(float dt)
     // object updates
     player_->update(dt);
     ground_->update(dt);
+#ifndef DEBUGMODE
     scene_spawner_->update(dt);
-    /*
+#endif
+    
+#ifdef DEBUGMODE
+    
     for (const auto& obstacle : obstacles_)
     {
         obstacle->update(dt);
     }
-    */
     
-    // collision tests
-    // need pointer check
-    /*
+    // Testing collision with object
     for (const auto& obstacle : obstacles_)
     {
         // change to reset player 
@@ -91,10 +100,11 @@ void level::update(float dt)
             player_->collision_response(obstacle.get(), mtv2);
         }
     }
-    */
+#endif
+#ifndef DEBUGMODE
     // spawned obstacle collision
     scene_spawner_->detect_collision(player_);
-    
+#endif
     // ground collision
     sf::Vector2f mtv;
     if (sat_detection::sat_collision(*player_, *ground_, mtv))
@@ -112,12 +122,19 @@ void level::render()
         
         // UI elements first
         timer_.render_timer(*window);
+#ifndef DEBUGMODE
         score_.add_to_score(scene_spawner_->get_objects_scored());
+        scene_spawner_->render_objects();
+#endif
         score_.render_score(*window);
         
         window->draw(*player_);
-        scene_spawner_->render_objects();
-        //for (const auto& obstacle : obstacles_) window->draw(*obstacle);
+        
+        
+        
+#ifdef DEBUGMODE
+        for (const auto& obstacle : obstacles_) window->draw(*obstacle);
+#endif
         
         window->draw(*ground_);
         
