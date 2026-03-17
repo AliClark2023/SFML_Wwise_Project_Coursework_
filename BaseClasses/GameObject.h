@@ -27,12 +27,13 @@ public:
     // Object states
     bool is_alive() const { return alive_; }
     void set_alive(const bool b) { alive_ = b; }
+    /*
     // move to obstacle class
     bool has_been_counted() const { return counted_; }
     void set_counted(const bool b) { counted_ = b; }
     bool has_been_activated() const { return activated_; }
     void set_activated(const bool b) { activated_ = b; }
-
+    */
     // For Object collision, set collider box, get collider box, and dedicated virtual function for any collision responses
     bool is_collider() const { return collider_; }
     void set_collider(bool b) { collider_ = b; }
@@ -53,9 +54,11 @@ protected:
     
     // flags to determine state of object
     bool alive_ = true;
+    /*
     // move to obstacle class
     bool counted_ = false;
     bool activated_ = false;
+    */
     
     ObjectType object_type_;
     

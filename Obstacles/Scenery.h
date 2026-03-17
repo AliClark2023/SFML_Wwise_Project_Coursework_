@@ -24,10 +24,18 @@ public:
     Scenery(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v, const scenery_config& config);
     virtual ~Scenery();
     
+    // move to obstacle class
+    bool has_been_counted() const { return counted_; }
+    void set_counted(const bool b) { counted_ = b; }
+    bool has_been_activated() const { return activated_; }
+    void set_activated(const bool b) { activated_ = b; }
+    
     void handle_input(float dt) override;
     void update(float dt) override;
     void collision_response(GameObject* collider, const sf::Vector2f& mtv) override;
 
 private:
     // can add in obstacle only flags (counted, activated) from base game object
+    bool counted_ = false;
+    bool activated_ = false;
 };

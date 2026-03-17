@@ -38,5 +38,5 @@ private:
     
     int objects_scored_ = 0;
     // change to obstacle/scenery class
-    std::vector<std::unique_ptr<GameObject>> objects_;
+    std::vector<std::unique_ptr<Scenery>> objects_;
 };
