@@ -45,8 +45,6 @@ public:
     // Set game components 
     void set_window(const std::shared_ptr<sf::RenderWindow>& win) { window_ref_ = win; }
     void set_view(const std::shared_ptr<sf::View>& v) { view_ref_ = v; }
-    
-    // getting components
     ObjectType get_object_type() const { return object_type_; }
 protected:
     // properties

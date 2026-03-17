@@ -23,7 +23,7 @@ Player::Player(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_p
     is_jumping_ = false;
     //movement
     velocity_ = sf::Vector2f(2.f, 0) * VELOCITY_SCALE;
-    object_type_ = player_controlled;
+    //object_type_ = player_controlled;
     
     // collision setup
     //collision_box_ = getGlobalBounds();

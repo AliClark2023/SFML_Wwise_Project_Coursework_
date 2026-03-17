@@ -13,7 +13,7 @@ struct scenery_config
     sf::Vector2f position = sf::Vector2f(0.0f, 0.0f);
     sf::Vector2f velocity = sf::Vector2f(0.0f, 0.0f);
     sf::Color color = sf::Color::Black;
-    ObjectType type = ObjectType::scenery;
+    ObjectType type = scenery;
 };
 
 // Handles platforms the player can land on top of
