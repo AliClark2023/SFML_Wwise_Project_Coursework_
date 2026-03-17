@@ -27,8 +27,13 @@ void Timer::render_timer( sf::RenderWindow& window) const
     timer_text_->setString(ss.str());
     window.draw(*timer_text_);
 }
-
+// returns timer text for formatting/adjusting
 sf::Text* Timer::get_text() const
 {
     return timer_text_.get();
+}
+// returns current value of time
+sf::Time Timer::get_time() const
+{
+    return timer_.getElapsedTime();
 }

@@ -2,19 +2,19 @@
 #include <SFML/Graphics/Font.hpp>
 #include "../Utilities/AssetUtilities.h"
 
+/*
+ * Class that creates timer and contains functions to display and adjust time
+ */
 class Timer
 {
 public:
     Timer();
-    //void start_timer();
     void render_timer(sf::RenderWindow& window) const;
     sf::Text* get_text() const;
-    sf::Time get_time();
+    sf::Time get_time() const;
 private:
     // time variables
     sf::Clock timer_;
-    bool started_ = false;
-    float elapsed_time_ = 0.0f;
     
     // text variables
     sf::Font timer_font_;
