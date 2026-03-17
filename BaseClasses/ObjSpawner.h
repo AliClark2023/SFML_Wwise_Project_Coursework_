@@ -15,9 +15,8 @@ public:
         const ObjectType& object_to_spawn);
     
     void spawn_object();
-    void set_spawn_rate(float);
-    void set_object_speed(float);
-    void set_object_speed(sf::Vector2f vel);
+    void set_spawn_rate(const float rate){spawn_rate_ = rate;}
+    void set_object_speed(const float speed){ object_speed_ = speed; }
     void render_objects() const;
     void detect_collision(const std::unique_ptr<Player>& player);
     void set_score_threshold(const sf::Vector2f& threshold_pos){ score_threshold_pos_ = threshold_pos; }

@@ -46,18 +46,6 @@ void object_spawner::spawn_object()
        
 }
 
-void object_spawner::set_spawn_rate(float)
-{
-}
-
-void object_spawner::set_object_speed(float)
-{
-}
-
-void object_spawner::set_object_speed(sf::Vector2f vel)
-{
-}
-
 void object_spawner::render_objects() const
 {
         if (!window_ref_.expired())

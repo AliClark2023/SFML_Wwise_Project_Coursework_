@@ -28,14 +28,16 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     */
     
     // spawner config
-    // add pos to constants
+    
+    // add these to constants (make unique pos for different spawners)
     sf::Vector2f spawnerPositions = sf::Vector2f(v->getCenter().x + v->getSize().x, v->getCenter().y);
+    sf::Vector2f despawn_pos = sf::Vector2f(v->getCenter().x - v->getSize().x, v->getCenter().y);
+    
     scene_spawner_ = std::make_unique<object_spawner>(win, v, scenery);
-   // scene_spawner_->setPosition( v->getCenter());
     scene_spawner_->setPosition(spawnerPositions);
     scene_spawner_->set_spawn_rate(1.f);
     scene_spawner_->set_score_threshold(v->getCenter());
-    scene_spawner_->set_despawn_threshold(sf::Vector2f(v->getCenter().x - 50.f , v->getCenter().y));
+    scene_spawner_->set_despawn_threshold(despawn_pos);
     
     //timer attributes (debug only, comment out in release)
     timer_.get_text()->setString("Time: 0.00");
