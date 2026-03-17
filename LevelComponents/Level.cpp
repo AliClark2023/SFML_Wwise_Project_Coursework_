@@ -23,7 +23,7 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     obstacle_config.point_count = 4;
     obstacle_config.radius = 80;
     obstacle_config.origin = sf::Vector2f( obstacle_config.radius,  obstacle_config.radius);
-    obstacle_config.rotation = 45;
+    obstacle_config.rotation = 0;
     obstacle_config.position = spawn_zone_min_;
     obstacle_config.position = v->getCenter();
    // obstacle_config.velocity = sf::Vector2f(-object_speed_, 0);

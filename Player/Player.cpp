@@ -1,5 +1,7 @@
 ﻿#include "Player.h"
 
+#include <algorithm>
+
 Player::Player(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v)
 {
     set_window(win);
@@ -83,6 +85,8 @@ void Player::update(float dt)
     // v = u +at note its += not =
     y_velocity_ += gravity_ * dt;
     setPosition(getPosition() + pos);
+    //required to constantly apply gravity when a collision is not occuring
+    if (is_on_ground_) is_on_ground_ = false;
     
 }
 
@@ -105,9 +109,12 @@ void Player::collision_response(GameObject* collider, const sf::Vector2f& mtv)
         }// underside of object
         else if (align < -0.5f)
         {
-            if (y_velocity_.y < 0.f) y_velocity_.y = 0.f;
+            is_on_ground_ = false;
+            y_velocity_.y = std::max(y_velocity_.y, 0.f);
+            //if (y_velocity_.y < 0.f) y_velocity_.y = 0.f;
         }else
         {
+            is_on_ground_ = false;
             velocity_.x = 0.f;
         }
     }
