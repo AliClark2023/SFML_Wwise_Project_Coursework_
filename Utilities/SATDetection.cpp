@@ -1,5 +1,6 @@
 ﻿#include "SATDetection.h"
 
+// transforms from local points into world
 std::vector <sf::Vector2f> sat_detection::get_transformed_points(const sf::Shape& shape)
 {
     std::vector <sf::Vector2f> points(shape.getPointCount());
@@ -10,6 +11,18 @@ std::vector <sf::Vector2f> sat_detection::get_transformed_points(const sf::Shape
     return points;
 }
 
+
+sf::Vector2f sat_detection::calculate_centre(const std::vector<sf::Vector2f>& pts)
+{
+    sf::Vector2f c(0.f, 0.f);
+    if (pts.empty()) return c;
+    for (const auto& p : pts) { c.x += p.x; c.y += p.y; }
+    c.x /= static_cast<float>(pts.size());
+    c.y /= static_cast<float>(pts.size());
+    return c;
+}
+
+// projects polygon points onto axis for overlapping detection
 void sat_detection::project_onto_axis(const std::vector<sf::Vector2f>& pts, const sf::Vector2f& axis, float& min,
     float& max)
 {
@@ -22,12 +35,18 @@ void sat_detection::project_onto_axis(const std::vector<sf::Vector2f>& pts, cons
     }
 
 }
-
+// returns if theres an overlap between point A & B when its projected onto an axis
 bool sat_detection::projection_overlap(const float min_a, const float max_a, const float min_b, const float max_b)
 {
     return !(max_a < min_b || max_b < min_a);
 }
 
+/*
+   * Performs Separate axis theorem to detect if there's a collision between two shapes 
+   * and determines which orientation the collision came from using minimal translation vector MTV
+   */
+// collision assumes shape A will be the object to move out of shape Bs way
+// works with convex shapes only
 bool sat_detection::sat_collision(const sf::Shape& shape_a, const sf::Shape& shape_b, sf::Vector2f& mtv)
 {
     std::vector <sf::Vector2f> points_a = get_transformed_points(shape_a);
@@ -74,6 +93,7 @@ bool sat_detection::sat_collision(const sf::Shape& shape_a, const sf::Shape& sha
         if (!projection_overlap(min_a, max_a, min_b, max_b)) return false;
         
         float overlap = std::min(max_a, max_b) - std::max(min_a, min_b);
+        //float overlap = std::min(min_a, min_b) - std::max(max_a, max_b);
         if (overlap < smallest_overlap)
         {
             smallest_overlap = overlap;
@@ -81,6 +101,15 @@ bool sat_detection::sat_collision(const sf::Shape& shape_a, const sf::Shape& sha
         }
     }
     
+    
+    // calculating direction of movement needed for collision response
+    sf::Vector2f centre_a = calculate_centre(points_a);
+    sf::Vector2f centre_b = calculate_centre(points_b);
+    sf::Vector2f axis = centre_a - centre_b;
+    if (axis.dot(smallest_axis) < 0.0f)
+    {
+        smallest_axis = -smallest_axis;
+    }
     mtv = smallest_axis * smallest_overlap;
     return true;
 }

@@ -21,9 +21,9 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     
     scenery_config obstacle_config;
     obstacle_config.point_count = 4;
-    obstacle_config.radius = 20;
+    obstacle_config.radius = 80;
     obstacle_config.origin = sf::Vector2f( obstacle_config.radius,  obstacle_config.radius);
-    obstacle_config.rotation = 0;
+    obstacle_config.rotation = 45;
     obstacle_config.position = spawn_zone_min_;
     obstacle_config.position = v->getCenter();
    // obstacle_config.velocity = sf::Vector2f(-object_speed_, 0);
@@ -127,15 +127,10 @@ void level::render()
         scene_spawner_->render_objects();
 #endif
         score_.render_score(*window);
-        
-        window->draw(*player_);
-        
-        
-        
 #ifdef DEBUGMODE
         for (const auto& obstacle : obstacles_) window->draw(*obstacle);
 #endif
-        
+        window->draw(*player_);
         window->draw(*ground_);
         
         window.reset();

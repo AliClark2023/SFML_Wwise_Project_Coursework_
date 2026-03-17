@@ -24,7 +24,7 @@ Player::Player(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_p
     object_type_ = player_controlled;
     
     // collision setup
-    collision_box_ = getGlobalBounds();
+    //collision_box_ = getGlobalBounds();
 }
 
 Player::~Player()
@@ -61,9 +61,11 @@ void Player::handle_input(float dt)
             }
             // debug functions or keep ?
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+                velocity_.x = 2 * VELOCITY_SCALE;
                 move(-velocity_ * dt);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+                velocity_.x = 2 * VELOCITY_SCALE;
                 move(velocity_ * dt);
             }
         }
@@ -106,7 +108,7 @@ void Player::collision_response(GameObject* collider, const sf::Vector2f& mtv)
             if (y_velocity_.y < 0.f) y_velocity_.y = 0.f;
         }else
         {
-            
+            velocity_.x = 0.f;
         }
     }
 }
