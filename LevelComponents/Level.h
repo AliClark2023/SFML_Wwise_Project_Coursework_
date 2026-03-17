@@ -21,7 +21,7 @@ private:
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Scenery> ground_;
-    std::vector<std::unique_ptr<GameObject>> obstacles_;
+   // std::vector<std::unique_ptr<GameObject>> obstacles_;
     
     /*
      * spawners

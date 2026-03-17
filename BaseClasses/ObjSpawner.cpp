@@ -76,15 +76,37 @@ void object_spawner::render_objects() const
 
 void object_spawner::detect_collision(const std::unique_ptr<Player>& player)
 {
+        int object_count = 0;
         for (const auto& object : objects_)
         {
-                if (object->get_object_type() != scenery) return;
-                sf::Vector2f mtv2;
-                if (sat_detection::sat_collision(*player, *object, mtv2))
+                if (object->is_alive())
                 {
-                        player->collision_response(object.get(), mtv2);
+                        // player v object collisions
+                        //if (object->get_object_type() != scenery) return;
+                        sf::Vector2f mtv2;
+                        if (sat_detection::sat_collision(*player, *object, mtv2))
+                        {
+                                player->collision_response(object.get(), mtv2);
+                        }
+                        // object v score threshold position
+                        if (!object->has_been_counted())
+                        {
+                                if (object->getPosition().x < score_threshold_pos_.x)
+                                {
+                                        object->set_counted(true);
+                                        object_count++;
+                                }
+                        }
                 }
         }
+        objects_scored_ = object_count;
+}
+// returns number of objects that have passed score threshold and resets count
+int object_spawner::get_objects_scored()
+{
+        int scored_objects = objects_scored_;
+        objects_scored_ = 0;
+        return scored_objects;
 }
 
 void object_spawner::handle_input(float dt)
@@ -106,9 +128,11 @@ void object_spawner::update(float dt)
                 if (object->is_alive())
                 {
                         object->update(dt);
+                        // check if object position is passed view dimensions
+                        
                 }else
                 {
-                        //erase her or in seperate search?
+                        //erase here or in seperate search?
                         objects_.erase(objects_.begin());
                 }
         } 

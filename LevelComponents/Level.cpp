@@ -14,6 +14,7 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     spawn_zone_max_ = sf::Vector2f(0.0f, 0.0f);
     
     // testing obstacles
+    /*
     scenery_config obstacle_config;
     obstacle_config.point_count = 4;
     obstacle_config.radius = 20;
@@ -24,11 +25,16 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
    // obstacle_config.velocity = sf::Vector2f(-object_speed_, 0);
     obstacle_config.color = sf::Color::Cyan;
     obstacles_.emplace_back(std::make_unique<Scenery>(win, v, obstacle_config));
+    */
     
     // spawner config
+    // add pos to constants
+    sf::Vector2f spawnerPositions = sf::Vector2f(v->getCenter().x + v->getSize().x, v->getCenter().y);
     scene_spawner_ = std::make_unique<object_spawner>(win, v, scenery);
-    scene_spawner_->setPosition( v->getCenter());
+   // scene_spawner_->setPosition( v->getCenter());
+    scene_spawner_->setPosition(spawnerPositions);
     scene_spawner_->set_spawn_rate(1.f);
+    scene_spawner_->set_score_threshold(v->getCenter());
     
     //timer attributes (debug only, comment out in release)
     timer_.get_text()->setString("Time: 0.00");
@@ -61,15 +67,19 @@ void level::update(float dt)
     player_->update(dt);
     ground_->update(dt);
     scene_spawner_->update(dt);
+    /*
     for (const auto& obstacle : obstacles_)
     {
         obstacle->update(dt);
     }
+    */
     
     // collision tests
     // need pointer check
+    /*
     for (const auto& obstacle : obstacles_)
     {
+        // change to reset player 
         if (obstacle->get_object_type() != scenery) continue;
         
         sf::Vector2f mtv2;
@@ -78,7 +88,7 @@ void level::update(float dt)
             player_->collision_response(obstacle.get(), mtv2);
         }
     }
-    
+    */
     // spawned obstacle collision
     scene_spawner_->detect_collision(player_);
     
@@ -99,11 +109,12 @@ void level::render()
         
         // UI elements first
         timer_.render_timer(*window);
+        score_.add_to_score(scene_spawner_->get_objects_scored());
         score_.render_score(*window);
         
         window->draw(*player_);
         scene_spawner_->render_objects();
-        for (const auto& obstacle : obstacles_) window->draw(*obstacle);
+        //for (const auto& obstacle : obstacles_) window->draw(*obstacle);
         
         window->draw(*ground_);
         

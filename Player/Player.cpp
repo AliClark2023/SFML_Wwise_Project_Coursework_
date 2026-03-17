@@ -84,6 +84,7 @@ void Player::update(float dt)
     
 }
 
+// will handle collision responses according to their type
 void Player::collision_response(GameObject* collider, const sf::Vector2f& mtv)
 {
     

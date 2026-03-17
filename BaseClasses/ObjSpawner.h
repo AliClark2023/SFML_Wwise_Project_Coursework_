@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <SFML/Graphics.hpp>
+#include <map>
 #include "GameObject.h"
 #include "../Utilities/SATDetection.h"
 #include "../Player/Player.h"
@@ -19,6 +20,8 @@ public:
     void set_object_speed(sf::Vector2f vel);
     void render_objects() const;
     void detect_collision(const std::unique_ptr<Player>& player);
+    void set_score_threshold(const sf::Vector2f& threshold_pos){ score_threshold_pos_ = threshold_pos; }
+    int get_objects_scored();
     // revert/remove
     void handle_input(float dt) override;
     void update(float dt) override;
@@ -28,6 +31,7 @@ private:
     float elapsed_time_ = 0.f;
     float spawn_rate_ = 0.5f;
     float object_speed_ = 300.0f;
-    sf::Vector2f object_position_;
+    sf::Vector2f score_threshold_pos_;
+    int objects_scored_ = 0;
     std::vector<std::unique_ptr<GameObject>> objects_;
 };

@@ -24,9 +24,11 @@ public:
     void set_velocity(const float& vx, const float& vy){velocity_.x = vx;velocity_.y = vy;}
     sf::Vector2f get_velocity() const {return velocity_;}
     
-    // Object state
+    // Object states
     bool is_alive() const { return alive_; }
     void set_alive(const bool b) { alive_ = b; }
+    bool has_been_counted() const { return counted_; }
+    void set_counted(const bool b) { counted_ = b; }
 
     // For Object collision, set collider box, get collider box, and dedicated virtual function for any collision responses
     bool is_collider() const { return collider_; }
@@ -45,8 +47,13 @@ public:
 protected:
     // properties
     sf::Vector2f velocity_{0.0f,0.0f };
-    bool alive_;
+    
+    // flags to determine state of object
+    bool alive_ = true;
+    bool counted_ = false;
+    
     ObjectType object_type_;
+    
     // collision variables
     // not currently used (but could be used to define smaller/larger collision area)
     sf::FloatRect collision_box_;
