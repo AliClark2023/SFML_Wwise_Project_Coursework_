@@ -97,6 +97,11 @@ void object_spawner::detect_collision(const std::unique_ptr<Player>& player)
                                         object_count++;
                                 }
                         }
+                        // object passing by render view (set flag for deletion)
+                        if (object->getPosition().x < despawn_threshold.x)
+                        {
+                                object->set_alive(false);
+                        }
                 }
         }
         objects_scored_ = object_count;
@@ -125,7 +130,7 @@ void object_spawner::update(float dt)
         // updating or removing objects from vector
         for (const auto& object : objects_)
         {
-                if (object->is_alive())
+                if ( object || object->is_alive())
                 {
                         object->update(dt);
                         // check if object position is passed view dimensions
