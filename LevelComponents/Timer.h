@@ -5,10 +5,10 @@
 /*
  * Class that creates timer and contains functions to display and adjust time
  */
-class Timer
+class timer
 {
 public:
-    Timer();
+    timer();
     void render_timer(sf::RenderWindow& window) const;
     sf::Text* get_text() const;
     sf::Time get_time() const;

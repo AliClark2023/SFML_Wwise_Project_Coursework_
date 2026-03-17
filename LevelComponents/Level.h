@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Score.h"
 #include "../Player/Player.h"
 #include "../Obstacles/Scenery.h"
 #include "../BaseClasses/ObjSpawner.h"
@@ -36,5 +37,6 @@ private:
     int object_count_ = 0;
     
     // level UI components
-    Timer timer_;
+    timer timer_;
+    score score_;
 };

@@ -39,11 +39,19 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     
     // score
     // position sf::Vector2(v->getCenter().x - v->getSize().x /2 + 125, v->getCenter().y - v->getSize().y / 2 + 20));
+    score_.get_text()->setOrigin(score_.get_text()->getGlobalBounds().size / 2.0f);
+    score_.get_text()->setFillColor(sf::Color::White);
+    score_.get_text()->setOutlineThickness(1.0f);
+    score_.get_text()->setPosition(sf::Vector2(v->getCenter().x - v->getSize().x /2 + 50, v->getCenter().y - v->getSize().y / 2 + 10));
 }
 
 void level::handle_input(float dt)
 {
     player_->handle_input(dt);
+    
+    // testing
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)) score_.add_to_score(1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2)) score_.sub_from_score(1);
 }
 
 void level::update(float dt)
@@ -88,8 +96,11 @@ void level::render()
     if (!window_ref_.expired())
     {
         std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
+        
         // UI elements first
         timer_.render_timer(*window);
+        score_.render_score(*window);
+        
         window->draw(*player_);
         scene_spawner_->render_objects();
         for (const auto& obstacle : obstacles_) window->draw(*obstacle);

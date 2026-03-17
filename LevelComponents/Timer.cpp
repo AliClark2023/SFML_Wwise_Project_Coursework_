@@ -2,16 +2,16 @@
 #include <sstream>
 
 // Constructs timer with specified font & starts timer
-Timer::Timer()
+timer::timer()
 {
     // replace with desired font (note: the directory is vital to loading correctly)
-    std::string font_name = "Assets/Fonts/Montserrat-Regular.ttf";
+    const std::string font_name = "Assets/Fonts/Montserrat-Regular.ttf";
     asset_utilities::LoadFont(timer_font_, font_name);
     timer_text_ = std::make_unique<sf::Text>(timer_font_);
     timer_.restart();
 }
 // converts clock timer to MM::SS and renders to window
-void Timer::render_timer( sf::RenderWindow& window) const
+void timer::render_timer( sf::RenderWindow& window) const
 {
     const sf::Time elapsed = timer_.getElapsedTime();
     const int total_seconds = static_cast<int>(elapsed.asSeconds());
@@ -28,12 +28,12 @@ void Timer::render_timer( sf::RenderWindow& window) const
     window.draw(*timer_text_);
 }
 // returns timer text for formatting/adjusting
-sf::Text* Timer::get_text() const
+sf::Text* timer::get_text() const
 {
     return timer_text_.get();
 }
 // returns current value of time
-sf::Time Timer::get_time() const
+sf::Time timer::get_time() const
 {
     return timer_.getElapsedTime();
 }
