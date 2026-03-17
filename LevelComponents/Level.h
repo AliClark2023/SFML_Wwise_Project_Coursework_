@@ -27,6 +27,7 @@ private:
      * spawners
      */
     std::unique_ptr<object_spawner> scene_spawner_;
+    std::unique_ptr<object_spawner> hazard_spawner_;
     /*
      * spawned object parameters
      */

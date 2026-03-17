@@ -26,15 +26,25 @@ void object_spawner::spawn_object()
                         scene_config.point_count = 4;
                         scene_config.radius = 20;
                         scene_config.origin = sf::Vector2f( scene_config.radius,  scene_config.radius);
-                        scene_config.rotation = 0;
+                        scene_config.rotation = 45;
                         scene_config.position = getPosition();
-                       // scene_config.position = view->getCenter();
                         scene_config.velocity = sf::Vector2f(-object_speed_, 0);
                         scene_config.color = sf::Color::Cyan;
+                        scene_config.type = ObjectType::scenery;
                         objects_.emplace_back(std::make_unique<Scenery>(window, view, scene_config));
                         objects_.back()->set_alive(true);
                         break;
                 case hazard:
+                        scene_config.point_count = 4;
+                        scene_config.radius = 20;
+                        scene_config.origin = sf::Vector2f( scene_config.radius,  scene_config.radius);
+                        scene_config.rotation = 0;
+                        scene_config.position = getPosition();
+                        scene_config.velocity = sf::Vector2f(-object_speed_, 0);
+                        scene_config.color = sf::Color::Yellow;
+                        scene_config.type = ObjectType::hazard;
+                        objects_.emplace_back(std::make_unique<Scenery>(window, view, scene_config));
+                        objects_.back()->set_alive(true);
                         break;
                 default:
                         break;
@@ -75,11 +85,21 @@ void object_spawner::detect_collision(const std::unique_ptr<Player>& player)
                         if (sat_detection::sat_collision(*player, *object, mtv2))
                         {
                                 player->collision_response(object.get(), mtv2);
+                                object->collision_response(player.get(), mtv2);
                         }
-                        // object v score threshold position
+                        // object v score threshold position or
+                        // object v activation = score increase
                         if (!object->has_been_counted())
                         {
+                                /* score based on passing threshold
                                 if (object->getPosition().x < score_threshold_pos_.x)
+                                {
+                                        object->set_counted(true);
+                                        object_count++;
+                                }
+                                */
+                                // score based on activating platform
+                                if (object->has_been_activated())
                                 {
                                         object->set_counted(true);
                                         object_count++;

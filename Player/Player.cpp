@@ -10,7 +10,7 @@ Player::Player(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_p
     setRadius(25.f);
     setOrigin(sf::Vector2f(getRadius(), getRadius()));
     setRotation(sf::degrees(45));
-    //spawn_point = win->getView().getCenter();
+    // use in constant, should be updateable
     spawn_point = sf::Vector2f(win->getView().getCenter().x, win->getView().getCenter().y - 500.f);
     setPosition(spawn_point);
     setFillColor(sf::Color::Yellow);
@@ -117,5 +117,8 @@ void Player::collision_response(GameObject* collider, const sf::Vector2f& mtv)
             is_on_ground_ = false;
             velocity_.x = 0.f;
         }
+    }else if (collider->get_object_type() == hazard)
+    {
+        setPosition(spawn_point);
     }
 }

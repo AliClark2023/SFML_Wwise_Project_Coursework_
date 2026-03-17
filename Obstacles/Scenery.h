@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../BaseClasses/GameObject.h"
+#include "../Constants/PhysicsConsts.h"
 
 // make general to use between obstacle types
 struct scenery_config
@@ -12,6 +13,7 @@ struct scenery_config
     sf::Vector2f position = sf::Vector2f(0.0f, 0.0f);
     sf::Vector2f velocity = sf::Vector2f(0.0f, 0.0f);
     sf::Color color = sf::Color::Black;
+    ObjectType type = ObjectType::scenery;
 };
 
 // Handles platforms the player can land on top of
@@ -27,5 +29,5 @@ public:
     void collision_response(GameObject* collider, const sf::Vector2f& mtv) override;
 
 private:
-    //sf::Vector2f y_velocity_;
+    // can add in obstacle only flags (counted, activated) from base game object
 };

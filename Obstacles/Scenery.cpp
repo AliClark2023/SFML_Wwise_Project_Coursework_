@@ -25,7 +25,7 @@ Scenery::Scenery(const std::shared_ptr<sf::RenderWindow>& win, const std::shared
     setPosition(config.position);
     set_velocity(config.velocity);
     setFillColor(config.color);
-    object_type_ = scenery;
+    object_type_ = config.type;
 }
 
 Scenery::~Scenery()
@@ -42,6 +42,29 @@ void Scenery::update(float dt)
     move(velocity_ * dt);
 }
 
+// needs to indicate whether player has collided with object
 void Scenery::collision_response(GameObject* collider, const sf::Vector2f& mtv)
 {
+    float collision_align;
+    switch (object_type_)
+    {
+        case scenery:
+            // alter so that only an upward collision will change colour/gain points
+            collision_align = mtv.x * UP.x + mtv.y * UP.y;
+            //landing from above
+            if (collision_align > 0.5f)
+            {
+                if (!has_been_activated())
+                {
+                    set_activated(true);
+                    setFillColor(sf::Color::Green);
+                }
+            }
+        break;
+        case hazard:
+            set_alive(false);
+        break;
+        default:
+        break;
+    }
 }

@@ -37,5 +37,6 @@ private:
     sf::Vector2f despawn_threshold;
     
     int objects_scored_ = 0;
+    // change to obstacle/scenery class
     std::vector<std::unique_ptr<GameObject>> objects_;
 };

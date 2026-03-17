@@ -1,7 +1,7 @@
 ﻿#include "Level.h"
 
 // debug mode
-#include "../Constants/DebugMode.h"
+//#include "../Constants/DebugMode.h"
 
 level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v)
 {
@@ -35,14 +35,21 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
 #ifndef DEBUGMODE
     // spawner config
     // add these to constants (make unique pos for different spawners)
-    sf::Vector2f spawnerPositions = sf::Vector2f(v->getCenter().x + v->getSize().x, v->getCenter().y);
+    sf::Vector2f plat_spawn_pos = sf::Vector2f(v->getCenter().x + v->getSize().x, v->getCenter().y);
+    sf::Vector2f hazard_spawn_pos = sf::Vector2f(v->getCenter().x + v->getSize().x, v->getCenter().y + 50);
     sf::Vector2f despawn_pos = sf::Vector2f(v->getCenter().x - v->getSize().x, v->getCenter().y);
     
     scene_spawner_ = std::make_unique<object_spawner>(win, v, scenery);
-    scene_spawner_->setPosition(spawnerPositions);
+    scene_spawner_->setPosition(plat_spawn_pos);
     scene_spawner_->set_spawn_rate(1.f);
     scene_spawner_->set_score_threshold(v->getCenter());
     scene_spawner_->set_despawn_threshold(despawn_pos);
+    
+    hazard_spawner_ = std::make_unique<object_spawner>(win, v, hazard);
+    hazard_spawner_->setPosition(hazard_spawn_pos);
+    hazard_spawner_->set_spawn_rate(0.5f);
+    hazard_spawner_->set_score_threshold(v->getCenter());
+    hazard_spawner_->set_despawn_threshold(despawn_pos);
 #endif
     
     //timer attributes (debug only, comment out in release)
@@ -79,6 +86,7 @@ void level::update(float dt)
     ground_->update(dt);
 #ifndef DEBUGMODE
     scene_spawner_->update(dt);
+    hazard_spawner_->update(dt);
 #endif
     
 #ifdef DEBUGMODE
@@ -104,6 +112,7 @@ void level::update(float dt)
 #ifndef DEBUGMODE
     // spawned obstacle collision
     scene_spawner_->detect_collision(player_);
+    hazard_spawner_->detect_collision(player_);
 #endif
     // ground collision
     sf::Vector2f mtv;
@@ -123,8 +132,10 @@ void level::render()
         // UI elements first
         timer_.render_timer(*window);
 #ifndef DEBUGMODE
+        // need to account for multiple spawners
         score_.add_to_score(scene_spawner_->get_objects_scored());
         scene_spawner_->render_objects();
+        hazard_spawner_->render_objects();
 #endif
         score_.render_score(*window);
 #ifdef DEBUGMODE
