@@ -30,8 +30,15 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     scene_spawner_->setPosition( v->getCenter());
     scene_spawner_->set_spawn_rate(1.f);
     
-    //clock start
-    clock_.restart();
+    //timer attributes (debug only, comment out in release)
+    timer_.get_text()->setString("Time: 0.00");
+    timer_.get_text()->setOrigin(timer_.get_text()->getGlobalBounds().size / 2.0f);
+    timer_.get_text()->setFillColor(sf::Color::White);
+    timer_.get_text()->setOutlineThickness(1.0f);
+    timer_.get_text()->setPosition(sf::Vector2(v->getCenter().x, v->getCenter().y - v->getSize().y / 2 + 20));
+    
+    // score
+    // position sf::Vector2(v->getCenter().x - v->getSize().x /2 + 125, v->getCenter().y - v->getSize().y / 2 + 20));
 }
 
 void level::handle_input(float dt)
@@ -41,7 +48,7 @@ void level::handle_input(float dt)
 
 void level::update(float dt)
 {
-    elapsed_time_ = clock_.getElapsedTime();
+    //elapsed_time_ = clock_.getElapsedTime();
     // object updates
     player_->update(dt);
     ground_->update(dt);
@@ -81,6 +88,8 @@ void level::render()
     if (!window_ref_.expired())
     {
         std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
+        // UI elements first
+        timer_.render_timer(*window);
         window->draw(*player_);
         scene_spawner_->render_objects();
         for (const auto& obstacle : obstacles_) window->draw(*obstacle);

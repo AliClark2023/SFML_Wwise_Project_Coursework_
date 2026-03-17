@@ -64,6 +64,7 @@ int main()
 	view->setCenter(sf::Vector2f(window->getSize().x/2, window->getSize().y/2));
 	view->setSize(sf::Vector2f(1280, 720));
 	window->setView(*view);
+	window->setFramerateLimit(60);
 
 	std::unique_ptr<level> Level(new level(window,view));
 	

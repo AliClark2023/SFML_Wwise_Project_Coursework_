@@ -3,6 +3,7 @@
 #include "../Obstacles/Scenery.h"
 #include "../BaseClasses/ObjSpawner.h"
 #include "../BaseClasses/GameObject.h"
+#include "../LevelComponents/Timer.h"
 #include "../Utilities/SATDetection.h"
 
 class level
@@ -34,6 +35,6 @@ private:
     sf::Vector2f spawn_zone_max_ = sf::Vector2f(0.0f, 0.0f);
     int object_count_ = 0;
     
-    sf::Clock clock_;
-    sf::Time elapsed_time_ = sf::Time::Zero;
+    // level UI components
+    Timer timer_;
 };

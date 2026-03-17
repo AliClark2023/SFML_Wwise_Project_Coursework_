@@ -133,7 +133,6 @@
   <ItemGroup>
     <ClCompile Include="BaseClasses\GameObject.cpp" />
     <ClCompile Include="BaseClasses\ObjSpawner.cpp" />
-    <ClCompile Include="Constants\FileAssets.cpp" />
     <ClCompile Include="LevelComponents\Level.cpp" />
     <ClCompile Include="LevelComponents\Score.cpp" />
     <ClCompile Include="LevelComponents\Timer.cpp" />
@@ -150,13 +149,89 @@
     <ClCompile Include="SoundEngine\Win32\AkDefaultIOHookDeferred.cpp" />
     <ClCompile Include="SoundEngine\Win32\AkPlatformProfilerHooks.cpp" />
     <ClCompile Include="SoundEngine\Win32\stdafx.cpp" />
+    <ClCompile Include="Utilities\AssetUtilities.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>SFML Wwi.84da9597\x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>SFML Wwi.84da9597\x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <UseDynamicDebugging>false</UseDynamicDebugging>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <EnableVectorLength>NotSet</EnableVectorLength>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>SFML Wwi.84da9597\x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>SFML Wwi.84da9597\x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>SFML Wwi.84da9597\x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>SFML Wwi.84da9597\x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>SFML Wwi.84da9597\x64\Debug\SFML Wwise Project.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>SFML Wwi.84da9597\x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>SFML Wwi.84da9597\x64\Debug\SFML Wwi.84da9597.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>SFML Wwi.84da9597\x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\DevPrograms\Wwise\Wwise2024.1.8.8898\SDK\include;D:\DevPrograms\SFML\SFML-3.0.2\include;</AdditionalIncludeDirectories>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
     <ClCompile Include="Utilities\SATDetection.cpp" />
     <ClCompile Include="WwiseWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseClasses\GameObject.h" />
     <ClInclude Include="BaseClasses\ObjSpawner.h" />
-    <ClInclude Include="Constants\FileAssets.h" />
     <ClInclude Include="Constants\PhysicsConsts.h" />
     <ClInclude Include="LevelComponents\Level.h" />
     <ClInclude Include="LevelComponents\Score.h" />
@@ -177,6 +252,7 @@
     <ClInclude Include="SoundEngine\Win32\AkDefaultIOHookDeferred.h" />
     <ClInclude Include="SoundEngine\Win32\AkFileHelpers.h" />
     <ClInclude Include="SoundEngine\Win32\stdafx.h" />
+    <ClInclude Include="Utilities\AssetUtilities.h" />
     <ClInclude Include="Utilities\SATDetection.h" />
     <ClInclude Include="WwiseWrapper.h" />
   </ItemGroup>
