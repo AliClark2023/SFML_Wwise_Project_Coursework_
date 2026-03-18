@@ -56,12 +56,31 @@ void object_spawner::spawn_object()
        
 }
 //need to clamp min/max values
-void object_spawner::update_object_speed(const int score)
+void object_spawner::update_object_speed(const int& score, const float& time)
 {
+        
+        // timer increase calculation
+        const int total_seconds = static_cast<int>(time);
+        const int minutes = total_seconds / 60;
+        const int seconds = total_seconds % 60;
+        
+        if (minutes == 0 && seconds == 0) return;
+        //testing (every 10s increase speed)
+        if (seconds % 10 == 0 && !increased_speed_)
+        {
+                // change to add
+                object_speed_ *= 1.5f;
+                increased_speed_ = true;
+        }else if (seconds % 10 >= 1 && increased_speed_)
+        {
+                increased_speed_ = false;
+        }
+        
         //score increase calculation
         if (score == 0) return;
         if (score % 10 == 0 && !increased_speed_)
         {
+                // change to add
                 object_speed_ *= 1.5f;
                 increased_speed_ = true;
                 // can change type to spawn
@@ -70,15 +89,35 @@ void object_spawner::update_object_speed(const int score)
         {
                 increased_speed_ = false;
         }
+        
+       
 }
 
 // need to clamp min/max values
-void object_spawner::update_spawn_rate(const int score)
+void object_spawner::update_spawn_rate(const int& score, const float& time)
 {
+        // timer increase calculation
+        const int total_seconds = static_cast<int>(time);
+        const int minutes = total_seconds / 60;
+        const int seconds = total_seconds % 60;
+        
+        if (minutes == 0 && seconds == 0) return;
+        //testing (every 10s increase speed)
+        if (seconds % 10 == 0 && !increases_spawn_rate_)
+        {
+                // change to add
+                spawn_rate_ *= 0.5f;
+                increases_spawn_rate_ = true;
+        }else if (seconds % 10 >= 1 && increases_spawn_rate_)
+        {
+                increases_spawn_rate_ = false;
+        }
+        
         //score increase calculation
         if (score == 0) return;
         if (score % 10 == 0 && !increases_spawn_rate_)
         {
+                // change to add
                 spawn_rate_ *= 0.5f;
                 increases_spawn_rate_ = true;
         }else if (score % 10 >= 1 && increases_spawn_rate_)

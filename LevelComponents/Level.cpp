@@ -86,8 +86,8 @@ void level::update(float dt)
     // need to account for multiple spawners (make function)
     score_.add_to_score(scene_spawner_->get_objects_scored());
     // adjusting object speeds based on score (make function)
-    scene_spawner_->update_object_speed( score_.get_score());
-    scene_spawner_->update_spawn_rate( score_.get_score());
+    scene_spawner_->update_object_speed( score_.get_score(),timer_.get_time().asSeconds());
+    scene_spawner_->update_spawn_rate( score_.get_score(), timer_.get_time().asSeconds());
     
 #ifndef DEBUGMODE
     scene_spawner_->update(dt);
