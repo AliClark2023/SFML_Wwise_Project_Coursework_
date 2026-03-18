@@ -15,8 +15,12 @@ public:
         const ObjectType& object_to_spawn);
     
     void spawn_object();
+    // directly set spawn & speed
     void set_spawn_rate(const float rate){spawn_rate_ = rate;}
     void set_object_speed(const float speed){ object_speed_ = speed; }
+    // calculation function to set spawn rate & speed (add parameters for timer)
+    void update_object_speed(const int score);
+    void update_spawn_rate(const int score);
     void render_objects() const;
     void detect_collision(const std::unique_ptr<Player>& player);
     void set_score_threshold(const sf::Vector2f& threshold_pos){ score_threshold_pos_ = threshold_pos; }
@@ -39,4 +43,8 @@ private:
     int objects_scored_ = 0;
     // change to obstacle/scenery class
     std::vector<std::unique_ptr<Scenery>> objects_;
+    
+    // flags for determining if variable has been altered
+    bool increased_speed_ = false;
+    bool increases_spawn_rate_ = false;
 };

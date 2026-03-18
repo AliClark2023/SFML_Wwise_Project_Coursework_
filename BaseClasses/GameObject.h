@@ -5,6 +5,7 @@
 enum ObjectType
 {
     player_controlled,
+    spawner,
     scenery,
     hazard,
 };

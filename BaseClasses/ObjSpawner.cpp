@@ -55,6 +55,37 @@ void object_spawner::spawn_object()
         view.reset();
        
 }
+//need to clamp min/max values
+void object_spawner::update_object_speed(const int score)
+{
+        //score increase calculation
+        if (score == 0) return;
+        if (score % 10 == 0 && !increased_speed_)
+        {
+                object_speed_ *= 1.5f;
+                increased_speed_ = true;
+                // can change type to spawn
+                // type_to_spawn_ = hazard;
+        }else if (score % 10 >= 1 && increased_speed_)
+        {
+                increased_speed_ = false;
+        }
+}
+
+// need to clamp min/max values
+void object_spawner::update_spawn_rate(const int score)
+{
+        //score increase calculation
+        if (score == 0) return;
+        if (score % 10 == 0 && !increases_spawn_rate_)
+        {
+                spawn_rate_ *= 0.5f;
+                increases_spawn_rate_ = true;
+        }else if (score % 10 >= 1 && increases_spawn_rate_)
+        {
+                increases_spawn_rate_ = false;
+        }
+}
 
 void object_spawner::render_objects() const
 {
@@ -135,20 +166,38 @@ void object_spawner::update(float dt)
                 spawn_object();
                 elapsed_time_ = 0.0f;
         }
+        /*
         // updating or removing objects from vector
         for (const auto& object : objects_)
         {
-                if ( object || object->is_alive())
+                if (object)
                 {
-                        object->update(dt);
-                        // check if object position is passed view dimensions
-                        
+                        if (object->is_alive())
+                        {
+                                object->update(dt);
+                        }else
+                        {
+                                objects_.erase(objects_.begin());
+                        }
+                }
+        }
+        */
+        //updating or removing dead objects from vector
+        // no need to increment iterator in loop condition as it gets updated within the loop
+        for (auto it = objects_.begin(); it != objects_.end();)
+        {
+                if (*it && !(*it)->is_alive())
+                {
+                        it = objects_.erase(it);
                 }else
                 {
-                        //erase here or in seperate search?
-                        objects_.erase(objects_.begin());
+                        if (*it)
+                        {
+                                (*it)->update(dt);
+                                ++it;
+                        }
                 }
-        } 
+        }
         
 }
 

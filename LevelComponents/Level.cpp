@@ -80,10 +80,15 @@ void level::handle_input(float dt)
 
 void level::update(float dt)
 {
-    //elapsed_time_ = clock_.getElapsedTime();
-    // object updates
+    // component updates
     player_->update(dt);
     ground_->update(dt);
+    // need to account for multiple spawners (make function)
+    score_.add_to_score(scene_spawner_->get_objects_scored());
+    // adjusting object speeds based on score (make function)
+    scene_spawner_->update_object_speed( score_.get_score());
+    scene_spawner_->update_spawn_rate( score_.get_score());
+    
 #ifndef DEBUGMODE
     scene_spawner_->update(dt);
     hazard_spawner_->update(dt);
@@ -109,6 +114,7 @@ void level::update(float dt)
         }
     }
 #endif
+    
 #ifndef DEBUGMODE
     // spawned obstacle collision
     scene_spawner_->detect_collision(player_);
@@ -132,8 +138,6 @@ void level::render()
         // UI elements first
         timer_.render_timer(*window);
 #ifndef DEBUGMODE
-        // need to account for multiple spawners
-        score_.add_to_score(scene_spawner_->get_objects_scored());
         scene_spawner_->render_objects();
         hazard_spawner_->render_objects();
 #endif
