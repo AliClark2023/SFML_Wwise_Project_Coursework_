@@ -41,4 +41,7 @@ private:
     // level UI components
     timer timer_;
     score score_;
+    
+    // testing
+    float prev_intensity = 0.0f;
 };

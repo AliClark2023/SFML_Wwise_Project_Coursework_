@@ -65,23 +65,23 @@ void object_spawner::update_object_speed(const int& score, const float& time)
         const int seconds = total_seconds % 60;
         
         if (minutes == 0 && seconds == 0) return;
-        //testing (every 10s increase speed)
+        //testing (every 10s increase speed)(remove magic numbers and make variable/calculation)
         if (seconds % 10 == 0 && !increased_speed_)
         {
                 // change to add
-                object_speed_ *= 1.5f;
+                object_speed_ += static_cast<float>(seconds) / 10;
                 increased_speed_ = true;
         }else if (seconds % 10 >= 1 && increased_speed_)
         {
                 increased_speed_ = false;
         }
         
-        //score increase calculation
+        //score increase calculation(remove magic numbers and make variable/calculation)
         if (score == 0) return;
         if (score % 10 == 0 && !increased_speed_)
         {
                 // change to add
-                object_speed_ *= 1.5f;
+                object_speed_ += static_cast<float>(score) / 10;
                 increased_speed_ = true;
                 // can change type to spawn
                 // type_to_spawn_ = hazard;
