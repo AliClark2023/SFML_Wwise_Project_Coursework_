@@ -10,6 +10,14 @@
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
 				</SoundBank>
+				<SoundBank Name="ProjectSoundbank" ID="{D586EC88-24D7-4A03-A18B-8352411C673F}">
+					<ObjectInclusionList>
+						<ObjectRef Name="INT_Music Events" ID="{B03C5B15-8464-437D-851B-23FC751A7D31}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Interactive_Music Work Unit" ID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
 			</ChildrenList>
 		</WorkUnit>
 	</SoundBanks>

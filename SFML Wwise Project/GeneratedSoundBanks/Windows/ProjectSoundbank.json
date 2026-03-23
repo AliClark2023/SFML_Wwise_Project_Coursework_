@@ -1,0 +1,121 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "2110248291",
+    "Type": "User",
+    "GUID": "{D586EC88-24D7-4A03-A18B-8352411C673F}",
+    "Language": "SFX",
+    "Hash": "{6D13687F-A568-64DA-3C12-9D44A95CED27}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\ProjectSoundbank",
+    "ShortName": "ProjectSoundbank",
+    "Path": "ProjectSoundbank.bnk",
+    "Media": [
+     {
+      "Id": "155725555",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Synth_Bass.wav",
+      "CachePath": "DA/{DA443ED7-606F-D78F-4C7A-3BE0921747F0}.wem"
+     },
+     {
+      "Id": "192726892",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Synth_Start.wav",
+      "CachePath": "93/{9338CA94-B553-A3F1-B8F6-091117ADC624}.wem"
+     },
+     {
+      "Id": "417098927",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Drums_High.wav",
+      "CachePath": "11/{112135F2-331E-A206-BFEA-5DB95EDF7263}.wem"
+     },
+     {
+      "Id": "438565338",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Backing.wav",
+      "CachePath": "FC/{FCDE7D09-3FC3-0643-BA80-ACC8956B98D9}.wem"
+     },
+     {
+      "Id": "457001804",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Backing_High.wav",
+      "CachePath": "47/{477447C7-3A5D-29F3-0CA1-491E4F7D5256}.wem"
+     },
+     {
+      "Id": "618067175",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Synth_High.wav",
+      "CachePath": "C2/{C2FB6AEB-39BA-2F2D-47D6-0320E8698610}.wem"
+     },
+     {
+      "Id": "806843990",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Drums_Base.wav",
+      "CachePath": "02/{0255D648-2734-3A28-5D78-7C55C39F4C07}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "65769146",
+      "Name": "Play_Background_Music",
+      "ObjectPath": "\\Events\\INT_Music Events\\Play_Background_Music",
+      "GUID": "{E5CC79CA-F599-4B84-8FFD-7E7AC4E7C5CA}",
+      "DurationType": "OneShot",
+      "DurationMin": "53.5",
+      "DurationMax": "53.5",
+      "MediaRefs": [
+       {
+        "Id": "155725555"
+       },
+       {
+        "Id": "192726892"
+       },
+       {
+        "Id": "417098927"
+       },
+       {
+        "Id": "438565338"
+       },
+       {
+        "Id": "457001804"
+       },
+       {
+        "Id": "618067175"
+       },
+       {
+        "Id": "806843990"
+       }
+      ]
+     }
+    ],
+    "GameParameters": [
+     {
+      "Id": "2470328564",
+      "Name": "Intensity",
+      "ObjectPath": "\\Game Parameters\\Music Parameters\\Intensity",
+      "GUID": "{AFF6513C-D8DF-4CE4-A311-276CFD171F10}"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{2FAB4F34-2C11-CF54-8CD3-F47E373D9CD9}"
+ }
+}

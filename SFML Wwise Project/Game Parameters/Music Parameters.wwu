@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{900B550B-E1BF-4964-AB69-8A8E765D5999}" SchemaVersion="123">
+	<GameParameters>
+		<WorkUnit Name="Music Parameters" ID="{900B550B-E1BF-4964-AB69-8A8E765D5999}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="Intensity" ID="{AFF6513C-D8DF-4CE4-A311-276CFD171F10}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="RTPCRamping" Type="int16" Value="1"/>
+						<Property Name="SlewRateUp" Type="Real64" Value="25"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
+	</GameParameters>
+</WwiseDocument>

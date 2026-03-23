@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{B03C5B15-8464-437D-851B-23FC751A7D31}" SchemaVersion="123">
+	<Events>
+		<WorkUnit Name="INT_Music Events" ID="{B03C5B15-8464-437D-851B-23FC751A7D31}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_Background_Music" ID="{E5CC79CA-F599-4B84-8FFD-7E7AC4E7C5CA}">
+					<ChildrenList>
+						<Action Name="" ID="{1CDCC43F-0F60-44E2-A9FB-57B4C70731C9}" ShortID="237417357">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Upbeat Music" ID="{E1573ABF-5859-4841-82EE-D8244F8D29E4}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>
