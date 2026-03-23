@@ -29,7 +29,7 @@ int main()
 	//		you will probably want to replace it with your own soundbank.
 	{
 		AkBankID mainBankId;
-		if (AK::SoundEngine::LoadBank(AKTEXT("MainSoundbank"), mainBankId) != AK_Success)
+		if (AK::SoundEngine::LoadBank(AKTEXT("ProjectSoundbank"), mainBankId) != AK_Success)
 		{
 			assert(!"Could not load soundbank.");
 			return 1;
@@ -54,7 +54,7 @@ int main()
 		//assigns the listener with an ID of 0, hence the ID of 1 for our loop.
 		AK::SoundEngine::RegisterGameObj(gameObjectId);
 
-		AK::SoundEngine::PostEvent(AKTEXT("Loop"), gameObjectId);
+		AK::SoundEngine::PostEvent(AKTEXT("Play_Background_Music"), gameObjectId);
 	}
 	//--------------------------------------------------------------------------
 
