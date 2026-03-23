@@ -70,7 +70,7 @@ int main()
 	
 	// Initialise objects for delta time
 	sf::Clock clock;
-
+	
 	while (window->isOpen())
 	{
 		// Calculate delta time. How much time has passed 
@@ -84,8 +84,11 @@ int main()
 			else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
 			{
 				if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
+				{
 					window->close();
+				}
 			}
+
 		}
 
 		//--Wwise code----------------------------------------------------------
