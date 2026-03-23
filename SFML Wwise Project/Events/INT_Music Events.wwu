@@ -8,7 +8,21 @@
 						<Action Name="" ID="{1CDCC43F-0F60-44E2-A9FB-57B4C70731C9}" ShortID="237417357">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="Upbeat Music" ID="{E1573ABF-5859-4841-82EE-D8244F8D29E4}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
+									<ObjectRef Name="Background Music Loop" ID="{7A276EF1-EE46-4585-9994-04B3AB61614F}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Set_Background_Intensity" ID="{2B871084-A18E-45A1-B70D-0D3DA2C43396}">
+					<ChildrenList>
+						<Action Name="" ID="{4E123D79-7A05-43FD-8937-70428B3B9E96}" ShortID="269653515">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="38"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Intensity" ID="{AFF6513C-D8DF-4CE4-A311-276CFD171F10}" WorkUnitID="{900B550B-E1BF-4964-AB69-8A8E765D5999}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

@@ -5,6 +5,7 @@
 #include "../BaseClasses/ObjSpawner.h"
 #include "../BaseClasses/GameObject.h"
 #include "../LevelComponents/Timer.h"
+#include "../WwiseWrapper.h"
 #include "../Utilities/SATDetection.h"
 
 class level

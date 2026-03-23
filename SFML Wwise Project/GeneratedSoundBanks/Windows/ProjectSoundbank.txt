@@ -1,5 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
 	65769146	Play_Background_Music			\INT_Music Events\Play_Background_Music	
+	839265480	Set_Background_Intensity			\INT_Music Events\Set_Background_Intensity	
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	2470328564	Intensity			\Music Parameters\Intensity	

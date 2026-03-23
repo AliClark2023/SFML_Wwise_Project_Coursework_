@@ -4,6 +4,13 @@
 		<WorkUnit Name="Interactive_Music Work Unit" ID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}" PersistMode="Standalone">
 			<ChildrenList>
 				<MusicPlaylistContainer Name="Background Music Loop" ID="{7A276EF1-EE46-4585-9994-04B3AB61614F}" ShortID="108571311">
+					<PropertyList>
+						<Property Name="MaxSoundPerInstance" Type="int16">
+							<ValueList>
+								<Value>4</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DB241402-7335-44F0-8B8F-05556E8E147C}"/>
@@ -14,10 +21,12 @@
 						<Reference Name="PlaylistRoot">
 							<Custom>
 								<MusicPlaylistItem Name="" ID="{C50562B1-0DDF-4EA2-B500-A6CE1875FC0C}" ShortID="1013183171">
+									<PropertyList>
+										<Property Name="LoopCount" Type="int16" Value="0"/>
+									</PropertyList>
 									<ChildrenList>
-										<MusicPlaylistItem Name="" ID="{24849280-5E7B-4EC2-AE15-AE6831F32625}" ShortID="604732467">
+										<MusicPlaylistItem Name="" ID="{D93D2756-49A3-42D7-A56D-DD1B9519EE88}" ShortID="1026718798">
 											<PropertyList>
-												<Property Name="LoopCount" Type="int16" Value="0"/>
 												<Property Name="PlaylistItemType" Type="int16" Value="1"/>
 											</PropertyList>
 											<ReferenceList>
@@ -49,7 +58,7 @@
 					<ChildrenList>
 						<MusicSegment Name="Upbeat Music" ID="{E1573ABF-5859-4841-82EE-D8244F8D29E4}" ShortID="418163056">
 							<PropertyList>
-								<Property Name="EndPosition" Type="Real64" Value="53500"/>
+								<Property Name="EndPosition" Type="Real64" Value="56315.4172560113"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -61,6 +70,13 @@
 							</ReferenceList>
 							<ChildrenList>
 								<MusicTrack Name="Backing" ID="{D4EF0429-7223-43A1-91F0-719E8049423C}" ShortID="381125118">
+									<PropertyList>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DB241402-7335-44F0-8B8F-05556E8E147C}"/>
@@ -164,6 +180,13 @@
 									</ObjectLists>
 								</MusicTrack>
 								<MusicTrack Name="Backing_High" ID="{C2EE7FE9-3860-40EC-ABBB-98D95901113A}" ShortID="26193155">
+									<PropertyList>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DB241402-7335-44F0-8B8F-05556E8E147C}"/>
@@ -267,6 +290,18 @@
 									</ObjectLists>
 								</MusicTrack>
 								<MusicTrack Name="Drums_Base" ID="{4493E81C-7581-4D49-B087-5DB0F262240D}" ShortID="139162044">
+									<PropertyList>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+										<Property Name="UseMaxSoundPerInstance" Type="bool">
+											<ValueList>
+												<Value>True</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DB241402-7335-44F0-8B8F-05556E8E147C}"/>
@@ -376,6 +411,18 @@
 									</ObjectLists>
 								</MusicTrack>
 								<MusicTrack Name="Drums_High" ID="{DBD53F24-031B-4383-86D0-A61EFEDDC954}" ShortID="530222246">
+									<PropertyList>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+										<Property Name="UseMaxSoundPerInstance" Type="bool">
+											<ValueList>
+												<Value>True</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DB241402-7335-44F0-8B8F-05556E8E147C}"/>
@@ -804,7 +851,7 @@
 											<MusicCue Name="Exit Cue" ID="{6CAD567C-E897-4F45-B4FA-C641D387DDB3}">
 												<PropertyList>
 													<Property Name="CueType" Type="int16" Value="1"/>
-													<Property Name="TimeMs" Type="Real64" Value="1000"/>
+													<Property Name="TimeMs" Type="Real64" Value="53500"/>
 												</PropertyList>
 											</MusicCue>
 										</Local>

@@ -1,7 +1,7 @@
 ﻿#include "Level.h"
 
 // debug mode
-//#include "../Constants/DebugMode.h"
+#include "../Constants/DebugMode.h"
 
 level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v)
 {
@@ -75,6 +75,20 @@ void level::handle_input(float dt)
     // testing
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)) score_.add_to_score(1);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2)) score_.sub_from_score(1);
+    bool updatedAudio = false;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3))
+    {
+        if (!updatedAudio)
+        {
+            if (AK::SoundEngine::SetRTPCValue("Intensity", 25.f))
+            {
+                std::cout << "Could not initialise Intensity value." << '\n';
+            }
+            updatedAudio = true;
+        }
+        
+    }
+    
 #endif
 }
 
@@ -84,10 +98,10 @@ void level::update(float dt)
     player_->update(dt);
     ground_->update(dt);
     // need to account for multiple spawners (make function)
-    score_.add_to_score(scene_spawner_->get_objects_scored());
+    //score_.add_to_score(scene_spawner_->get_objects_scored());
     // adjusting object speeds based on score (make function)
-    scene_spawner_->update_object_speed( score_.get_score(),timer_.get_time().asSeconds());
-    scene_spawner_->update_spawn_rate( score_.get_score(), timer_.get_time().asSeconds());
+    //scene_spawner_->update_object_speed( score_.get_score(),timer_.get_time().asSeconds());
+    //scene_spawner_->update_spawn_rate( score_.get_score(), timer_.get_time().asSeconds());
     
 #ifndef DEBUGMODE
     scene_spawner_->update(dt);
