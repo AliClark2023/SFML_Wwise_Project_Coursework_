@@ -55,7 +55,7 @@ void object_spawner::spawn_object()
         view.reset();
        
 }
-//need to clamp min/max values
+//need to clamp min/max values (remove?)
 void object_spawner::update_object_speed(const int& score, const float& time)
 {
         
@@ -93,7 +93,7 @@ void object_spawner::update_object_speed(const int& score, const float& time)
        
 }
 
-// need to clamp min/max values
+// need to clamp min/max values (remove?)
 void object_spawner::update_spawn_rate(const int& score, const float& time)
 {
         // timer increase calculation
@@ -205,22 +205,7 @@ void object_spawner::update(float dt)
                 spawn_object();
                 elapsed_time_ = 0.0f;
         }
-        /*
-        // updating or removing objects from vector
-        for (const auto& object : objects_)
-        {
-                if (object)
-                {
-                        if (object->is_alive())
-                        {
-                                object->update(dt);
-                        }else
-                        {
-                                objects_.erase(objects_.begin());
-                        }
-                }
-        }
-        */
+
         //updating or removing dead objects from vector
         // no need to increment iterator in loop condition as it gets updated within the loop
         for (auto it = objects_.begin(); it != objects_.end();)

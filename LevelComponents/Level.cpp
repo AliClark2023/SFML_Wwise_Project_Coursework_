@@ -33,7 +33,7 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
 #endif
     
 #ifndef DEBUGMODE
-    // spawner config
+    // spawner config (create function)
     // add these to constants (make unique pos for different spawners)
     sf::Vector2f plat_spawn_pos = sf::Vector2f(v->getCenter().x + v->getSize().x, v->getCenter().y);
     sf::Vector2f hazard_spawn_pos = sf::Vector2f(v->getCenter().x + v->getSize().x, v->getCenter().y + 50);
@@ -41,13 +41,15 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     
     scene_spawner_ = std::make_unique<object_spawner>(win, v, scenery);
     scene_spawner_->setPosition(plat_spawn_pos);
-    scene_spawner_->set_spawn_rate(1.f);
+    scene_spawner_->set_spawn_rate(START_SPWN_RATE);
+    scene_spawner_->set_object_speed(START_OBJ_SPEED);
     scene_spawner_->set_score_threshold(v->getCenter());
     scene_spawner_->set_despawn_threshold(despawn_pos);
     
     hazard_spawner_ = std::make_unique<object_spawner>(win, v, hazard);
     hazard_spawner_->setPosition(hazard_spawn_pos);
-    hazard_spawner_->set_spawn_rate(0.5f);
+    hazard_spawner_->set_spawn_rate(START_SPWN_RATE);
+    hazard_spawner_->set_object_speed(START_OBJ_SPEED);
     hazard_spawner_->set_score_threshold(v->getCenter());
     hazard_spawner_->set_despawn_threshold(despawn_pos);
 #endif
@@ -97,16 +99,26 @@ void level::update(float dt)
     // component updates
     player_->update(dt);
     ground_->update(dt);
-    // need to account for multiple spawners (make function)
+    // make function/calculation to account for multiple spawners
     score_.add_to_score(scene_spawner_->get_objects_scored());
+    const float score = static_cast<float>(score_.get_score());
+    // CLAMP THESE
+    const float new_obj_speed = std::clamp((score * OBJ_SPEED_MULTIPLIER) + START_OBJ_SPEED, START_OBJ_SPEED, MAX_OBJ_SPEED);
+    const float new_obj_spwn_rate = std::clamp( (-score * OBJ_SPAWN_MULTIPLIER) + START_SPWN_RATE, MAX_SPWN_RATE, START_SPWN_RATE);
+    const float new_audio_intensity = std::clamp(score * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
+    
     // adjusting object speeds based on score (make function)
-    scene_spawner_->update_object_speed( score_.get_score(),timer_.get_time().asSeconds());
+    scene_spawner_->set_object_speed(new_obj_speed);
+    scene_spawner_->set_spawn_rate(new_obj_spwn_rate);
+    //scene_spawner_->update_object_speed( score_.get_score(),timer_.get_time().asSeconds());
     //scene_spawner_->update_spawn_rate( score_.get_score(), timer_.get_time().asSeconds());
-    float intensity = static_cast<float>(score_.get_score()) / 10;
-    if (AK::SoundEngine::SetRTPCValue("Intensity", intensity * 2))
+    
+    // audio hook testing
+    if ( !(prev_intensity <= new_audio_intensity && AK::SoundEngine::SetRTPCValue("Intensity", new_audio_intensity)))
     {
         std::cout << "Could not initialise Intensity value." << '\n';
     }
+    prev_intensity = new_audio_intensity;
     
 #ifndef DEBUGMODE
     scene_spawner_->update(dt);

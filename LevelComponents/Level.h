@@ -5,6 +5,7 @@
 #include "../BaseClasses/ObjSpawner.h"
 #include "../BaseClasses/GameObject.h"
 #include "../LevelComponents/Timer.h"
+#include "../Constants/ObstaclesConsts.h"
 #include "../WwiseWrapper.h"
 #include "../Utilities/SATDetection.h"
 
@@ -44,4 +45,5 @@ private:
     
     // testing
     float prev_intensity = 0.0f;
+    
 };

@@ -17,12 +17,12 @@ Player::Player(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_p
     
     //physics Initialisation
     //gravity
-    gravity_ = sf::Vector2f(0, 9.8f) * VELOCITY_SCALE;
+    gravity_ = sf::Vector2f(0, 9.8f) * PLAYER_V_SCALE;
     //jumping velocity
-    jump_vector_ = sf::Vector2f(0, -4.0f) * VELOCITY_SCALE;
+    jump_vector_ = sf::Vector2f(0, -4.0f) * PLAYER_V_SCALE;
     is_jumping_ = false;
     //movement
-    velocity_ = sf::Vector2f(2.f, 0) * VELOCITY_SCALE;
+    velocity_ = sf::Vector2f(2.f, 0) * PLAYER_V_SCALE;
     //object_type_ = player_controlled;
     
     // collision setup
@@ -61,13 +61,13 @@ void Player::handle_input(float dt)
             else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && is_key_held_) {
                 is_key_held_ = false;
             }
-            // debug functions or keep ?
+            // side ways movement
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-                velocity_.x = 2 * VELOCITY_SCALE;
+                velocity_.x = 2 * PLAYER_V_SCALE;
                 move(-velocity_ * dt);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-                velocity_.x = 2 * VELOCITY_SCALE;
+                velocity_.x = 2 * PLAYER_V_SCALE;
                 move(velocity_ * dt);
             }
         }

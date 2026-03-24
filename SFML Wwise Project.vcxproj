@@ -233,6 +233,7 @@
     <ClInclude Include="BaseClasses\GameObject.h" />
     <ClInclude Include="BaseClasses\ObjSpawner.h" />
     <ClInclude Include="Constants\DebugMode.h" />
+    <ClInclude Include="Constants\ObstaclesConsts.h" />
     <ClInclude Include="Constants\PhysicsConsts.h" />
     <ClInclude Include="LevelComponents\Level.h" />
     <ClInclude Include="LevelComponents\Score.h" />
