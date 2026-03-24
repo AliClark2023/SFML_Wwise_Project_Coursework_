@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{2FF0199B-55A2-4F06-AE85-D921F1B66132}" SchemaVersion="123">
+	<Triggers>
+		<WorkUnit Name="Music" ID="{2FF0199B-55A2-4F06-AE85-D921F1B66132}" PersistMode="Standalone">
+			<ChildrenList>
+				<Trigger Name="Landing_note" ID="{138BFD02-1A20-499D-993C-86BDEFE713A9}"/>
+				<Trigger Name="Hazzard_note" ID="{DB10D9A3-B2A8-49E4-8B5F-C0A9D6A02C5F}"/>
+			</ChildrenList>
+		</WorkUnit>
+	</Triggers>
+</WwiseDocument>

@@ -1,16 +1,25 @@
 Event	ID	Name			Wwise Object Path	Notes
+	13598864	Destroy_Hazzard			\INT_Music Events\Destroy_Hazzard	
 	65769146	Play_Background_Music			\INT_Music Events\Play_Background_Music	
 	839265480	Set_Background_Intensity			\INT_Music Events\Set_Background_Intensity	
+	2570636058	Change_To_Downbeat			\INT_Music Events\Change_To_Downbeat	
+	2633434876	Platform_Landing			\INT_Music Events\Platform_Landing	
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	2470328564	Intensity			\Music Parameters\Intensity	
 
+Trigger	ID	Name			Wwise Object Path	Notes
+	507357969	Landing_note			\Music\Landing_note	
+	797539126	Hazzard_note			\Music\Hazzard_note	
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	155725555	Synth_Bass	D:\Data\Uni\Year4\Audio\Assessment\SFML-Wwise-Project-main\SFML Wwise Project\.cache\DA\{DA443ED7-606F-D78F-4C7A-3BE0921747F0}.wem		\Interactive Music Hierarchy\Interactive_Music Work Unit\Background Music Loop\Upbeat Music\Synth_Bass		9437496
 	192726892	Synth_Start	D:\Data\Uni\Year4\Audio\Assessment\SFML-Wwise-Project-main\SFML Wwise Project\.cache\93\{9338CA94-B553-A3F1-B8F6-091117ADC624}.wem		\Interactive Music Hierarchy\Interactive_Music Work Unit\Background Music Loop\Upbeat Music\Synth_Start		9437496
+	404378780	LandingStinger	D:\Data\Uni\Year4\Audio\Assessment\SFML-Wwise-Project-main\SFML Wwise Project\.cache\70\{70F06DA5-DBBB-4ACA-525A-CA9750B6F038}.wem		\Interactive Music Hierarchy\Interactive_Music Work Unit\Stingers\LandingStinger\LandingStinger		88296
 	417098927	Drums_High	D:\Data\Uni\Year4\Audio\Assessment\SFML-Wwise-Project-main\SFML Wwise Project\.cache\11\{112135F2-331E-A206-BFEA-5DB95EDF7263}.wem		\Interactive Music Hierarchy\Interactive_Music Work Unit\Background Music Loop\Upbeat Music\Drums_High		9437496
 	438565338	Backing	D:\Data\Uni\Year4\Audio\Assessment\SFML-Wwise-Project-main\SFML Wwise Project\.cache\FC\{FCDE7D09-3FC3-0643-BA80-ACC8956B98D9}.wem		\Interactive Music Hierarchy\Interactive_Music Work Unit\Background Music Loop\Upbeat Music\Backing		9437496
 	457001804	Backing_High	D:\Data\Uni\Year4\Audio\Assessment\SFML-Wwise-Project-main\SFML Wwise Project\.cache\47\{477447C7-3A5D-29F3-0CA1-491E4F7D5256}.wem		\Interactive Music Hierarchy\Interactive_Music Work Unit\Background Music Loop\Upbeat Music\Backing_High		9437496
+	533836305	HazardStinger	D:\Data\Uni\Year4\Audio\Assessment\SFML-Wwise-Project-main\SFML Wwise Project\.cache\E0\{E0264790-D50F-8476-63C9-A3BF9BB48FF9}.wem		\Interactive Music Hierarchy\Interactive_Music Work Unit\Stingers\HazardStinger\HazardStinger		88296
 	618067175	Synth_High	D:\Data\Uni\Year4\Audio\Assessment\SFML-Wwise-Project-main\SFML Wwise Project\.cache\C2\{C2FB6AEB-39BA-2F2D-47D6-0320E8698610}.wem		\Interactive Music Hierarchy\Interactive_Music Work Unit\Background Music Loop\Upbeat Music\Synth_High		9437496
 	806843990	Drums_Base	D:\Data\Uni\Year4\Audio\Assessment\SFML-Wwise-Project-main\SFML Wwise Project\.cache\02\{0255D648-2734-3A28-5D78-7C55C39F4C07}.wem		\Interactive Music Hierarchy\Interactive_Music Work Unit\Background Music Loop\Upbeat Music\Drums_Base		9437496
 

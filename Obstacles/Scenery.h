@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../BaseClasses/GameObject.h"
+#include "../WwiseWrapper.h"
 #include "../Constants/PhysicsConsts.h"
 
 // make general to use between obstacle types

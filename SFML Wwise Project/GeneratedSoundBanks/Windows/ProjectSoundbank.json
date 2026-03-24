@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{D586EC88-24D7-4A03-A18B-8352411C673F}",
     "Language": "SFX",
-    "Hash": "{3C74B187-AB83-EE0A-5CA1-A18D002C8D59}",
+    "Hash": "{5EBE92B9-851A-151A-B885-99B6FBB7B201}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\ProjectSoundbank",
     "ShortName": "ProjectSoundbank",
     "Path": "ProjectSoundbank.bnk",
@@ -30,6 +30,14 @@
       "Location": "Memory",
       "ShortName": "Synth_Start.wav",
       "CachePath": "93/{9338CA94-B553-A3F1-B8F6-091117ADC624}.wem"
+     },
+     {
+      "Id": "404378780",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LandingStinger.wav",
+      "CachePath": "70/{70F06DA5-DBBB-4ACA-525A-CA9750B6F038}.wem"
      },
      {
       "Id": "417098927",
@@ -56,6 +64,14 @@
       "CachePath": "47/{477447C7-3A5D-29F3-0CA1-491E4F7D5256}.wem"
      },
      {
+      "Id": "533836305",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "HazardStinger.wav",
+      "CachePath": "E0/{E0264790-D50F-8476-63C9-A3BF9BB48FF9}.wem"
+     },
+     {
       "Id": "618067175",
       "Language": "SFX",
       "Streaming": "false",
@@ -74,6 +90,52 @@
     ],
     "Events": [
      {
+      "Id": "2570636058",
+      "Name": "Change_To_Downbeat",
+      "ObjectPath": "\\Events\\INT_Music Events\\Change_To_Downbeat",
+      "GUID": "{F2AEF4A7-529D-4D38-8E2C-03E1CEFA3272}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "13598864",
+      "Name": "Destroy_Hazzard",
+      "ObjectPath": "\\Events\\INT_Music Events\\Destroy_Hazzard",
+      "GUID": "{F3712289-3724-4397-A895-76FA3D875D62}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "ActionTrigger": [
+       {
+        "Id": "797539126",
+        "Name": "Hazzard_note",
+        "ObjectPath": "\\Triggers\\Music\\Hazzard_note",
+        "GUID": "{DB10D9A3-B2A8-49E4-8B5F-C0A9D6A02C5F}"
+       }
+      ]
+     },
+     {
+      "Id": "2633434876",
+      "Name": "Platform_Landing",
+      "ObjectPath": "\\Events\\INT_Music Events\\Platform_Landing",
+      "GUID": "{28D15D34-C4A9-4ACE-9833-2F9EF0BE9CB3}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "ActionTrigger": [
+       {
+        "Id": "507357969",
+        "Name": "Landing_note",
+        "ObjectPath": "\\Triggers\\Music\\Landing_note",
+        "GUID": "{138BFD02-1A20-499D-993C-86BDEFE713A9}"
+       }
+      ]
+     },
+     {
       "Id": "65769146",
       "Name": "Play_Background_Music",
       "ObjectPath": "\\Events\\INT_Music Events\\Play_Background_Music",
@@ -87,6 +149,9 @@
         "Id": "192726892"
        },
        {
+        "Id": "404378780"
+       },
+       {
         "Id": "417098927"
        },
        {
@@ -94,6 +159,9 @@
        },
        {
         "Id": "457001804"
+       },
+       {
+        "Id": "533836305"
        },
        {
         "Id": "618067175"
@@ -121,9 +189,23 @@
       "ObjectPath": "\\Game Parameters\\Music Parameters\\Intensity",
       "GUID": "{AFF6513C-D8DF-4CE4-A311-276CFD171F10}"
      }
+    ],
+    "Triggers": [
+     {
+      "Id": "507357969",
+      "Name": "Landing_note",
+      "ObjectPath": "\\Triggers\\Music\\Landing_note",
+      "GUID": "{138BFD02-1A20-499D-993C-86BDEFE713A9}"
+     },
+     {
+      "Id": "797539126",
+      "Name": "Hazzard_note",
+      "ObjectPath": "\\Triggers\\Music\\Hazzard_note",
+      "GUID": "{DB10D9A3-B2A8-49E4-8B5F-C0A9D6A02C5F}"
+     }
     ]
    }
   ],
-  "FileHash": "{CCC9264A-1A67-130E-F886-388E6EB8B7D1}"
+  "FileHash": "{51F6FE11-519C-61E5-04E4-DB910C1588BF}"
  }
 }

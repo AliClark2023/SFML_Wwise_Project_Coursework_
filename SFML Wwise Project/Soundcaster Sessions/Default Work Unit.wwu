@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{9E744E6F-DF7F-47AB-804C-76648DD05690}" SchemaVersion="123">
 	<SoundcasterSessions>
-		<WorkUnit Name="Default Work Unit" ID="{9E744E6F-DF7F-47AB-804C-76648DD05690}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{9E744E6F-DF7F-47AB-804C-76648DD05690}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="MusicTest" ID="{903D9BE0-6701-4DB1-84DA-C3718C89B146}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="Platform_Landing" ID="{28D15D34-C4A9-4ACE-9833-2F9EF0BE9CB3}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Destroy_Hazzard" ID="{F3712289-3724-4397-A895-76FA3D875D62}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_Background_Music" ID="{E5CC79CA-F599-4B84-8FFD-7E7AC4E7C5CA}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true"/>
+					<CurrentStateList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true"/>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundcasterSessions>
 </WwiseDocument>

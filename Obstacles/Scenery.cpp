@@ -52,6 +52,8 @@ void Scenery::collision_response(GameObject* collider, const sf::Vector2f& mtv)
             {
                 if (!has_been_activated())
                 {
+                    // audio trigger (pass in ID)
+                    AK::SoundEngine::PostEvent(AKTEXT("Platform_Landing"), 1);
                     set_activated(true);
                     setFillColor(sf::Color::Green);
                 }

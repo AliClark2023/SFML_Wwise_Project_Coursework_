@@ -28,6 +28,35 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Platform_Landing" ID="{28D15D34-C4A9-4ACE-9833-2F9EF0BE9CB3}">
+					<ChildrenList>
+						<Action Name="" ID="{38D98863-50D2-4ADB-8740-6D42DA286D16}" ShortID="204682215">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="35"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Landing_note" ID="{138BFD02-1A20-499D-993C-86BDEFE713A9}" WorkUnitID="{2FF0199B-55A2-4F06-AE85-D921F1B66132}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Change_To_Downbeat" ID="{F2AEF4A7-529D-4D38-8E2C-03E1CEFA3272}"/>
+				<Event Name="Destroy_Hazzard" ID="{F3712289-3724-4397-A895-76FA3D875D62}">
+					<ChildrenList>
+						<Action Name="" ID="{EC061B26-058E-4C42-B889-27F489BEF7FF}" ShortID="375073610">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="35"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Hazzard_note" ID="{DB10D9A3-B2A8-49E4-8B5F-C0A9D6A02C5F}" WorkUnitID="{2FF0199B-55A2-4F06-AE85-D921F1B66132}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
