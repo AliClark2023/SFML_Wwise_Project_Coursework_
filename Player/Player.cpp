@@ -11,7 +11,7 @@ Player::Player(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_p
     setOrigin(sf::Vector2f(getRadius(), getRadius()));
     setRotation(sf::degrees(45));
     // use in constant, should be updateable
-    spawn_point = sf::Vector2f(win->getView().getCenter().x, win->getView().getCenter().y - 500.f);
+    spawn_point = sf::Vector2f(win->getView().getCenter().x, win->getView().getCenter().y - 200.f);
     setPosition(spawn_point);
     setFillColor(sf::Color::Yellow);
     
@@ -88,12 +88,36 @@ void Player::update(float dt)
     //required to constantly apply gravity when a collision is not occuring
     if (is_on_ground_) is_on_ground_ = false;
     
+    // viewport boundary collision check
+    if (!window_ref_.expired())
+    {
+        std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
+        float window_width = window->getView().getSize().x;
+        float window_height = window->getView().getSize().y;
+        sf::Vector2f window_centre = window->getView().getCenter();
+        // left border
+        if (getPosition().x < window_centre.x - (window_width / 2))
+        {
+            setPosition(sf::Vector2f(window_centre.x -(window_width / 2), getPosition().y));
+        }
+        // right border
+        if (getPosition().x > window->getView().getCenter().x + (window_width / 2))
+        {
+            setPosition(sf::Vector2f(window_centre.x  + (window_width / 2), getPosition().y));
+        }
+        // top border
+        if (getPosition().y < window_centre.y - (window_height / 2))
+        {
+            setPosition(sf::Vector2f(getPosition().x, window_centre.y - (window_height / 2)));
+        }
+    }
 }
 
 // will handle collision responses according to their type
 void Player::collision_response(GameObject* collider, const sf::Vector2f& mtv)
 {
-    
+    //used as validation
+    if (!collider) return;
     if (collider->get_object_type() == scenery)
     {
         // moves player out of collision
