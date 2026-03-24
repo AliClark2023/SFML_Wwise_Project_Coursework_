@@ -19,18 +19,28 @@ public:
     
 private:
     void setup_spawners();
+    void update_spawners(const float& dt);
+    void render_spawners();
+    void spawner_collisions();
+    
+    int update_score() const;
+    void update_audio();
+    
     sf::RenderWindow& window_ref_;
     sf::View& view_ref_;
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Scenery> ground_;
-   std::vector<std::unique_ptr<GameObject>> obstacles_;
+    std::vector<std::unique_ptr<GameObject>> obstacles_;
     
     /*
      * spawners
      */
-    std::unique_ptr<object_spawner> scene_spawner_;
-    std::unique_ptr<object_spawner> hazard_spawner_;
+    // remove when vector of spawners are implemented
+    //std::unique_ptr<object_spawner> scene_spawner_;
+    //std::unique_ptr<object_spawner> hazard_spawner_;
+    
+    std::vector<std::unique_ptr<object_spawner>> spawners_;
     /*
      * spawned object parameters
      */

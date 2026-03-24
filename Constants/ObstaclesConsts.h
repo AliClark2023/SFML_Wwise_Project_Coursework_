@@ -2,8 +2,8 @@
 // holds variables denoting parameters for obstacles being spawned into a level
 
 // obstacle default speed
-inline constexpr float START_OBJ_SPEED = 300.0f;
-inline constexpr float START_SPWN_RATE = 0.5f;
+inline constexpr float MIN_OBJ_SPEED = 300.0f;
+inline constexpr float MIN_SPWN_RATE = 0.5f;
 
 // obstacle limits
 inline constexpr float MAX_OBJ_SPEED = 1000.0f;

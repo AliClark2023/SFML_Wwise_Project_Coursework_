@@ -3,7 +3,8 @@
 object_spawner::object_spawner(sf::RenderWindow& win, sf::View& v,
         const ObjectType& object_to_spawn) : GameObject(win, v)
 {
-        type_to_spawn_ = object_to_spawn;
+        //type_to_spawn_ = object_to_spawn;
+        object_type_ = object_to_spawn;
 }
 
 void object_spawner::spawn_object()
@@ -24,7 +25,7 @@ void object_spawner::spawn_object()
         view.reset();
         */
         scenery_config scene_config;
-        switch (type_to_spawn_)
+        switch (object_type_)
         {
         case scenery:
                 scene_config.point_count = 4;
