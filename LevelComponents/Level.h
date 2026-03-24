@@ -12,14 +12,15 @@
 class level
 {
 public:
-    level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v);
+    level( sf::RenderWindow& win,  sf::View& v);
     void handle_input(float dt);
     void update(float dt);
     void render();
     
 private:
-    std::weak_ptr<sf::RenderWindow> window_ref_;
-    std::weak_ptr<sf::View> view_ref_;
+    void setup_spawners();
+    sf::RenderWindow& window_ref_;
+    sf::View& view_ref_;
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Scenery> ground_;

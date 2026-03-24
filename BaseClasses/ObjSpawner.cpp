@@ -1,17 +1,14 @@
 ﻿#include "ObjSpawner.h"
 
-object_spawner::object_spawner(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v,
-        const ObjectType& object_to_spawn)
+object_spawner::object_spawner(sf::RenderWindow& win, sf::View& v,
+        const ObjectType& object_to_spawn) : GameObject(win, v)
 {
-        set_window(win);
-        set_view(v);
         type_to_spawn_ = object_to_spawn;
-        
-        
 }
 
 void object_spawner::spawn_object()
 {
+        /*
         std::shared_ptr<sf::RenderWindow> window ;
         std::shared_ptr<sf::View> view ;
         scenery_config scene_config;
@@ -20,39 +17,42 @@ void object_spawner::spawn_object()
         
         if (!window_ref_.expired() && !view_ref_.expired())
         {
-                switch (type_to_spawn_)
-                {
-                case scenery:
-                        scene_config.point_count = 4;
-                        scene_config.radius = 20;
-                        scene_config.origin = sf::Vector2f( scene_config.radius,  scene_config.radius);
-                        scene_config.rotation = 45;
-                        scene_config.position = getPosition();
-                        scene_config.velocity = sf::Vector2f(-object_speed_, 0);
-                        scene_config.color = sf::Color::Cyan;
-                        scene_config.type = ObjectType::scenery;
-                        objects_.emplace_back(std::make_unique<Scenery>(window, view, scene_config));
-                        objects_.back()->set_alive(true);
-                        break;
-                case hazard:
-                        scene_config.point_count = 4;
-                        scene_config.radius = 20;
-                        scene_config.origin = sf::Vector2f( scene_config.radius,  scene_config.radius);
-                        scene_config.rotation = 0;
-                        scene_config.position = getPosition();
-                        scene_config.velocity = sf::Vector2f(-object_speed_, 0);
-                        scene_config.color = sf::Color::Yellow;
-                        scene_config.type = ObjectType::hazard;
-                        objects_.emplace_back(std::make_unique<Scenery>(window, view, scene_config));
-                        objects_.back()->set_alive(true);
-                        break;
-                default:
-                        break;
-                }
+                
         }
         
         window.reset();
         view.reset();
+        */
+        scenery_config scene_config;
+        switch (type_to_spawn_)
+        {
+        case scenery:
+                scene_config.point_count = 4;
+                scene_config.radius = 20;
+                scene_config.origin = sf::Vector2f( scene_config.radius,  scene_config.radius);
+                scene_config.rotation = 45;
+                scene_config.position = getPosition();
+                scene_config.velocity = sf::Vector2f(-object_speed_, 0);
+                scene_config.color = sf::Color::Cyan;
+                scene_config.type = ObjectType::scenery;
+                objects_.emplace_back(std::make_unique<Scenery>(window_ref_, view_ref_, scene_config));
+                objects_.back()->set_alive(true);
+                break;
+        case hazard:
+                scene_config.point_count = 4;
+                scene_config.radius = 20;
+                scene_config.origin = sf::Vector2f( scene_config.radius,  scene_config.radius);
+                scene_config.rotation = 0;
+                scene_config.position = getPosition();
+                scene_config.velocity = sf::Vector2f(-object_speed_, 0);
+                scene_config.color = sf::Color::Yellow;
+                scene_config.type = ObjectType::hazard;
+                objects_.emplace_back(std::make_unique<Scenery>(window_ref_, view_ref_, scene_config));
+                objects_.back()->set_alive(true);
+                break;
+        default:
+                break;
+        }
        
 }
 //need to clamp min/max values (remove?)
@@ -128,17 +128,20 @@ void object_spawner::update_spawn_rate(const int& score, const float& time)
 
 void object_spawner::render_objects() const
 {
+        /*
         if (!window_ref_.expired())
         {
                 std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
-                for (const auto& object : objects_)
-                {
-                        if (object->is_alive())
-                        {
-                                window->draw(*object);
-                        }
-                }
+                
                 window.reset();
+        }
+        */
+        for (const auto& object : objects_)
+        {
+                if (object->is_alive())
+                {
+                        window_ref_.draw(*object);
+                }
         }
 }
 

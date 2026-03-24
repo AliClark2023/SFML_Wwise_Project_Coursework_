@@ -14,7 +14,7 @@ enum ObjectType
 class GameObject : public sf::CircleShape
 {
 public:
-    GameObject();
+    GameObject( sf::RenderWindow& win,  sf::View& v);
     ~GameObject() override {}
     
     virtual void handle_input(float dt) = 0;
@@ -44,8 +44,8 @@ public:
     virtual void collision_response(GameObject* collider, const sf::Vector2f& mtv) = 0;
     
     // Set game components 
-    void set_window(const std::shared_ptr<sf::RenderWindow>& win) { window_ref_ = win; }
-    void set_view(const std::shared_ptr<sf::View>& v) { view_ref_ = v; }
+    //void set_window(const sf::RenderWindow& win) { window_ref_ = win; }
+   // void set_view(const std::shared_ptr<sf::View>& v) { view_ref_ = v; }
     ObjectType get_object_type() const { return object_type_; }
 protected:
     // properties
@@ -66,6 +66,6 @@ protected:
     sf::FloatRect collision_box_;
     bool collider_;
     
-    std::weak_ptr<sf::RenderWindow> window_ref_;
-    std::weak_ptr<sf::View> view_ref_;
+    sf::RenderWindow& window_ref_;
+    sf::View& view_ref_;
 };

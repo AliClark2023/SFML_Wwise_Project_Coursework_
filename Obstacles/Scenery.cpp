@@ -1,23 +1,19 @@
 ﻿#include "Scenery.h"
 
-Scenery::Scenery(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v)
+Scenery::Scenery(sf::RenderWindow& win, sf::View& v) : GameObject(win, v)
 {
-    set_window(win);
-    set_view(v);
     setPointCount(4);
-    setRadius(v->getSize().x);
+    setRadius(view_ref_.getSize().x);
     setOrigin(sf::Vector2f(getRadius(), getRadius()));
     setRotation(sf::degrees(45));
-    setPosition(sf::Vector2f(win->getView().getCenter().x, win->getView().getCenter().y + (getRadius()/1.2)));
+    setPosition(sf::Vector2f(window_ref_.getView().getCenter().x, window_ref_.getView().getCenter().y + (getRadius()/1.2)));
     setFillColor(sf::Color::Red);
     object_type_ = scenery;
 }
 
-Scenery::Scenery(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v,
-    const scenery_config& config)
+Scenery::Scenery(sf::RenderWindow& win, sf::View& v,
+    const scenery_config& config) : GameObject(win, v)
 {
-    set_window(win);
-    set_view(v);
     setPointCount(config.point_count);
     setRadius(config.radius);
     setOrigin(config.origin);

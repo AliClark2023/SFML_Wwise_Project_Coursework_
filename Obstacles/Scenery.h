@@ -20,8 +20,8 @@ struct scenery_config
 class Scenery : public GameObject
 {
 public:
-    Scenery(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v);
-    Scenery(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v, const scenery_config& config);
+    Scenery(sf::RenderWindow& win, sf::View& v);
+    Scenery(sf::RenderWindow& win, sf::View& v, const scenery_config& config);
     virtual ~Scenery();
     
     // move to obstacle class

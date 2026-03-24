@@ -8,7 +8,7 @@
 class Player : public GameObject
 {
 public:
-    Player(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v);
+    Player(sf::RenderWindow& win, sf::View& v);
     ~Player();
     
     void handle_input(float dt) override;

@@ -3,15 +3,16 @@
 // debug mode
 //#include "../Constants/DebugMode.h"
 
-level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v)
+level::level( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_ref_(v)
 {
-    window_ref_ = win;
-    view_ref_ = v;
+    //window_ref_ = win;
+    //view_ref_ = v;
+    
     player_ = std::make_unique<Player>(win, v);
     ground_ = std::make_unique<Scenery>(win, v);
     
     //initializing spawn zone
-    spawn_zone_min_ = v->getCenter();
+    spawn_zone_min_ = view_ref_.getCenter();
     spawn_zone_min_.x = spawn_zone_min_.x + 500.f;
     spawn_zone_min_.y = spawn_zone_min_.y - 50.f;
     spawn_zone_max_ = sf::Vector2f(0.0f, 0.0f);
@@ -35,22 +36,22 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
 #ifndef DEBUGMODE
     // spawner config (create function)
     // add these to constants (make unique pos for different spawners)
-    sf::Vector2f plat_spawn_pos = sf::Vector2f(v->getCenter().x + v->getSize().x, v->getCenter().y);
-    sf::Vector2f hazard_spawn_pos = sf::Vector2f(v->getCenter().x + v->getSize().x, v->getCenter().y + 50);
-    sf::Vector2f despawn_pos = sf::Vector2f(v->getCenter().x - v->getSize().x, v->getCenter().y);
+    sf::Vector2f plat_spawn_pos = sf::Vector2f(view_ref_.getCenter().x + view_ref_.getSize().x, view_ref_.getCenter().y);
+    sf::Vector2f hazard_spawn_pos = sf::Vector2f(view_ref_.getCenter().x + view_ref_.getSize().x, view_ref_.getCenter().y + 50);
+    sf::Vector2f despawn_pos = sf::Vector2f(view_ref_.getCenter().x - view_ref_.getSize().x, view_ref_.getCenter().y);
     
-    scene_spawner_ = std::make_unique<object_spawner>(win, v, scenery);
+    scene_spawner_ = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery);
     scene_spawner_->setPosition(plat_spawn_pos);
     scene_spawner_->set_spawn_rate(START_SPWN_RATE);
     scene_spawner_->set_object_speed(START_OBJ_SPEED);
-    scene_spawner_->set_score_threshold(v->getCenter());
+    scene_spawner_->set_score_threshold(view_ref_.getCenter());
     scene_spawner_->set_despawn_threshold(despawn_pos);
     
     hazard_spawner_ = std::make_unique<object_spawner>(win, v, hazard);
     hazard_spawner_->setPosition(hazard_spawn_pos);
     hazard_spawner_->set_spawn_rate(START_SPWN_RATE);
     hazard_spawner_->set_object_speed(START_OBJ_SPEED);
-    hazard_spawner_->set_score_threshold(v->getCenter());
+    hazard_spawner_->set_score_threshold(view_ref_.getCenter());
     hazard_spawner_->set_despawn_threshold(despawn_pos);
 #endif
     
@@ -59,14 +60,14 @@ level::level(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr
     timer_.get_text()->setOrigin(timer_.get_text()->getGlobalBounds().size / 2.0f);
     timer_.get_text()->setFillColor(sf::Color::White);
     timer_.get_text()->setOutlineThickness(1.0f);
-    timer_.get_text()->setPosition(sf::Vector2(v->getCenter().x, v->getCenter().y - v->getSize().y / 2 + 20));
+    timer_.get_text()->setPosition(sf::Vector2(view_ref_.getCenter().x, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 20));
     
     // score
     // position sf::Vector2(v->getCenter().x - v->getSize().x /2 + 125, v->getCenter().y - v->getSize().y / 2 + 20));
     score_.get_text()->setOrigin(score_.get_text()->getGlobalBounds().size / 2.0f);
     score_.get_text()->setFillColor(sf::Color::White);
     score_.get_text()->setOutlineThickness(1.0f);
-    score_.get_text()->setPosition(sf::Vector2(v->getCenter().x - v->getSize().x /2 + 50, v->getCenter().y - v->getSize().y / 2 + 10));
+    score_.get_text()->setPosition(sf::Vector2(view_ref_.getCenter().x - view_ref_.getSize().x /2 + 50, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 10));
 }
 
 void level::handle_input(float dt)
@@ -162,25 +163,50 @@ void level::update(float dt)
 
 void level::render()
 {
+    /*
     if (!window_ref_.expired())
     {
         std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
         
-        // UI elements first
-        timer_.render_timer(*window);
-#ifndef DEBUGMODE
-        scene_spawner_->render_objects();
-        hazard_spawner_->render_objects();
-#endif
-        score_.render_score(*window);
-#ifdef DEBUGMODE
-        for (const auto& obstacle : obstacles_) window->draw(*obstacle);
-#endif
-        window->draw(*player_);
-        window->draw(*ground_);
         
-        window.reset();
     }
+    */
     
-   
+    // UI elements first
+    timer_.render_timer(window_ref_);
+#ifndef DEBUGMODE
+    scene_spawner_->render_objects();
+    hazard_spawner_->render_objects();
+#endif
+    score_.render_score(window_ref_);
+#ifdef DEBUGMODE
+    for (const auto& obstacle : obstacles_) window->draw(*obstacle);
+#endif
+    window_ref_.draw(*player_);
+    window_ref_.draw(*ground_);
+    
+}
+
+// initialises all spawners and moves to container for easy alterations
+void level::setup_spawners()
+{
+    // spawner config (create function)
+    // add these to constants (make unique pos for different spawners)
+    sf::Vector2f plat_spawn_pos = sf::Vector2f(view_ref_.getCenter().x + view_ref_.getSize().x, view_ref_.getCenter().y);
+    sf::Vector2f hazard_spawn_pos = sf::Vector2f(view_ref_.getCenter().x + view_ref_.getSize().x, view_ref_.getCenter().y + 50);
+    sf::Vector2f despawn_pos = sf::Vector2f(view_ref_.getCenter().x - view_ref_.getSize().x, view_ref_.getCenter().y);
+    
+    scene_spawner_ = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery);
+    scene_spawner_->setPosition(plat_spawn_pos);
+    scene_spawner_->set_spawn_rate(START_SPWN_RATE);
+    scene_spawner_->set_object_speed(START_OBJ_SPEED);
+    scene_spawner_->set_score_threshold(view_ref_.getCenter());
+    scene_spawner_->set_despawn_threshold(despawn_pos);
+    
+    hazard_spawner_ = std::make_unique<object_spawner>(window_ref_, view_ref_, hazard);
+    hazard_spawner_->setPosition(hazard_spawn_pos);
+    hazard_spawner_->set_spawn_rate(START_SPWN_RATE);
+    hazard_spawner_->set_object_speed(START_OBJ_SPEED);
+    hazard_spawner_->set_score_threshold(view_ref_.getCenter());
+    hazard_spawner_->set_despawn_threshold(despawn_pos);
 }

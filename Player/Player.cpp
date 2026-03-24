@@ -2,16 +2,16 @@
 
 #include <algorithm>
 
-Player::Player(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v)
+Player::Player(sf::RenderWindow& win, sf::View& v):  GameObject(win, v)
 {
-    set_window(win);
-    set_view(v);
+    //set_window(win);
+    //set_view(v);
     setPointCount(4);
     setRadius(25.f);
     setOrigin(sf::Vector2f(getRadius(), getRadius()));
     setRotation(sf::degrees(45));
     // use in constant, should be updateable
-    spawn_point = sf::Vector2f(win->getView().getCenter().x, win->getView().getCenter().y - 200.f);
+    spawn_point = sf::Vector2f(win.getView().getCenter().x, win.getView().getCenter().y - 200.f);
     setPosition(spawn_point);
     setFillColor(sf::Color::Yellow);
     
@@ -35,43 +35,47 @@ Player::~Player()
 
 void Player::handle_input(float dt)
 {
+    /*
     if (!window_ref_.expired())
     {
         // debug code
         std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
-        if(window->hasFocus())
-        {
-            //jumping
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !is_key_held_) {
-                if (!is_jumping_) {
-                    /*
-                    y_velocity_ = jump_vector_;
-                    is_jumping_ = true;
-                    is_key_held_ = true;
-                    //jump sound
-                    */
-                }
-                
-                // testing jumping 
+        
+        window.reset();
+    }
+    */
+    
+    if(window_ref_.hasFocus())
+    {
+        //jumping
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !is_key_held_) {
+            if (!is_jumping_) {
+                /*
                 y_velocity_ = jump_vector_;
                 is_jumping_ = true;
                 is_key_held_ = true;
-                is_on_ground_ = false;
+                //jump sound
+                */
             }
-            else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && is_key_held_) {
-                is_key_held_ = false;
-            }
-            // side ways movement
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-                velocity_.x = 2 * PLAYER_V_SCALE;
-                move(-velocity_ * dt);
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-                velocity_.x = 2 * PLAYER_V_SCALE;
-                move(velocity_ * dt);
-            }
+                
+            // testing jumping 
+            y_velocity_ = jump_vector_;
+            is_jumping_ = true;
+            is_key_held_ = true;
+            is_on_ground_ = false;
         }
-        window.reset();
+        else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && is_key_held_) {
+            is_key_held_ = false;
+        }
+        // side ways movement
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+            velocity_.x = 2 * PLAYER_V_SCALE;
+            move(-velocity_ * dt);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+            velocity_.x = 2 * PLAYER_V_SCALE;
+            move(velocity_ * dt);
+        }
     }
 }
 
@@ -89,27 +93,30 @@ void Player::update(float dt)
     if (is_on_ground_) is_on_ground_ = false;
     
     // viewport boundary collision check
+    /*
     if (!window_ref_.expired())
     {
         std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
-        float window_width = window->getView().getSize().x;
-        float window_height = window->getView().getSize().y;
-        sf::Vector2f window_centre = window->getView().getCenter();
-        // left border
-        if (getPosition().x < window_centre.x - (window_width / 2))
-        {
-            setPosition(sf::Vector2f(window_centre.x -(window_width / 2), getPosition().y));
-        }
-        // right border
-        if (getPosition().x > window->getView().getCenter().x + (window_width / 2))
-        {
-            setPosition(sf::Vector2f(window_centre.x  + (window_width / 2), getPosition().y));
-        }
-        // top border
-        if (getPosition().y < window_centre.y - (window_height / 2))
-        {
-            setPosition(sf::Vector2f(getPosition().x, window_centre.y - (window_height / 2)));
-        }
+        
+    }
+    */
+    float window_width = window_ref_.getView().getSize().x;
+    float window_height = window_ref_.getView().getSize().y;
+    sf::Vector2f window_centre = window_ref_.getView().getCenter();
+    // left border
+    if (getPosition().x < window_centre.x - (window_width / 2))
+    {
+        setPosition(sf::Vector2f(window_centre.x -(window_width / 2), getPosition().y));
+    }
+    // right border
+    if (getPosition().x > window_ref_.getView().getCenter().x + (window_width / 2))
+    {
+        setPosition(sf::Vector2f(window_centre.x  + (window_width / 2), getPosition().y));
+    }
+    // top border
+    if (getPosition().y < window_centre.y - (window_height / 2))
+    {
+        setPosition(sf::Vector2f(getPosition().x, window_centre.y - (window_height / 2)));
     }
 }
 

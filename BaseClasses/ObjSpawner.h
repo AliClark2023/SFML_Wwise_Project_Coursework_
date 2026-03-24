@@ -11,7 +11,7 @@
 class object_spawner : public GameObject
 {
 public:
-    object_spawner(const std::shared_ptr<sf::RenderWindow>& win, const std::shared_ptr<sf::View>& v,
+    object_spawner(sf::RenderWindow& win, sf::View& v,
         const ObjectType& object_to_spawn);
     
     void spawn_object();
