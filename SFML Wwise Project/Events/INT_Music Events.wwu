@@ -8,7 +8,7 @@
 						<Action Name="" ID="{1CDCC43F-0F60-44E2-A9FB-57B4C70731C9}" ShortID="237417357">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="Background Music Loop" ID="{7A276EF1-EE46-4585-9994-04B3AB61614F}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
+									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -42,7 +42,37 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Change_To_Downbeat" ID="{F2AEF4A7-529D-4D38-8E2C-03E1CEFA3272}"/>
+				<Event Name="Change_To_Downbeat" ID="{F2AEF4A7-529D-4D38-8E2C-03E1CEFA3272}">
+					<ChildrenList>
+						<Action Name="" ID="{B1F08FB5-FDC9-4E85-B636-9863D6D3C692}" ShortID="739042854">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{37DF3C71-AA0F-4946-BDAD-C4E98460EB58}" ShortID="843644270">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="22"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="DownBeat" ID="{B759455B-536E-41C1-89BF-4FDF977B077E}" WorkUnitID="{292E542A-3870-4D00-AB79-C5C7237FCABC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{04614BEC-CF77-47CB-81CE-EB0F5BFD51A2}" ShortID="850277224">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 				<Event Name="Destroy_Hazzard" ID="{F3712289-3724-4397-A895-76FA3D875D62}">
 					<ChildrenList>
 						<Action Name="" ID="{EC061B26-058E-4C42-B889-27F489BEF7FF}" ShortID="375073610">
@@ -52,6 +82,37 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="Hazzard_note" ID="{DB10D9A3-B2A8-49E4-8B5F-C0A9D6A02C5F}" WorkUnitID="{2FF0199B-55A2-4F06-AE85-D921F1B66132}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Change_To_Upbeat" ID="{CBE79153-4B2A-4070-B446-7C2BE886B8C9}">
+					<ChildrenList>
+						<Action Name="" ID="{6135E590-B62D-4BB1-9406-A7C8BD46708C}" ShortID="81883322">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{D24C31B9-9CD1-4742-A71C-85A4F24571E8}" ShortID="480149956">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="22"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="UpBeat" ID="{BCCCAA9D-F82C-42EC-A51D-79E476BAE2DD}" WorkUnitID="{292E542A-3870-4D00-AB79-C5C7237FCABC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{9F7437CC-EE19-4139-8949-E80D148CF8A3}" ShortID="863624647">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
