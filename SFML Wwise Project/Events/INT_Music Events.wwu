@@ -5,13 +5,6 @@
 			<ChildrenList>
 				<Event Name="Play_Background_Music" ID="{E5CC79CA-F599-4B84-8FFD-7E7AC4E7C5CA}">
 					<ChildrenList>
-						<Action Name="" ID="{1CDCC43F-0F60-44E2-A9FB-57B4C70731C9}" ShortID="237417357">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
 						<Action Name="" ID="{2ECE4B31-2AA9-4989-B182-3B2FCAEF0118}" ShortID="130780548">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="22"/>
@@ -19,6 +12,13 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="DownBeat" ID="{B759455B-536E-41C1-89BF-4FDF977B077E}" WorkUnitID="{292E542A-3870-4D00-AB79-C5C7237FCABC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{1CDCC43F-0F60-44E2-A9FB-57B4C70731C9}" ShortID="237417357">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -54,16 +54,6 @@
 				</Event>
 				<Event Name="Change_To_Downbeat" ID="{F2AEF4A7-529D-4D38-8E2C-03E1CEFA3272}">
 					<ChildrenList>
-						<Action Name="" ID="{B1F08FB5-FDC9-4E85-B636-9863D6D3C692}" ShortID="739042854">
-							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="2"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
 						<Action Name="" ID="{37DF3C71-AA0F-4946-BDAD-C4E98460EB58}" ShortID="843644270">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="22"/>
@@ -71,13 +61,6 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="DownBeat" ID="{B759455B-536E-41C1-89BF-4FDF977B077E}" WorkUnitID="{292E542A-3870-4D00-AB79-C5C7237FCABC}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-						<Action Name="" ID="{04614BEC-CF77-47CB-81CE-EB0F5BFD51A2}" ShortID="850277224">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -99,16 +82,6 @@
 				</Event>
 				<Event Name="Change_To_Upbeat" ID="{CBE79153-4B2A-4070-B446-7C2BE886B8C9}">
 					<ChildrenList>
-						<Action Name="" ID="{6135E590-B62D-4BB1-9406-A7C8BD46708C}" ShortID="81883322">
-							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="2"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
 						<Action Name="" ID="{D24C31B9-9CD1-4742-A71C-85A4F24571E8}" ShortID="480149956">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="22"/>
@@ -116,13 +89,6 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="UpBeat" ID="{BCCCAA9D-F82C-42EC-A51D-79E476BAE2DD}" WorkUnitID="{292E542A-3870-4D00-AB79-C5C7237FCABC}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-						<Action Name="" ID="{9F7437CC-EE19-4139-8949-E80D148CF8A3}" ShortID="863624647">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
