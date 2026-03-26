@@ -10,8 +10,16 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="Destroy_Hazzard" ID="{F3712289-3724-4397-A895-76FA3D875D62}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="Change_To_Downbeat" ID="{F2AEF4A7-529D-4D38-8E2C-03E1CEFA3272}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
 							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Platform_Landing" ID="{28D15D34-C4A9-4ACE-9833-2F9EF0BE9CB3}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
+							<Position X="1" Y="1"/>
 						</Module>
 						<Module>
 							<ObjectRef Name="Change_To_Upbeat" ID="{CBE79153-4B2A-4070-B446-7C2BE886B8C9}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
