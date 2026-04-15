@@ -52,7 +52,7 @@ void Scenery::collision_response(GameObject* collider, const sf::Vector2f& mtv)
             {
                 if (!has_been_activated())
                 {
-                    // audio trigger (pass in ID)
+                    // audio trigger (pass in ID) (create ID system)
                     AK::SoundEngine::PostEvent(AKTEXT("Platform_Landing"), 1);
                     set_activated(true);
                     setFillColor(sf::Color::Green);
@@ -60,6 +60,7 @@ void Scenery::collision_response(GameObject* collider, const sf::Vector2f& mtv)
             }
         break;
         case hazard:
+            AK::SoundEngine::PostEvent(AKTEXT("Destroy_Hazzard"), 1);
             set_alive(false);
         break;
         default:

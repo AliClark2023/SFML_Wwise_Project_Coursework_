@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{64378184-05D0-F458-B025-7F3A31D740B2}",
+    "Hash": "{1103251E-E569-C14A-200D-5A01D17044B3}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -49,9 +49,37 @@
       "ObjectPath": "\\Game Parameters\\Music Parameters\\Intensity",
       "GUID": "{AFF6513C-D8DF-4CE4-A311-276CFD171F10}"
      }
+    ],
+    "StateGroups": [
+     {
+      "Id": "766723505",
+      "Name": "Game_State",
+      "ObjectPath": "\\States\\Default Work Unit\\Game_State",
+      "GUID": "{56CC915B-5BEC-497B-B4D0-3480601397A2}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Game_State\\None",
+        "GUID": "{A0A2D612-B59B-4ADC-B6A5-EC3E59CE344D}"
+       },
+       {
+        "Id": "1500425445",
+        "Name": "DownBeat",
+        "ObjectPath": "\\States\\Default Work Unit\\Game_State\\DownBeat",
+        "GUID": "{B759455B-536E-41C1-89BF-4FDF977B077E}"
+       },
+       {
+        "Id": "4090965798",
+        "Name": "UpBeat",
+        "ObjectPath": "\\States\\Default Work Unit\\Game_State\\UpBeat",
+        "GUID": "{BCCCAA9D-F82C-42EC-A51D-79E476BAE2DD}"
+       }
+      ]
+     }
     ]
    }
   ],
-  "FileHash": "{E5A84223-60D7-30CC-3A18-C7D4DF2D9356}"
+  "FileHash": "{A35B1968-CDF0-970F-DF55-73E7DDA96905}"
  }
 }

@@ -16,7 +16,7 @@ public:
     void handle_input(float dt);
     void update(float dt);
     void render();
-    
+
 private:
     void setup_spawners();
     void update_spawners(const float& dt);
@@ -31,14 +31,9 @@ private:
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Scenery> ground_;
-    std::vector<std::unique_ptr<GameObject>> obstacles_;
     
-    /*
-     * spawners
-     */
-    // remove when vector of spawners are implemented
-    //std::unique_ptr<object_spawner> scene_spawner_;
-    //std::unique_ptr<object_spawner> hazard_spawner_;
+    // remove after testing is done
+    std::vector<std::unique_ptr<GameObject>> obstacles_;
     
     std::vector<std::unique_ptr<object_spawner>> spawners_;
     /*
@@ -57,4 +52,6 @@ private:
     // testing
     float prev_intensity = 0.0f;
     
+    enum class level_state { slow, high };
+    level_state level_state_ = level_state::slow;
 };

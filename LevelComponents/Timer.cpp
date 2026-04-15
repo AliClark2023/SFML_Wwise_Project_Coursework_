@@ -6,7 +6,7 @@ timer::timer()
 {
     // replace with desired font (note: the directory is vital to loading correctly)
     const std::string font_name = "Assets/Fonts/Montserrat-Regular.ttf";
-    asset_utilities::LoadFont(timer_font_, font_name);
+    FileLoading::load_font(timer_font_, font_name);
     timer_text_ = std::make_unique<sf::Text>(timer_font_);
     timer_.restart();
 }

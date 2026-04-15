@@ -17,3 +17,7 @@ inline constexpr float OBJ_SPAWN_MULTIPLIER = 0.01f;
 inline constexpr float AUDIO_INTENSITY_MULTIPLIER = 0.5f;
 inline constexpr float START_AUDIO_INTENSITY = 0.0f;
 inline constexpr float MAX_AUDIO_INTENSITY = 100.0f;
+
+// specific level state header?
+// determines threshold used by level to change state (score based)
+inline constexpr int HIGH_STATE_SCORE_THRESHOLD = 200;

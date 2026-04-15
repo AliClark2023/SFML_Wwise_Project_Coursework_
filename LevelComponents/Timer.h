@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <SFML/Graphics/Font.hpp>
-#include "../Utilities/AssetUtilities.h"
+#include "../Utilities/FileLoading.h"
 
 /*
  * Class that creates timer and contains functions to display and adjust time

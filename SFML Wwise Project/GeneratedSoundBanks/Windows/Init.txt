@@ -1,3 +1,11 @@
+State Group	ID	Name			Wwise Object Path	Notes
+	766723505	Game_State			\Default Work Unit\Game_State	
+
+State	ID	Name	State Group			Notes
+	748895195	None	Game_State			
+	1500425445	DownBeat	Game_State			
+	4090965798	UpBeat	Game_State			
+
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
 

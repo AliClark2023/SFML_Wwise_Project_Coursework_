@@ -273,10 +273,44 @@ void level::update_spawners(const float& dt)
     }
 }
 
+// handles music triggers within the level
 void level::update_audio()
 {
     const float score = static_cast<float>(score_.get_score());
+    float new_audio_intensity = 0.f;
+    
+    // change state (apply to whole level)
+    if (level_state_ != level_state::high && score >= HIGH_STATE_SCORE_THRESHOLD)
+    {
+        level_state_ = level_state::high;
+        // testing
+        // coallate and create game objects in audio header file
+        const uint64_t gameObjectId = 2;
+        AK::SoundEngine::RegisterGameObj(gameObjectId);
+
+        AK::SoundEngine::PostEvent(AKTEXT("Change_To_Upbeat"), gameObjectId);
+    }
+    
+    // handles how audio intensity is handled depending on level state
+    switch (level_state_)
+    {
+        case level_state::slow:
+            new_audio_intensity = std::clamp(score * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
+            break;
+        // high state
+        default:
+            new_audio_intensity = std::clamp((score - HIGH_STATE_SCORE_THRESHOLD) * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
+            break;
+    }
+    
+    if ( !(prev_intensity <= new_audio_intensity && AK::SoundEngine::SetRTPCValue("Intensity", new_audio_intensity)))
+    {
+        std::cout << "Could not initialise Intensity value." << '\n';
+    }
+    prev_intensity = new_audio_intensity;
+    
     // CLAMP THESE
+    /*
     const float new_audio_intensity = std::clamp(score * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
     // audio hook testing
     if ( !(prev_intensity <= new_audio_intensity && AK::SoundEngine::SetRTPCValue("Intensity", new_audio_intensity)))
@@ -284,6 +318,7 @@ void level::update_audio()
         std::cout << "Could not initialise Intensity value." << '\n';
     }
     prev_intensity = new_audio_intensity;
+    */
 }
 
 void level::render_spawners()

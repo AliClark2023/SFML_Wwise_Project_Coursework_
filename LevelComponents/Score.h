@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <SFML/Graphics/Font.hpp>
-#include "../Utilities/AssetUtilities.h"
+#include "../Utilities/FileLoading.h"
 
 class score
 {
