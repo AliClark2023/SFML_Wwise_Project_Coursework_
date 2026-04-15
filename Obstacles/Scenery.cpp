@@ -55,18 +55,36 @@ void Scenery::collision_response(GameObject* collider, const sf::Vector2f& mtv)
                 {
                     // audio trigger (pass in ID) (create ID system)
                     //AK::SoundEngine::PostEvent(AKTEXT("Platform_Landing"), 1);
-                    AK::SoundEngine::PostEvent(audio_sfx_event.EventName.data(), 1);
-                    set_activated(true);
-                    setFillColor(sf::Color::Green);
+                    AK::SoundEngine::PostEvent(audio_sfx_event.EventName.data(), 1, AK_EndOfEvent, AudioEventCallback, this);
+                    //set_activated(true);
+                    //setFillColor(sf::Color::Green);
                 }
             }
         break;
         case hazard:
             //AK::SoundEngine::PostEvent(AKTEXT("Destroy_Hazzard"), 1);
-            AK::SoundEngine::PostEvent(audio_sfx_event.EventName.data(), 1);
-            set_alive(false);
+            AK::SoundEngine::PostEvent(audio_sfx_event.EventName.data(), 1, AK_EndOfEvent, AudioEventCallback, this);
+            //set_alive(false);
         break;
         default:
         break;
+    }
+}
+
+void Scenery::AudioEventCallback(AkCallbackType in_eType, AkCallbackInfo* in_pCallbackInfo)
+{
+    if (in_eType & AK_EndOfEvent)
+    {
+        if (auto* owner = static_cast<Scenery*>(in_pCallbackInfo->pCookie))
+        {
+            if (owner->object_type_ == scenery)
+            {
+                owner->set_activated(true);
+                owner->setFillColor(sf::Color::Green);
+            }else
+            {
+                owner->set_alive(false);
+            }
+        }
     }
 }

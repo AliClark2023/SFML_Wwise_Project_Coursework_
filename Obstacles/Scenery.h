@@ -42,4 +42,11 @@ private:
     bool counted_ = false;
     bool activated_ = false;
     AudioEvent audio_sfx_event;
+    
+    // Wwise call back adapted from: https://www.audiokinetic.com/en/public-library/2025.1.6_9117/?source=SDK&id=soundengine_music_callbacks.html
+    static void AudioEventCallback(
+        AkCallbackType in_eType,
+        AkCallbackInfo* in_pCallbackInfo
+    );
+
 };
