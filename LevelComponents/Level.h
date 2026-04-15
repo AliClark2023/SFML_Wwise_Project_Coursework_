@@ -8,6 +8,7 @@
 #include "../Constants/ObstaclesConsts.h"
 #include "../WwiseWrapper.h"
 #include "../Utilities/SATDetection.h"
+#include "../Constants/AudioObjects.h"
 
 class level
 {

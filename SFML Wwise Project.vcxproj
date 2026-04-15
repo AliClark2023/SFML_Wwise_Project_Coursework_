@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="BaseClasses\GameObject.h" />
     <ClInclude Include="BaseClasses\ObjSpawner.h" />
+    <ClInclude Include="Constants\AudioObjects.h" />
     <ClInclude Include="Constants\DebugMode.h" />
     <ClInclude Include="Constants\ObstaclesConsts.h" />
     <ClInclude Include="Constants\PhysicsConsts.h" />

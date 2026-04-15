@@ -36,6 +36,7 @@ int main()
 		}
 	}
 
+	/*
 	//TODO: This code tests event posting using the Loop event from the included
 	//		Wwise project. You will want to remove it for your own projects.
 	{
@@ -56,6 +57,7 @@ int main()
 
 		AK::SoundEngine::PostEvent(AKTEXT("Play_Background_Music"), gameObjectId);
 	}
+	*/
 	//--------------------------------------------------------------------------
 
 	// game initialisation

@@ -5,11 +5,18 @@
 
 level::level( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_ref_(v)
 {
-    //window_ref_ = win;
-    //view_ref_ = v;
-    
     player_ = std::make_unique<Player>(win, v);
     ground_ = std::make_unique<Scenery>(win, v);
+    
+    // Audio initialisation (create function)
+    // registering objects used within level
+    AK::SoundEngine::RegisterGameObj(EVT_PLAY_BG_MUSIC.ID);
+    AK::SoundEngine::RegisterGameObj(EVT_CHANGE_TO_UP_BEAT.ID);
+    AK::SoundEngine::RegisterGameObj(EVT_INTENSITY.ID);
+    
+    // starting music
+    AK::SoundEngine::PostEvent(EVT_PLAY_BG_MUSIC.EventName.data(), EVT_PLAY_BG_MUSIC.ID);
+    
     
     //initializing spawn zone
     spawn_zone_min_ = view_ref_.getCenter();
@@ -17,46 +24,7 @@ level::level( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_ref_
     spawn_zone_min_.y = spawn_zone_min_.y - 50.f;
     spawn_zone_max_ = sf::Vector2f(0.0f, 0.0f);
     
-#ifdef DEBUGMODE
-    // testing obstacles
-    
-    scenery_config obstacle_config;
-    obstacle_config.point_count = 4;
-    obstacle_config.radius = 80;
-    obstacle_config.origin = sf::Vector2f( obstacle_config.radius,  obstacle_config.radius);
-    obstacle_config.rotation = 0;
-    obstacle_config.position = spawn_zone_min_;
-    obstacle_config.position = v->getCenter();
-   // obstacle_config.velocity = sf::Vector2f(-object_speed_, 0);
-    obstacle_config.color = sf::Color::Cyan;
-    obstacles_.emplace_back(std::make_unique<Scenery>(win, v, obstacle_config));
-    
-#endif
-    
-#ifndef DEBUGMODE
-    // spawner config (create function)
     setup_spawners();
-    /*
-    // add these to constants (make unique pos for different spawners)
-    sf::Vector2f plat_spawn_pos = sf::Vector2f(view_ref_.getCenter().x + view_ref_.getSize().x, view_ref_.getCenter().y);
-    sf::Vector2f hazard_spawn_pos = sf::Vector2f(view_ref_.getCenter().x + view_ref_.getSize().x, view_ref_.getCenter().y + 50);
-    sf::Vector2f despawn_pos = sf::Vector2f(view_ref_.getCenter().x - view_ref_.getSize().x, view_ref_.getCenter().y);
-    
-    scene_spawner_ = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery);
-    scene_spawner_->setPosition(plat_spawn_pos);
-    scene_spawner_->set_spawn_rate(START_SPWN_RATE);
-    scene_spawner_->set_object_speed(START_OBJ_SPEED);
-    scene_spawner_->set_score_threshold(view_ref_.getCenter());
-    scene_spawner_->set_despawn_threshold(despawn_pos);
-    
-    hazard_spawner_ = std::make_unique<object_spawner>(win, v, hazard);
-    hazard_spawner_->setPosition(hazard_spawn_pos);
-    hazard_spawner_->set_spawn_rate(START_SPWN_RATE);
-    hazard_spawner_->set_object_speed(START_OBJ_SPEED);
-    hazard_spawner_->set_score_threshold(view_ref_.getCenter());
-    hazard_spawner_->set_despawn_threshold(despawn_pos);
-    */
-#endif
     
     //timer attributes (debug only, comment out in release)
     timer_.get_text()->setString("Time: 0.00");
@@ -76,26 +44,6 @@ level::level( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_ref_
 void level::handle_input(float dt)
 {
     player_->handle_input(dt);
-    
-#ifdef  DEBUGMODE
-    // testing
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)) score_.add_to_score(1);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2)) score_.sub_from_score(1);
-    bool updatedAudio = false;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3))
-    {
-        if (!updatedAudio)
-        {
-            if (AK::SoundEngine::SetRTPCValue("Intensity", 50.f))
-            {
-                std::cout << "Could not initialise Intensity value." << '\n';
-            }
-            updatedAudio = true;
-        }
-        
-    }
-    
-#endif
 }
 
 void level::update(float dt)
@@ -106,60 +54,12 @@ void level::update(float dt)
     // make function/calculation to account for multiple spawners
     score_.add_to_score(update_score());
     
-    /*
-    const float score = static_cast<float>(score_.get_score());
-    // CLAMP THESE
-    const float new_obj_speed = std::clamp((score * OBJ_SPEED_MULTIPLIER) + START_OBJ_SPEED, START_OBJ_SPEED, MAX_OBJ_SPEED);
-    const float new_obj_spwn_rate = std::clamp( (-score * OBJ_SPAWN_MULTIPLIER) + START_SPWN_RATE, MAX_SPWN_RATE, START_SPWN_RATE);
-    
-    const float new_audio_intensity = std::clamp(score * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
-    
-    // adjusting object speeds based on score (make function)
-    scene_spawner_->set_object_speed(new_obj_speed);
-    scene_spawner_->set_spawn_rate(new_obj_spwn_rate);
-    //scene_spawner_->update_object_speed( score_.get_score(),timer_.get_time().asSeconds());
-    //scene_spawner_->update_spawn_rate( score_.get_score(), timer_.get_time().asSeconds());
-    
-    // audio hook testing
-    if ( !(prev_intensity <= new_audio_intensity && AK::SoundEngine::SetRTPCValue("Intensity", new_audio_intensity)))
-    {
-        std::cout << "Could not initialise Intensity value." << '\n';
-    }
-    prev_intensity = new_audio_intensity;
-    
-    */
-    
     update_audio();
-    
-#ifndef DEBUGMODE
     update_spawners(dt);
-#endif
     
-#ifdef DEBUGMODE
-    
-    for (const auto& obstacle : obstacles_)
-    {
-        obstacle->update(dt);
-    }
-    
-    // Testing collision with object
-    for (const auto& obstacle : obstacles_)
-    {
-        // change to reset player 
-        if (obstacle->get_object_type() != scenery) continue;
-        
-        sf::Vector2f mtv2;
-        if (sat_detection::sat_collision(*player_, *obstacle, mtv2))
-        {
-            player_->collision_response(obstacle.get(), mtv2);
-        }
-    }
-#endif
-    
-#ifndef DEBUGMODE
     // spawned obstacle collision
     spawner_collisions();
-#endif
+
     // ground collision
     sf::Vector2f mtv;
     if (sat_detection::sat_collision(*player_, *ground_, mtv))
@@ -171,27 +71,12 @@ void level::update(float dt)
 
 void level::render()
 {
-    /*
-    if (!window_ref_.expired())
-    {
-        std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
-        
-        
-    }
-    */
-    
     // UI elements first
     timer_.render_timer(window_ref_);
-#ifndef DEBUGMODE
     render_spawners();
-#endif
     score_.render_score(window_ref_);
-#ifdef DEBUGMODE
-    for (const auto& obstacle : obstacles_) window->draw(*obstacle);
-#endif
     window_ref_.draw(*player_);
     window_ref_.draw(*ground_);
-    
 }
 
 // initialises all spawners and moves to container for easy alterations
@@ -283,12 +168,17 @@ void level::update_audio()
     if (level_state_ != level_state::high && score >= HIGH_STATE_SCORE_THRESHOLD)
     {
         level_state_ = level_state::high;
+        //need to reset after state switching
+        prev_intensity = 0;
+        /*
         // testing
         // coallate and create game objects in audio header file
         const uint64_t gameObjectId = 2;
         AK::SoundEngine::RegisterGameObj(gameObjectId);
-
-        AK::SoundEngine::PostEvent(AKTEXT("Change_To_Upbeat"), gameObjectId);
+        */
+        
+        //AK::SoundEngine::PostEvent(AKTEXT("Change_To_Upbeat"), gameObjectId);
+        AK::SoundEngine::PostEvent(EVT_CHANGE_TO_UP_BEAT.EventName.data(), EVT_CHANGE_TO_UP_BEAT.ID);
     }
     
     // handles how audio intensity is handled depending on level state
@@ -303,22 +193,19 @@ void level::update_audio()
             break;
     }
     
-    if ( !(prev_intensity <= new_audio_intensity && AK::SoundEngine::SetRTPCValue("Intensity", new_audio_intensity)))
+    //if ( !(prev_intensity <= new_audio_intensity && AK::SoundEngine::SetRTPCValue("Intensity", new_audio_intensity)))
+    if ( prev_intensity <= new_audio_intensity)
     {
-        std::cout << "Could not initialise Intensity value." << '\n';
+        const AKRESULT result = AK::SoundEngine::SetRTPCValue(EVT_INTENSITY.EventName.data(), new_audio_intensity);
+        
+        if (result != AK_Success)
+        {
+            std::cout << "Could not initialise Intensity value." << '\n';
+        }else
+        {
+            prev_intensity = new_audio_intensity;
+        }
     }
-    prev_intensity = new_audio_intensity;
-    
-    // CLAMP THESE
-    /*
-    const float new_audio_intensity = std::clamp(score * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
-    // audio hook testing
-    if ( !(prev_intensity <= new_audio_intensity && AK::SoundEngine::SetRTPCValue("Intensity", new_audio_intensity)))
-    {
-        std::cout << "Could not initialise Intensity value." << '\n';
-    }
-    prev_intensity = new_audio_intensity;
-    */
 }
 
 void level::render_spawners()
