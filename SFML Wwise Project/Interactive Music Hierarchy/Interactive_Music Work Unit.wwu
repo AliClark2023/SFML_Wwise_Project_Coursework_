@@ -1132,48 +1132,47 @@
 												</Local>
 											</Reference>
 										</ObjectList>
-										<ObjectList Name="RTPC">
-											<Reference>
-												<Local>
-													<RTPC Name="" ID="{B8131D06-71D5-4831-9EBE-EDAA6D9EA553}" ShortID="829086652">
-														<PropertyList>
-															<Property Name="PropertyName" Type="string" Value="PlaybackSpeed"/>
-														</PropertyList>
-														<ReferenceList>
-															<Reference Name="ControlInput">
-																<ObjectRef Name="Intensity" ID="{AFF6513C-D8DF-4CE4-A311-276CFD171F10}" WorkUnitID="{900B550B-E1BF-4964-AB69-8A8E765D5999}"/>
-															</Reference>
-															<Reference Name="Curve">
-																<Custom>
-																	<Curve Name="" ID="{14DBA7C2-6F4C-444A-A50B-64173227BE42}">
-																		<PropertyList>
-																			<Property Name="Flags" Type="int32" Value="1"/>
-																		</PropertyList>
-																		<PointList>
-																			<Point>
-																				<XPos>0</XPos>
-																				<YPos>1</YPos>
-																				<Flags>5</Flags>
-																				<SegmentShape>SCurve</SegmentShape>
-																			</Point>
-																			<Point>
-																				<XPos>100</XPos>
-																				<YPos>1.25</YPos>
-																				<Flags>37</Flags>
-																			</Point>
-																		</PointList>
-																	</Curve>
-																</Custom>
-															</Reference>
-														</ReferenceList>
-													</RTPC>
-												</Local>
-											</Reference>
-										</ObjectList>
 									</ObjectLists>
 								</MusicSegment>
 							</ChildrenList>
 							<ObjectLists>
+								<ObjectList Name="RTPC">
+									<Reference>
+										<Local>
+											<RTPC Name="" ID="{1602495C-2CB9-477A-A222-BD745620600D}" ShortID="236724337">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="PlaybackSpeed"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="Intensity" ID="{AFF6513C-D8DF-4CE4-A311-276CFD171F10}" WorkUnitID="{900B550B-E1BF-4964-AB69-8A8E765D5999}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{2E065326-8659-4B3F-97CA-119487A9D5E9}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="1"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>1.1</YPos>
+																		<Flags>5</Flags>
+																	</Point>
+																	<Point>
+																		<XPos>100</XPos>
+																		<YPos>1.1</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</Local>
+									</Reference>
+								</ObjectList>
 								<ObjectList Name="Stingers">
 									<Reference>
 										<Local>
@@ -2105,7 +2104,7 @@
 																	</Point>
 																	<Point>
 																		<XPos>100</XPos>
-																		<YPos>1.25</YPos>
+																		<YPos>1</YPos>
 																		<Flags>37</Flags>
 																	</Point>
 																</PointList>
