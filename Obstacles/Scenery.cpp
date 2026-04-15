@@ -22,6 +22,7 @@ Scenery::Scenery(sf::RenderWindow& win, sf::View& v,
     set_velocity(config.velocity);
     setFillColor(config.color);
     object_type_ = config.type;
+    audio_sfx_event = config.audio_event_sfx;
 }
 
 Scenery::~Scenery()
@@ -53,14 +54,16 @@ void Scenery::collision_response(GameObject* collider, const sf::Vector2f& mtv)
                 if (!has_been_activated())
                 {
                     // audio trigger (pass in ID) (create ID system)
-                    AK::SoundEngine::PostEvent(AKTEXT("Platform_Landing"), 1);
+                    //AK::SoundEngine::PostEvent(AKTEXT("Platform_Landing"), 1);
+                    AK::SoundEngine::PostEvent(audio_sfx_event.EventName.data(), 1);
                     set_activated(true);
                     setFillColor(sf::Color::Green);
                 }
             }
         break;
         case hazard:
-            AK::SoundEngine::PostEvent(AKTEXT("Destroy_Hazzard"), 1);
+            //AK::SoundEngine::PostEvent(AKTEXT("Destroy_Hazzard"), 1);
+            AK::SoundEngine::PostEvent(audio_sfx_event.EventName.data(), 1);
             set_alive(false);
         break;
         default:

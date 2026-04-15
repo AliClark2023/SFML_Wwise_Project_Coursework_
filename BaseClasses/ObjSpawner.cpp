@@ -1,10 +1,11 @@
 ﻿#include "ObjSpawner.h"
 
 object_spawner::object_spawner(sf::RenderWindow& win, sf::View& v,
-        const ObjectType& object_to_spawn) : GameObject(win, v)
+        const ObjectType& object_to_spawn, const AudioEvent& event) : GameObject(win, v)
 {
         //type_to_spawn_ = object_to_spawn;
         object_type_ = object_to_spawn;
+        object_triggered_sfx_ = event;
 }
 
 void object_spawner::spawn_object()
@@ -36,6 +37,7 @@ void object_spawner::spawn_object()
                 scene_config.velocity = sf::Vector2f(-object_speed_, 0);
                 scene_config.color = sf::Color::Cyan;
                 scene_config.type = ObjectType::scenery;
+                scene_config.audio_event_sfx = object_triggered_sfx_;
                 objects_.emplace_back(std::make_unique<Scenery>(window_ref_, view_ref_, scene_config));
                 objects_.back()->set_alive(true);
                 break;
@@ -48,6 +50,7 @@ void object_spawner::spawn_object()
                 scene_config.velocity = sf::Vector2f(-object_speed_, 0);
                 scene_config.color = sf::Color::Yellow;
                 scene_config.type = ObjectType::hazard;
+                scene_config.audio_event_sfx = object_triggered_sfx_;
                 objects_.emplace_back(std::make_unique<Scenery>(window_ref_, view_ref_, scene_config));
                 objects_.back()->set_alive(true);
                 break;

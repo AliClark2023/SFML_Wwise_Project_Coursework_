@@ -2,6 +2,7 @@
 #include "../BaseClasses/GameObject.h"
 #include "../WwiseWrapper.h"
 #include "../Constants/PhysicsConsts.h"
+#include "../Constants/AudioObjects.h"
 
 // make general to use between obstacle types
 struct scenery_config
@@ -15,6 +16,7 @@ struct scenery_config
     sf::Vector2f velocity = sf::Vector2f(0.0f, 0.0f);
     sf::Color color = sf::Color::Black;
     ObjectType type = scenery;
+    AudioEvent audio_event_sfx;
 };
 
 // Handles platforms the player can land on top of
@@ -39,4 +41,5 @@ private:
     // can add in obstacle only flags (counted, activated) from base game object
     bool counted_ = false;
     bool activated_ = false;
+    AudioEvent audio_sfx_event;
 };

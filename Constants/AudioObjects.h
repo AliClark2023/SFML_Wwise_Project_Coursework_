@@ -16,7 +16,9 @@ struct AudioEvent
 inline constexpr AudioEvent EVT_PLAY_BG_MUSIC {1, "Play_Background_Music"};
 inline constexpr AudioEvent EVT_CHANGE_TO_UP_BEAT {2, "Change_To_Upbeat"};
 inline constexpr AudioEvent EVT_INTENSITY {3, "Intensity"};
+inline constexpr AudioEvent EVT_PLAT_LANDING {4, "Platform_Landing"};
+inline constexpr AudioEvent EVT_DESTROY_HAZARD {5, "Destroy_Hazzard"};
 
 // Not Currently Implemented
-inline constexpr AudioEvent EVT_PAUSE_BG_MUSIC = {4, "Pause_Background_Music"};
-inline constexpr AudioEvent EVT_RESUME_BG_MUSIC = {5, "Resume_Background_Music"};
+inline constexpr AudioEvent EVT_PAUSE_BG_MUSIC = {6, "Pause_Background_Music"};
+inline constexpr AudioEvent EVT_RESUME_BG_MUSIC = {7, "Resume_Background_Music"};
