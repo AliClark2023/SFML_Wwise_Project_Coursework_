@@ -45,8 +45,8 @@ int main()
 	window->setFramerateLimit(60);
 
 	// levels
-	std::unique_ptr<menu_UI> pause_menu(new menu_UI(*window,*view));
-	std::unique_ptr<level> Level(new level(*window,*view, *pause_menu));
+	std::unique_ptr<menu_ui> ui(new menu_ui(*window,*view));
+	std::unique_ptr<level> Level(new level(*window,*view, *ui));
 
 	
 	// Initialise objects for delta time
@@ -96,7 +96,7 @@ int main()
 
 		// render cycle
 		window->clear();
-		pause_menu->render();
+		ui->render();
 		Level->render();
 		
 		window->display();

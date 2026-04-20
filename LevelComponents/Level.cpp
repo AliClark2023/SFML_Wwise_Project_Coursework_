@@ -1,6 +1,6 @@
 ﻿#include "Level.h"
 
-level::level( sf::RenderWindow& win,  sf::View& v, menu_UI& menu) : window_ref_(win), view_ref_(v), menu_ref_(menu)
+level::level( sf::RenderWindow& win,  sf::View& v, menu_ui& menu) : window_ref_(win), view_ref_(v), menu_ref_(menu)
 {
     player_ = std::make_unique<Player>(win, v);
     ground_ = std::make_unique<Scenery>(win, v);
@@ -25,37 +25,40 @@ level::level( sf::RenderWindow& win,  sf::View& v, menu_UI& menu) : window_ref_(
     
     setup_spawners();
     
+    /*
     //timer attributes (debug only, comment out in release)
     timer_.get_text()->setString("Time: 0.00");
     timer_.get_text()->setOrigin(timer_.get_text()->getGlobalBounds().size / 2.0f);
     timer_.get_text()->setFillColor(sf::Color::White);
     timer_.get_text()->setOutlineThickness(1.0f);
     timer_.get_text()->setPosition(sf::Vector2(view_ref_.getCenter().x, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 20));
-    
-    // score
+    */
+    /*
+    // scoreget_text
     // position sf::Vector2(v->getCenter().x - v->getSize().x /2 + 125, v->getCenter().y - v->getSize().y / 2 + 20));
     score_.get_text()->setOrigin(score_.get_text()->getGlobalBounds().size / 2.0f);
     score_.get_text()->setFillColor(sf::Color::White);
     score_.get_text()->setOutlineThickness(1.0f);
     score_.get_text()->setPosition(sf::Vector2(view_ref_.getCenter().x - view_ref_.getSize().x /2 + 50, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 10));
+    */
 }
 
 void level::handle_input(float dt)
 {
-    if (!menu_ref_.is_active()) player_->handle_input(dt);
+    if (!menu_ref_.is_pause_active()) player_->handle_input(dt);
     
     menu_ref_.handle_input(dt);
 }
 
 void level::update(float dt)
 {
-    if (menu_ref_.is_active()) return;
+    if (menu_ref_.is_pause_active()) return;
     
     // component updates
     player_->update(dt);
     ground_->update(dt);
     // make function/calculation to account for multiple spawners
-    score_.add_to_score(update_score());
+    menu_ref_.add_to_score(update_score());
     
     update_audio();
     update_spawners(dt);
@@ -75,9 +78,9 @@ void level::update(float dt)
 void level::render()
 {
     // UI elements first
-    timer_.render_timer(window_ref_);
+    //timer_.render_timer(window_ref_);
     render_spawners();
-    score_.render_score(window_ref_);
+    //score_.render_score(window_ref_);
     window_ref_.draw(*player_);
     window_ref_.draw(*ground_);
     
@@ -139,7 +142,7 @@ int level::update_score() const
 
 void level::update_spawners(const float& dt)
 {
-    const float score = static_cast<float>(score_.get_score());
+    const float score = static_cast<float>(menu_ref_.get_score());
     // CLAMP THESE
     float new_obj_speed;
     float new_obj_spwn_rate;
@@ -165,7 +168,7 @@ void level::update_spawners(const float& dt)
 // handles music triggers within the level
 void level::update_audio()
 {
-    const float score = static_cast<float>(score_.get_score());
+    const float score = static_cast<float>(menu_ref_.get_score());
     float new_audio_intensity = 0.f;
     
     // change state (apply to whole level)

@@ -10,10 +10,19 @@ timer::timer()
     timer_text_ = std::make_unique<sf::Text>(timer_font_);
     timer_.restart();
 }
+
+timer::timer(sf::Font& font)
+{
+    timer_text_ = std::make_unique<sf::Text>(font);
+    timer_text_->setString("Time: 0.00");
+    timer_text_->setOrigin(timer_text_->getGlobalBounds().size / 2.0f);
+    timer_text_->setFillColor(sf::Color::White);
+    timer_text_->setOutlineThickness(1.0f);
+}
+
 // converts clock timer to MM::SS and renders to window
 void timer::render_timer(sf::RenderWindow& window) const
 {
-    if (!timer_.isRunning()) return;
     
     const sf::Time elapsed = timer_.getElapsedTime();
     const int total_seconds = static_cast<int>(elapsed.asSeconds());

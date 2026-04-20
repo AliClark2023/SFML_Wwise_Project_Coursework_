@@ -1,11 +1,9 @@
 ﻿#include "PauseMenu.h"
 
 
-pause_menu::pause_menu( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_ref_(v)
+pause_menu::pause_menu( sf::RenderWindow& win,  sf::View& v, const sf::Font& font) : window_ref_(win), view_ref_(v)
 {
-    // replace with desired font (note: the directory is vital to loading correctly)
-    const std::string font_name = "Assets/Fonts/Montserrat-Regular.ttf";
-    FileLoading::load_font(font_, font_name);
+    font_ = font;
     
     // text pos offsets
     sf::Vector2f pause_pos {view_ref_.getCenter().x -100,view_ref_.getCenter().y -100};
@@ -68,10 +66,9 @@ void pause_menu::handle_input(float dt)
     
 }
 
+// should only be called when pause is activated
 void pause_menu::render() const
 {
-    if (!active_) return;
-    
     window_ref_.draw(*paused_text_);
     window_ref_.draw(*reset_text_);
     window_ref_.draw(*resume_text_);

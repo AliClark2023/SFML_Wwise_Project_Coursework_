@@ -9,6 +9,15 @@ score::score()
     score_text_ = std::make_unique<sf::Text>(score_font_);
 }
 
+// used by menu_ui to pass through font type and set up score parameters
+score::score(sf::Font& font)
+{
+    score_text_ = std::make_unique<sf::Text>(font);
+    score_text_->setOrigin(score_text_->getGlobalBounds().size / 2.0f);
+    score_text_->setFillColor(sf::Color::White);
+    score_text_->setOutlineThickness(1.0f);
+}
+
 // returns text variable for formatting/adjusting
 sf::Text* score::get_text() const
 {
@@ -32,3 +41,4 @@ void score::sub_from_score(const int& val_to_sub)
 {
     score_ -= val_to_sub;
 }
+

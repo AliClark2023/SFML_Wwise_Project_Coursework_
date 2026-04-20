@@ -3,34 +3,46 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include "../Utilities/FileLoading.h"
+#include "../LevelComponents/Score.h"
+#include "../LevelComponents/Timer.h"
+#include "../LevelComponents/PauseMenu.h"
 
 // handles Pause, Quit, Resume and Reset functionality of the game
 // handles UI aspects of game, incorporates score, timer and pause components
 // implemented as a class as it should be able to function within any levels (if implemented)
-class menu_UI
+class menu_ui
 {
 public:
-    menu_UI( sf::RenderWindow& win,  sf::View& v);
+    menu_ui( sf::RenderWindow& win,  sf::View& v);
     void handle_input(float dt);
     void render() const;
     
-    bool is_active() const {return active_;}
+    bool is_pause_active() const {return pause_ui_->is_active();}
     bool get_reset_level() const {return reset_level_;}
-    void set_active(const bool active){ active_ = active; }
+    //void set_active(const bool active){ active_ = active; }
+    
+    // UI functions
+    // score
+    void add_to_score(const int & score_val) const { score_ui_->add_to_score(score_val); }
+    int get_score() const {  return score_ui_->get_score(); }
+    
+    
 private:
     sf::RenderWindow& window_ref_;
     sf::View& view_ref_;
     
     // menu status
-    bool active_ = false;
+    // make active status to all UI elements
+    // bool active_ = false;
+    
     //used as flag to reset current level, should change to enum to denote which level to reset
     bool reset_level_ = false;
     
-    // text variables
+    // text variables (default font used by components)
     sf::Font font_;
-    const unsigned int text_size_ = 20;
-    std::unique_ptr<sf::Text> paused_text_;
-    std::unique_ptr<sf::Text> reset_text_;
-    std::unique_ptr<sf::Text> resume_text_;
-    std::unique_ptr<sf::Text> quit_text_;
+    
+    // UI components
+    std::unique_ptr<score> score_ui_;
+    std::unique_ptr<timer> timer_ui_;
+    std::unique_ptr<pause_menu> pause_ui_;
 };

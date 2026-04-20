@@ -1,78 +1,47 @@
 ﻿#include "Menu.h"
 
-menu_UI::menu_UI( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_ref_(v)
+menu_ui::menu_ui( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_ref_(v)
 {
     // replace with desired font (note: the directory is vital to loading correctly)
     const std::string font_name = "Assets/Fonts/Montserrat-Regular.ttf";
     FileLoading::load_font(font_, font_name);
     
-    // text pos offsets
-    sf::Vector2f pause_pos {view_ref_.getCenter().x -100,view_ref_.getCenter().y -100};
-    sf::Vector2f reset_pos {view_ref_.getCenter().x -300,view_ref_.getCenter().y};
-    sf::Vector2f resume_pos {view_ref_.getCenter().x -100,view_ref_.getCenter().y};
-    sf::Vector2f quit_pos {view_ref_.getCenter().x + 150,view_ref_.getCenter().y};
-    
-    // Text initialisation
-    paused_text_ = std::make_unique<sf::Text>(font_);
-    paused_text_->setString("Level Paused ");
-    paused_text_->setPosition(pause_pos);
-    
-    reset_text_ = std::make_unique<sf::Text>(font_);
-    reset_text_->setString("Reset ( R ) ");
-    reset_text_->setPosition(reset_pos);
-    
-    resume_text_ = std::make_unique<sf::Text>(font_);
-    resume_text_->setString("Resume ( P ) ");
-    resume_text_->setPosition(resume_pos);
-    
-    quit_text_ = std::make_unique<sf::Text>(font_);
-    quit_text_->setString("Quit ( Q ) ");
-    quit_text_->setPosition(quit_pos);
+    // UI positions
+    const sf::Vector2f score_pos { view_ref_.getCenter().x - view_ref_.getSize().x /2 + 50, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 10};
+    const sf::Vector2f timer_pos { view_ref_.getCenter().x, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 20};
+
+    score_ui_ = std::make_unique<score>(font_);
+    score_ui_->set_pos(score_pos);
+    timer_ui_ = std::make_unique<timer>(font_);
+    timer_ui_->set_pos(timer_pos);
+    pause_ui_ = std::make_unique<pause_menu>(window_ref_, view_ref_, font_);
 }
 
-void menu_UI::handle_input(float dt)
+void menu_ui::handle_input(float dt)
 {
-    while (const std::optional event = window_ref_.pollEvent())
-    {
-        if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
-        {
-            // pause detection
-            if (!active_)
-            {
-                if (keyPressed->scancode == sf::Keyboard::Scancode::P)
-                {
-                    active_ = true;
-                }
-            }// pause handling
-            else
-            {
-                if (keyPressed->scancode == sf::Keyboard::Scancode::P)
-                {
-                    // return to level
-                    active_ = false;
-                }
-                if (keyPressed->scancode == sf::Keyboard::Scancode::R)
-                {
-                    //reset level
-                    reset_level_ = true;
-                }
-                if (keyPressed->scancode == sf::Keyboard::Scancode::Q)
-                {
-                    //quit game
-                    window_ref_.close();
-                }
-            }
-        }
-    }
-    
+    pause_ui_->handle_input(dt);
+   
+    // pause/resume timer
+    if (pause_ui_->is_active() && timer_ui_->get_clock().isRunning()) timer_ui_->pause_timer();
+    if (!pause_ui_->is_active() && !timer_ui_->get_clock().isRunning()) timer_ui_->resume_timer();
 }
 
-void menu_UI::render() const
+void menu_ui::render() const
 {
-    if (!active_) return;
+    score_ui_->render_score(window_ref_);
+    timer_ui_->render_timer(window_ref_);
     
+    
+    if (!pause_ui_->is_active()) return;
+    
+    pause_ui_->render();
+    
+    /*
     window_ref_.draw(*paused_text_);
     window_ref_.draw(*reset_text_);
     window_ref_.draw(*resume_text_);
     window_ref_.draw(*quit_text_);
+    */
+    
+    
 }

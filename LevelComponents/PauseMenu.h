@@ -8,7 +8,7 @@
 class pause_menu
 {
 public:
-    pause_menu( sf::RenderWindow& win,  sf::View& v);
+    pause_menu( sf::RenderWindow& win,  sf::View& v, const sf::Font& font);
     void handle_input(float dt);
     void render() const;
     

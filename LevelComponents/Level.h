@@ -14,7 +14,7 @@
 class level
 {
 public:
-    level( sf::RenderWindow& win,  sf::View& v, menu_UI& menu);
+    level( sf::RenderWindow& win,  sf::View& v, menu_ui& menu);
     void handle_input(float dt);
     void update(float dt);
     void render();
@@ -30,7 +30,7 @@ private:
     
     sf::RenderWindow& window_ref_;
     sf::View& view_ref_;
-    menu_UI& menu_ref_;
+    menu_ui& menu_ref_;
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Scenery> ground_;
@@ -49,8 +49,8 @@ private:
     int object_count_ = 0;
     
     // level UI components
-    timer timer_;
-    score score_;
+    //timer timer_;
+    //score score_;
     
     // testing
     float prev_intensity = 0.0f;

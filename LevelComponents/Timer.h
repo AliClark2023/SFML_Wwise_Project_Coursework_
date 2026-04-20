@@ -9,9 +9,13 @@ class timer
 {
 public:
     timer();
+    timer(sf::Font& font);
     void render_timer(sf::RenderWindow& window) const;
     sf::Text* get_text() const;
     sf::Time get_time() const;
+    
+    sf::Clock& get_clock() {return timer_;}
+    void set_pos(const sf::Vector2f& pos) const { timer_text_->setPosition(pos);}
     
     void pause_timer() { timer_.stop(); }
     void resume_timer() { timer_.start(); }
