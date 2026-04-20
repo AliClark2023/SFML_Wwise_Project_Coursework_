@@ -19,6 +19,7 @@ public:
     
     void pause_timer() { timer_.stop(); }
     void resume_timer() { timer_.start(); }
+    void reset_timer() { timer_.reset(); }
 private:
     // time variables
     sf::Clock timer_;

@@ -1,7 +1,7 @@
 ﻿#include "ObjSpawner.h"
 
 object_spawner::object_spawner(sf::RenderWindow& win, sf::View& v,
-        const ObjectType& object_to_spawn, const AudioEvent& event) : GameObject(win, v)
+        const ObjectType& object_to_spawn, const AudioTrigger& event) : GameObject(win, v)
 {
         //type_to_spawn_ = object_to_spawn;
         object_type_ = object_to_spawn;

@@ -13,6 +13,7 @@ public:
     void add_to_score(const int& val_to_add);
     void sub_from_score(const int& val_to_sub);
     void set_pos(const sf::Vector2f& pos) const {score_text_->setPosition(pos); }
+    void reset_score(){ score_ = 0; }
 private:
     int score_ = 0;
     // text variables

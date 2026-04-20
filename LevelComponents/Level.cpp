@@ -7,11 +7,14 @@ level::level( sf::RenderWindow& win,  sf::View& v, menu_ui& menu) : window_ref_(
     
     // Audio initialisation (create function)
     // registering objects used within level
+    /*
     AK::SoundEngine::RegisterGameObj(EVT_PLAY_BG_MUSIC.ID);
     AK::SoundEngine::RegisterGameObj(EVT_CHANGE_TO_UP_BEAT.ID);
     AK::SoundEngine::RegisterGameObj(EVT_INTENSITY.ID);
     AK::SoundEngine::RegisterGameObj(EVT_PLAT_LANDING.ID);
     AK::SoundEngine::RegisterGameObj(EVT_DESTROY_HAZARD.ID);
+    AK::SoundEngine::RegisterGameObj(EVT_STOP_BG_MUSIC.ID);
+    */
     
     // starting music
     AK::SoundEngine::PostEvent(EVT_PLAY_BG_MUSIC.EventName.data(), EVT_PLAY_BG_MUSIC.ID);
@@ -25,22 +28,6 @@ level::level( sf::RenderWindow& win,  sf::View& v, menu_ui& menu) : window_ref_(
     
     setup_spawners();
     
-    /*
-    //timer attributes (debug only, comment out in release)
-    timer_.get_text()->setString("Time: 0.00");
-    timer_.get_text()->setOrigin(timer_.get_text()->getGlobalBounds().size / 2.0f);
-    timer_.get_text()->setFillColor(sf::Color::White);
-    timer_.get_text()->setOutlineThickness(1.0f);
-    timer_.get_text()->setPosition(sf::Vector2(view_ref_.getCenter().x, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 20));
-    */
-    /*
-    // scoreget_text
-    // position sf::Vector2(v->getCenter().x - v->getSize().x /2 + 125, v->getCenter().y - v->getSize().y / 2 + 20));
-    score_.get_text()->setOrigin(score_.get_text()->getGlobalBounds().size / 2.0f);
-    score_.get_text()->setFillColor(sf::Color::White);
-    score_.get_text()->setOutlineThickness(1.0f);
-    score_.get_text()->setPosition(sf::Vector2(view_ref_.getCenter().x - view_ref_.getSize().x /2 + 50, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 10));
-    */
 }
 
 void level::handle_input(float dt)
@@ -178,7 +165,7 @@ void level::update_audio()
         //need to reset after state switching
         prev_intensity = 0;
    
-        AK::SoundEngine::PostEvent(EVT_CHANGE_TO_UP_BEAT.EventName.data(), EVT_CHANGE_TO_UP_BEAT.ID);
+        AK::SoundEngine::PostEvent(EVT_CHANGE_TO_UP_BEAT.EventName.data(), EVT_CHANGE_TO_UP_BEAT.Associated_ID);
     }
     
     // handles how audio intensity is handled depending on level state

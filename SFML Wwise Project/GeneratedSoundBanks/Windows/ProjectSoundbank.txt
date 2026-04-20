@@ -1,10 +1,13 @@
 Event	ID	Name			Wwise Object Path	Notes
 	13598864	Destroy_Hazzard			\INT_Music Events\Destroy_Hazzard	
 	65769146	Play_Background_Music			\INT_Music Events\Play_Background_Music	
+	467769552	Stop_Background_Music			\INT_Music Events\Stop_Background_Music	
 	769029069	Change_To_Upbeat			\INT_Music Events\Change_To_Upbeat	
 	839265480	Set_Background_Intensity			\INT_Music Events\Set_Background_Intensity	
+	1252958371	Resume_Background_Music			\INT_Music Events\Resume_Background_Music	
 	2570636058	Change_To_Downbeat			\INT_Music Events\Change_To_Downbeat	
 	2633434876	Platform_Landing			\INT_Music Events\Platform_Landing	
+	4032318072	Pause_Background_Music			\INT_Music Events\Pause_Background_Music	
 
 State Group	ID	Name			Wwise Object Path	Notes
 	766723505	Game_State			\Default Work Unit\Game_State	

@@ -22,8 +22,19 @@ void menu_ui::handle_input(float dt)
     pause_ui_->handle_input(dt);
    
     // pause/resume timer
-    if (pause_ui_->is_active() && timer_ui_->get_clock().isRunning()) timer_ui_->pause_timer();
-    if (!pause_ui_->is_active() && !timer_ui_->get_clock().isRunning()) timer_ui_->resume_timer();
+    if (pause_ui_->is_active() && timer_ui_->get_clock().isRunning())
+    {
+        AK::SoundEngine::PostEvent(EVT_PAUSE_BG_MUSIC.EventName.data(), EVT_PAUSE_BG_MUSIC.Associated_ID);
+        timer_ui_->pause_timer();
+    }
+    if (!pause_ui_->is_active() && !timer_ui_->get_clock().isRunning())
+    {
+        AK::SoundEngine::PostEvent(EVT_RESUME_BG_MUSIC.EventName.data(), EVT_RESUME_BG_MUSIC.Associated_ID);
+        timer_ui_->resume_timer();
+    }
+    
+    // resetting level
+    if (pause_ui_->is_active() && pause_ui_->get_reset_level()) set_reset_level(true);
 }
 
 void menu_ui::render() const
@@ -35,13 +46,18 @@ void menu_ui::render() const
     if (!pause_ui_->is_active()) return;
     
     pause_ui_->render();
+
+}
+// resets all values within each UI component
+void menu_ui::reset_UI() 
+{
+    // score (reset score value)
+    // timer (reset timer value)
+    // pause (reset active status)
     
-    /*
-    window_ref_.draw(*paused_text_);
-    window_ref_.draw(*reset_text_);
-    window_ref_.draw(*resume_text_);
-    window_ref_.draw(*quit_text_);
-    */
-    
-    
+    score_ui_->reset_score();
+    timer_ui_->reset_timer();
+    pause_ui_->set_active(false);
+    pause_ui_->set_reset_level(false);
+    reset_level_ = false;
 }

@@ -7,18 +7,32 @@
  * Processed at compile time
  */
 
-struct AudioEvent
+// Set game object with specified ID and name of event that will trigger it
+struct AudioObject
 {
     AkAudioObjectID ID;
     std::string_view EventName;
 };
 
-inline constexpr AudioEvent EVT_PLAY_BG_MUSIC {1, "Play_Background_Music"};
-inline constexpr AudioEvent EVT_CHANGE_TO_UP_BEAT {2, "Change_To_Upbeat"};
-inline constexpr AudioEvent EVT_INTENSITY {3, "Intensity"};
-inline constexpr AudioEvent EVT_PLAT_LANDING {4, "Platform_Landing"};
-inline constexpr AudioEvent EVT_DESTROY_HAZARD {5, "Destroy_Hazzard"};
+// Event used by wwise that contains ID of affecting audio and name of event
+struct AudioTrigger
+{
+    AkAudioObjectID Associated_ID;
+    std::string_view EventName;
+};
 
-// Not Currently Implemented
-inline constexpr AudioEvent EVT_PAUSE_BG_MUSIC = {6, "Pause_Background_Music"};
-inline constexpr AudioEvent EVT_RESUME_BG_MUSIC = {7, "Resume_Background_Music"};
+// require registering as objects
+inline constexpr AudioObject EVT_PLAY_BG_MUSIC {1, "Play_Background_Music"};
+
+
+//  must refer to the registered objects
+inline constexpr AudioTrigger EVT_PLAT_LANDING {1, "Platform_Landing"};
+inline constexpr AudioTrigger EVT_DESTROY_HAZARD {1, "Destroy_Hazzard"};
+inline constexpr AudioTrigger EVT_CHANGE_TO_UP_BEAT {1, "Change_To_Upbeat"};
+inline constexpr AudioTrigger EVT_INTENSITY {1, "Intensity"};
+inline constexpr AudioTrigger EVT_PAUSE_BG_MUSIC = {1, "Pause_Background_Music"};
+inline constexpr AudioTrigger EVT_RESUME_BG_MUSIC = {1, "Resume_Background_Music"};
+inline constexpr AudioTrigger EVT_STOP_BG_MUSIC = {1, "Stop_Background_Music"};
+
+// only need in ID on Audio playing objects (classed as Game Object)
+// events/triggers should refer to these ID's

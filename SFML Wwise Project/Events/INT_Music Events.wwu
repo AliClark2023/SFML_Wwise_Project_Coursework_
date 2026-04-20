@@ -94,6 +94,58 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Stop_Background_Music" ID="{A4123373-C4F5-4B36-8024-55DD99E07DAD}">
+					<ChildrenList>
+						<Action Name="" ID="{24A27518-9231-41D0-B0D1-D7BF3A73F539}" ShortID="384596220">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{30690F13-E3D2-4DC1-8668-94D385100B4A}" ShortID="22310925">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="39"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Intensity" ID="{AFF6513C-D8DF-4CE4-A311-276CFD171F10}" WorkUnitID="{900B550B-E1BF-4964-AB69-8A8E765D5999}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Pause_Background_Music" ID="{C63B3D65-52E4-4634-B202-FABD7EB97593}">
+					<ChildrenList>
+						<Action Name="" ID="{10FE07B8-352D-40E5-BFB9-1944DCEE2643}" ShortID="48063575">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="7"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Resume_Background_Music" ID="{64DDBC71-5DC2-4D96-BA7C-11AB1CAB66D9}">
+					<ChildrenList>
+						<Action Name="" ID="{47899FF0-67C3-41FF-B77E-C2503D1739D9}" ShortID="677484452">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="9"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Background Music Switch" ID="{F33A863C-04E8-4016-BEA2-A163FCF0EC7E}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

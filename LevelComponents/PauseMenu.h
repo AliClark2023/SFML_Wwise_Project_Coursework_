@@ -14,6 +14,7 @@ public:
     
     bool is_active() const {return active_;}
     bool get_reset_level() const {return reset_level_;}
+    void set_reset_level(const bool reset){ reset_level_ = reset; }
     void set_active(const bool active){ active_ = active; }
 private:
     sf::RenderWindow& window_ref_;

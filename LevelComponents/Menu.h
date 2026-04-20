@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../WwiseWrapper.h"
+#include  "../Constants/AudioObjects.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include "../Utilities/FileLoading.h"
@@ -7,7 +8,7 @@
 #include "../LevelComponents/Timer.h"
 #include "../LevelComponents/PauseMenu.h"
 
-// handles Pause, Quit, Resume and Reset functionality of the game
+
 // handles UI aspects of game, incorporates score, timer and pause components
 // implemented as a class as it should be able to function within any levels (if implemented)
 class menu_ui
@@ -19,8 +20,8 @@ public:
     
     bool is_pause_active() const {return pause_ui_->is_active();}
     bool get_reset_level() const {return reset_level_;}
-    //void set_active(const bool active){ active_ = active; }
-    
+    void set_reset_level(const bool reset_level) {reset_level_ = reset_level;}
+    void reset_UI();
     // UI functions
     // score
     void add_to_score(const int & score_val) const { score_ui_->add_to_score(score_val); }

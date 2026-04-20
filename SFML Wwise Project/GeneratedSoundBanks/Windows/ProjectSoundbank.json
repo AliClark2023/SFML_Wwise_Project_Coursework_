@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{D586EC88-24D7-4A03-A18B-8352411C673F}",
     "Language": "SFX",
-    "Hash": "{BD3948FC-6365-8CC4-544B-290BC2B495EF}",
+    "Hash": "{CCEA8FEF-1F93-06BA-98D0-80C613F44617}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\ProjectSoundbank",
     "ShortName": "ProjectSoundbank",
     "Path": "ProjectSoundbank.bnk",
@@ -202,6 +202,92 @@
       ]
      },
      {
+      "Id": "4032318072",
+      "Name": "Pause_Background_Music",
+      "ObjectPath": "\\Events\\INT_Music Events\\Pause_Background_Music",
+      "GUID": "{C63B3D65-52E4-4634-B202-FABD7EB97593}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "766723505",
+         "Id": "1500425445",
+         "GUID": "{B759455B-536E-41C1-89BF-4FDF977B077E}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "48197081"
+         },
+         {
+          "Id": "82857911"
+         },
+         {
+          "Id": "237590450"
+         },
+         {
+          "Id": "404378780"
+         },
+         {
+          "Id": "407282864"
+         },
+         {
+          "Id": "432246221"
+         },
+         {
+          "Id": "533836305"
+         },
+         {
+          "Id": "573457908"
+         },
+         {
+          "Id": "816133852"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "766723505",
+         "Id": "4090965798",
+         "GUID": "{BCCCAA9D-F82C-42EC-A51D-79E476BAE2DD}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "155725555"
+         },
+         {
+          "Id": "192726892"
+         },
+         {
+          "Id": "404378780"
+         },
+         {
+          "Id": "417098927"
+         },
+         {
+          "Id": "438565338"
+         },
+         {
+          "Id": "457001804"
+         },
+         {
+          "Id": "533836305"
+         },
+         {
+          "Id": "618067175"
+         },
+         {
+          "Id": "806843990"
+         }
+        ]
+       }
+      ]
+     },
+     {
       "Id": "2633434876",
       "Name": "Platform_Landing",
       "ObjectPath": "\\Events\\INT_Music Events\\Platform_Landing",
@@ -386,6 +472,92 @@
       ]
      },
      {
+      "Id": "1252958371",
+      "Name": "Resume_Background_Music",
+      "ObjectPath": "\\Events\\INT_Music Events\\Resume_Background_Music",
+      "GUID": "{64DDBC71-5DC2-4D96-BA7C-11AB1CAB66D9}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "766723505",
+         "Id": "1500425445",
+         "GUID": "{B759455B-536E-41C1-89BF-4FDF977B077E}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "48197081"
+         },
+         {
+          "Id": "82857911"
+         },
+         {
+          "Id": "237590450"
+         },
+         {
+          "Id": "404378780"
+         },
+         {
+          "Id": "407282864"
+         },
+         {
+          "Id": "432246221"
+         },
+         {
+          "Id": "533836305"
+         },
+         {
+          "Id": "573457908"
+         },
+         {
+          "Id": "816133852"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "766723505",
+         "Id": "4090965798",
+         "GUID": "{BCCCAA9D-F82C-42EC-A51D-79E476BAE2DD}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "155725555"
+         },
+         {
+          "Id": "192726892"
+         },
+         {
+          "Id": "404378780"
+         },
+         {
+          "Id": "417098927"
+         },
+         {
+          "Id": "438565338"
+         },
+         {
+          "Id": "457001804"
+         },
+         {
+          "Id": "533836305"
+         },
+         {
+          "Id": "618067175"
+         },
+         {
+          "Id": "806843990"
+         }
+        ]
+       }
+      ]
+     },
+     {
       "Id": "839265480",
       "Name": "Set_Background_Intensity",
       "ObjectPath": "\\Events\\INT_Music Events\\Set_Background_Intensity",
@@ -394,6 +566,92 @@
       "DurationType": "OneShot",
       "DurationMin": "0",
       "DurationMax": "0"
+     },
+     {
+      "Id": "467769552",
+      "Name": "Stop_Background_Music",
+      "ObjectPath": "\\Events\\INT_Music Events\\Stop_Background_Music",
+      "GUID": "{A4123373-C4F5-4B36-8024-55DD99E07DAD}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "766723505",
+         "Id": "1500425445",
+         "GUID": "{B759455B-536E-41C1-89BF-4FDF977B077E}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "48197081"
+         },
+         {
+          "Id": "82857911"
+         },
+         {
+          "Id": "237590450"
+         },
+         {
+          "Id": "404378780"
+         },
+         {
+          "Id": "407282864"
+         },
+         {
+          "Id": "432246221"
+         },
+         {
+          "Id": "533836305"
+         },
+         {
+          "Id": "573457908"
+         },
+         {
+          "Id": "816133852"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "766723505",
+         "Id": "4090965798",
+         "GUID": "{BCCCAA9D-F82C-42EC-A51D-79E476BAE2DD}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "155725555"
+         },
+         {
+          "Id": "192726892"
+         },
+         {
+          "Id": "404378780"
+         },
+         {
+          "Id": "417098927"
+         },
+         {
+          "Id": "438565338"
+         },
+         {
+          "Id": "457001804"
+         },
+         {
+          "Id": "533836305"
+         },
+         {
+          "Id": "618067175"
+         },
+         {
+          "Id": "806843990"
+         }
+        ]
+       }
+      ]
      }
     ],
     "GameParameters": [
@@ -448,6 +706,6 @@
     ]
    }
   ],
-  "FileHash": "{D841A90C-8FD5-4F01-AA6E-2F7D0DB17567}"
+  "FileHash": "{571E8A1D-FAA0-EFBE-B7DF-3913E01EABC3}"
  }
 }

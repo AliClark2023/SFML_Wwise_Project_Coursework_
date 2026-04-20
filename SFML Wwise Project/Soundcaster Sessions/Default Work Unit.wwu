@@ -25,6 +25,18 @@
 							<ObjectRef Name="Change_To_Upbeat" ID="{CBE79153-4B2A-4070-B446-7C2BE886B8C9}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
 							<Position X="2" Y="0"/>
 						</Module>
+						<Module>
+							<ObjectRef Name="Stop_Background_Music" ID="{A4123373-C4F5-4B36-8024-55DD99E07DAD}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
+							<Position X="2" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Resume_Background_Music" ID="{64DDBC71-5DC2-4D96-BA7C-11AB1CAB66D9}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Pause_Background_Music" ID="{C63B3D65-52E4-4634-B202-FABD7EB97593}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
+							<Position X="3" Y="1"/>
+						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
 					<CurrentStateList ShowAll="true"/>

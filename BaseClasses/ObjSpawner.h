@@ -13,7 +13,7 @@ class object_spawner : public GameObject
 {
 public:
     object_spawner(sf::RenderWindow& win, sf::View& v,
-        const ObjectType& object_to_spawn, const AudioEvent& event);
+        const ObjectType& object_to_spawn, const AudioTrigger& event);
     
     void spawn_object();
     // directly set spawn & speed
@@ -59,5 +59,5 @@ private:
     bool increased_speed_ = false;
     bool increases_spawn_rate_ = false;
     //Object triggered SFX Event & ID
-    AudioEvent object_triggered_sfx_;
+    AudioTrigger object_triggered_sfx_;
 };

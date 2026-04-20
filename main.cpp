@@ -36,6 +36,14 @@ int main()
 		}
 	}
 	
+	// registering wwise game objects (using IDs and names from AudioObjects.h)
+	// only 1 main audio object is required (background music)
+	{
+		AK::SoundEngine::RegisterGameObj(EVT_PLAY_BG_MUSIC.ID);
+		//AK::SoundEngine::RegisterGameObj(EVT_PLAT_LANDING.ID);
+		//::SoundEngine::RegisterGameObj(EVT_DESTROY_HAZARD.ID);
+	}
+	
 	// game initialisation
 	std::unique_ptr<sf::RenderWindow> window(new sf::RenderWindow (sf::VideoMode({ 1280, 720 }), "Audio Coursework"));
 	std::unique_ptr<sf::View> view(new sf::View);
@@ -58,39 +66,18 @@ int main()
 		// since it was last calculated (in seconds) and restart the clock.
 		float deltaTime = clock.restart().asSeconds();
 		
-		/*
-		while (const std::optional event = window->pollEvent())
-		{
-			if (event->is<sf::Event::Closed>())
-				window->close();
-			else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
-			{
-				// move input into level ?
-				
-				if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
-				{
-					window->close();
-				}
-				
-				if (keyPressed->scancode == sf::Keyboard::Scancode::P)
-				{
-					
-				}
-				if (keyPressed->scancode == sf::Keyboard::Scancode::R)
-				{
-					
-				}
-					
-			}
-
-		}
-		*/
-
 		//--Wwise code----------------------------------------------------------
 		//Handle Wwise's audio rendering.
 		AK::SoundEngine::RenderAudio();
 		//----------------------------------------------------------------------
 	
+		if (ui->get_reset_level())
+		{
+			AK::SoundEngine::PostEvent(EVT_STOP_BG_MUSIC.EventName.data(), EVT_STOP_BG_MUSIC.Associated_ID);
+			Level = std::make_unique<level>(*window,*view, *ui);
+			ui->reset_UI();
+		}
+		
 		Level->handle_input(deltaTime);
 		Level->update(deltaTime);
 

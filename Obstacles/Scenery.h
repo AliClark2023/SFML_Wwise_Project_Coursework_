@@ -16,7 +16,7 @@ struct scenery_config
     sf::Vector2f velocity = sf::Vector2f(0.0f, 0.0f);
     sf::Color color = sf::Color::Black;
     ObjectType type = scenery;
-    AudioEvent audio_event_sfx;
+    AudioTrigger audio_event_sfx;
 };
 
 // Handles platforms the player can land on top of
@@ -41,7 +41,7 @@ private:
     // can add in obstacle only flags (counted, activated) from base game object
     bool counted_ = false;
     bool activated_ = false;
-    AudioEvent audio_sfx_event;
+    AudioTrigger audio_sfx_event;
     
     // Wwise call back adapted from: https://www.audiokinetic.com/en/public-library/2025.1.6_9117/?source=SDK&id=soundengine_music_callbacks.html
     static void AudioEventCallback(
