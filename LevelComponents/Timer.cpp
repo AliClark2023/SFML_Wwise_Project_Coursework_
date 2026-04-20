@@ -13,6 +13,8 @@ timer::timer()
 // converts clock timer to MM::SS and renders to window
 void timer::render_timer(sf::RenderWindow& window) const
 {
+    if (!timer_.isRunning()) return;
+    
     const sf::Time elapsed = timer_.getElapsedTime();
     const int total_seconds = static_cast<int>(elapsed.asSeconds());
     const int minutes = total_seconds / 60;

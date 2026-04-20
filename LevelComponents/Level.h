@@ -9,11 +9,12 @@
 #include "../WwiseWrapper.h"
 #include "../Utilities/SATDetection.h"
 #include "../Constants/AudioObjects.h"
+#include "../LevelComponents/Menu.h"
 
 class level
 {
 public:
-    level( sf::RenderWindow& win,  sf::View& v);
+    level( sf::RenderWindow& win,  sf::View& v, menu_UI& menu);
     void handle_input(float dt);
     void update(float dt);
     void render();
@@ -29,6 +30,7 @@ private:
     
     sf::RenderWindow& window_ref_;
     sf::View& view_ref_;
+    menu_UI& menu_ref_;
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Scenery> ground_;

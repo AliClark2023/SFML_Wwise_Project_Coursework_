@@ -134,6 +134,8 @@
     <ClCompile Include="BaseClasses\GameObject.cpp" />
     <ClCompile Include="BaseClasses\ObjSpawner.cpp" />
     <ClCompile Include="LevelComponents\Level.cpp" />
+    <ClCompile Include="LevelComponents\Menu.cpp" />
+    <ClCompile Include="LevelComponents\PauseMenu.cpp" />
     <ClCompile Include="LevelComponents\Score.cpp" />
     <ClCompile Include="LevelComponents\Timer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -161,6 +163,8 @@
     <ClInclude Include="Constants\ObstaclesConsts.h" />
     <ClInclude Include="Constants\PhysicsConsts.h" />
     <ClInclude Include="LevelComponents\Level.h" />
+    <ClInclude Include="LevelComponents\Menu.h" />
+    <ClInclude Include="LevelComponents\PauseMenu.h" />
     <ClInclude Include="LevelComponents\Score.h" />
     <ClInclude Include="LevelComponents\Timer.h" />
     <ClInclude Include="Obstacles\Scenery.h" />

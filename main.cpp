@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Player/Player.h"
+#include "LevelComponents/Menu.h"
 #include "Utilities/SATDetection.h"
 #include "LevelComponents/Level.h"
 #include "Obstacles/Scenery.h"
@@ -25,8 +26,7 @@ int main()
 		return 1;
 	}
 
-	//TODO: This code loads the "MainSoundbank" from the included Wwise project;
-	//		you will probably want to replace it with your own soundbank.
+	//Loading soundbank (project specific soundbank)
 	{
 		AkBankID mainBankId;
 		if (AK::SoundEngine::LoadBank(AKTEXT("ProjectSoundbank"), mainBankId) != AK_Success)
@@ -35,31 +35,7 @@ int main()
 			return 1;
 		}
 	}
-
-	/*
-	//TODO: This code tests event posting using the Loop event from the included
-	//		Wwise project. You will want to remove it for your own projects.
-	{
-		const uint64_t gameObjectId = 1;
-
-		//In order to post an event in Wwise it must be associated with a game
-		//object. To Wwise, game objects are just a set of unique integer IDs,
-		//but you will need to register each game object with Wwise so that it
-		//is aware of them.
-
-		//For testing purposes we just register a single ID of 1 here, but in
-		//your own projects you will probably want to implement your own unique
-		//ID system.
-
-		//Note that the Wwise listener is also a game object. This project
-		//assigns the listener with an ID of 0, hence the ID of 1 for our loop.
-		AK::SoundEngine::RegisterGameObj(gameObjectId);
-
-		AK::SoundEngine::PostEvent(AKTEXT("Play_Background_Music"), gameObjectId);
-	}
-	*/
-	//--------------------------------------------------------------------------
-
+	
 	// game initialisation
 	std::unique_ptr<sf::RenderWindow> window(new sf::RenderWindow (sf::VideoMode({ 1280, 720 }), "Audio Coursework"));
 	std::unique_ptr<sf::View> view(new sf::View);
@@ -68,7 +44,10 @@ int main()
 	window->setView(*view);
 	window->setFramerateLimit(60);
 
-	std::unique_ptr<level> Level(new level(*window,*view));
+	// levels
+	std::unique_ptr<menu_UI> pause_menu(new menu_UI(*window,*view));
+	std::unique_ptr<level> Level(new level(*window,*view, *pause_menu));
+
 	
 	// Initialise objects for delta time
 	sf::Clock clock;
@@ -79,19 +58,33 @@ int main()
 		// since it was last calculated (in seconds) and restart the clock.
 		float deltaTime = clock.restart().asSeconds();
 		
+		/*
 		while (const std::optional event = window->pollEvent())
 		{
 			if (event->is<sf::Event::Closed>())
 				window->close();
 			else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
 			{
+				// move input into level ?
+				
 				if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
 				{
 					window->close();
 				}
+				
+				if (keyPressed->scancode == sf::Keyboard::Scancode::P)
+				{
+					
+				}
+				if (keyPressed->scancode == sf::Keyboard::Scancode::R)
+				{
+					
+				}
+					
 			}
 
 		}
+		*/
 
 		//--Wwise code----------------------------------------------------------
 		//Handle Wwise's audio rendering.
@@ -103,7 +96,7 @@ int main()
 
 		// render cycle
 		window->clear();
-
+		pause_menu->render();
 		Level->render();
 		
 		window->display();

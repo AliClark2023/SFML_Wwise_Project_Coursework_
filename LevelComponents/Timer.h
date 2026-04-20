@@ -12,6 +12,9 @@ public:
     void render_timer(sf::RenderWindow& window) const;
     sf::Text* get_text() const;
     sf::Time get_time() const;
+    
+    void pause_timer() { timer_.stop(); }
+    void resume_timer() { timer_.start(); }
 private:
     // time variables
     sf::Clock timer_;

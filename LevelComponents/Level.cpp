@@ -1,6 +1,6 @@
 ﻿#include "Level.h"
 
-level::level( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_ref_(v)
+level::level( sf::RenderWindow& win,  sf::View& v, menu_UI& menu) : window_ref_(win), view_ref_(v), menu_ref_(menu)
 {
     player_ = std::make_unique<Player>(win, v);
     ground_ = std::make_unique<Scenery>(win, v);
@@ -42,11 +42,15 @@ level::level( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_ref_
 
 void level::handle_input(float dt)
 {
-    player_->handle_input(dt);
+    if (!menu_ref_.is_active()) player_->handle_input(dt);
+    
+    menu_ref_.handle_input(dt);
 }
 
 void level::update(float dt)
 {
+    if (menu_ref_.is_active()) return;
+    
     // component updates
     player_->update(dt);
     ground_->update(dt);
@@ -76,6 +80,7 @@ void level::render()
     score_.render_score(window_ref_);
     window_ref_.draw(*player_);
     window_ref_.draw(*ground_);
+    
 }
 
 // initialises all spawners and moves to container for easy alterations
