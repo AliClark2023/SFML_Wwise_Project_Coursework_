@@ -9,6 +9,7 @@
 #include "LevelComponents/Level.h"
 #include "Obstacles/Scenery.h"
 #include "WwiseWrapper.h"
+#include "LevelComponents/AudioManager.h"
 
 int main()
 {
@@ -39,9 +40,8 @@ int main()
 	// registering wwise game objects (using IDs and names from AudioObjects.h)
 	// only 1 main audio object is required (background music)
 	{
-		AK::SoundEngine::RegisterGameObj(EVT_PLAY_BG_MUSIC.ID);
-		//AK::SoundEngine::RegisterGameObj(EVT_PLAT_LANDING.ID);
-		//::SoundEngine::RegisterGameObj(EVT_DESTROY_HAZARD.ID);
+		//AK::SoundEngine::RegisterGameObj(EVT_PLAY_BG_MUSIC.ID);
+		
 	}
 	
 	// game initialisation
@@ -52,10 +52,14 @@ int main()
 	window->setView(*view);
 	window->setFramerateLimit(60);
 
-	// levels
+	// game functionality
 	std::unique_ptr<menu_ui> ui(new menu_ui(*window,*view));
+	AudioObject bg_music{ AudioManager::instance().register_object("BackGround_Music","")};
+	AudioObject stop_bg_music{AudioManager::instance().register_object("Stop_Background_Music", "BackGround_Music")};
+	
 	std::unique_ptr<level> Level(new level(*window,*view, *ui));
 
+	
 	
 	// Initialise objects for delta time
 	sf::Clock clock;
@@ -73,7 +77,8 @@ int main()
 	
 		if (ui->get_reset_level())
 		{
-			AK::SoundEngine::PostEvent(EVT_STOP_BG_MUSIC.EventName.data(), EVT_STOP_BG_MUSIC.Associated_ID);
+			//AK::SoundEngine::PostEvent(EVT_STOP_BG_MUSIC.EventName.data(), EVT_STOP_BG_MUSIC.Associated_ID);
+			AK::SoundEngine::PostEvent(stop_bg_music.Name.data(), stop_bg_music.ID);
 			Level = std::make_unique<level>(*window,*view, *ui);
 			ui->reset_UI();
 		}

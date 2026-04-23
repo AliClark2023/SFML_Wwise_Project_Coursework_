@@ -15,6 +15,10 @@ menu_ui::menu_ui( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_
     timer_ui_ = std::make_unique<timer>(font_);
     timer_ui_->set_pos(timer_pos);
     pause_ui_ = std::make_unique<pause_menu>(window_ref_, view_ref_, font_);
+    
+    // audio events
+    pause_bg =AudioManager::instance().register_object("Pause_Background_Music", "BackGround_Music");
+    resume_bg = AudioManager::instance().register_object("Resume_Background_Music", "BackGround_Music");
 }
 
 void menu_ui::handle_input(float dt)
@@ -24,12 +28,14 @@ void menu_ui::handle_input(float dt)
     // pause/resume timer
     if (pause_ui_->is_active() && timer_ui_->get_clock().isRunning())
     {
-        AK::SoundEngine::PostEvent(EVT_PAUSE_BG_MUSIC.EventName.data(), EVT_PAUSE_BG_MUSIC.Associated_ID);
+        //AK::SoundEngine::PostEvent(EVT_PAUSE_BG_MUSIC.EventName.data(), EVT_PAUSE_BG_MUSIC.Associated_ID);
+        AK::SoundEngine::PostEvent(pause_bg.Name.data(), pause_bg.ID);
         timer_ui_->pause_timer();
     }
     if (!pause_ui_->is_active() && !timer_ui_->get_clock().isRunning())
     {
-        AK::SoundEngine::PostEvent(EVT_RESUME_BG_MUSIC.EventName.data(), EVT_RESUME_BG_MUSIC.Associated_ID);
+       // AK::SoundEngine::PostEvent(EVT_RESUME_BG_MUSIC.EventName.data(), EVT_RESUME_BG_MUSIC.Associated_ID);
+        AK::SoundEngine::PostEvent(resume_bg.Name.data(), resume_bg.ID);
         timer_ui_->resume_timer();
     }
     

@@ -7,6 +7,7 @@
 #include "../LevelComponents/Score.h"
 #include "../LevelComponents/Timer.h"
 #include "../LevelComponents/PauseMenu.h"
+#include "../LevelComponents/AudioManager.h"
 
 
 // handles UI aspects of game, incorporates score, timer and pause components
@@ -46,4 +47,8 @@ private:
     std::unique_ptr<score> score_ui_;
     std::unique_ptr<timer> timer_ui_;
     std::unique_ptr<pause_menu> pause_ui_;
+    
+    // audio events
+    AudioObject pause_bg;
+    AudioObject resume_bg;
 };

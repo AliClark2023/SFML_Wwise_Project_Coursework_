@@ -6,6 +6,7 @@
 #include "../Player/Player.h"
 #include "../Obstacles/Scenery.h"
 #include "../Constants/AudioObjects.h"
+#include "../LevelComponents/AudioManager.h"
 /*
  * Base Class that spawns specified object type at a specified rate & speed
  */
@@ -13,7 +14,7 @@ class object_spawner : public GameObject
 {
 public:
     object_spawner(sf::RenderWindow& win, sf::View& v,
-        const ObjectType& object_to_spawn, const AudioTrigger& event);
+        const ObjectType& object_to_spawn, const AudioObject& event);
     
     void spawn_object();
     // directly set spawn & speed
@@ -59,5 +60,5 @@ private:
     bool increased_speed_ = false;
     bool increases_spawn_rate_ = false;
     //Object triggered SFX Event & ID
-    AudioTrigger object_triggered_sfx_;
+    AudioObject object_triggered_sfx_;
 };

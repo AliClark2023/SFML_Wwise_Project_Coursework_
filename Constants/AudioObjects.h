@@ -8,11 +8,13 @@
  */
 
 // Set game object with specified ID and name of event that will trigger it
+/*
 struct AudioObject
 {
     AkAudioObjectID ID;
     std::string_view EventName;
 };
+
 
 // Event used by wwise that contains ID of affecting audio and name of event
 struct AudioTrigger
@@ -36,3 +38,4 @@ inline constexpr AudioTrigger EVT_STOP_BG_MUSIC = {1, "Stop_Background_Music"};
 
 // only need in ID on Audio playing objects (classed as Game Object)
 // events/triggers should refer to these ID's
+*/

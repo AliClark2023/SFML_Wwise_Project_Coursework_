@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="BaseClasses\GameObject.cpp" />
     <ClCompile Include="BaseClasses\ObjSpawner.cpp" />
+    <ClCompile Include="LevelComponents\AudioManager.cpp" />
     <ClCompile Include="LevelComponents\Level.cpp" />
     <ClCompile Include="LevelComponents\Menu.cpp" />
     <ClCompile Include="LevelComponents\PauseMenu.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Constants\DebugMode.h" />
     <ClInclude Include="Constants\ObstaclesConsts.h" />
     <ClInclude Include="Constants\PhysicsConsts.h" />
+    <ClInclude Include="LevelComponents\AudioManager.h" />
     <ClInclude Include="LevelComponents\Level.h" />
     <ClInclude Include="LevelComponents\Menu.h" />
     <ClInclude Include="LevelComponents\PauseMenu.h" />

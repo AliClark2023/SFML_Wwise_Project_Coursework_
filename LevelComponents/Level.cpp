@@ -16,8 +16,18 @@ level::level( sf::RenderWindow& win,  sf::View& v, menu_ui& menu) : window_ref_(
     AK::SoundEngine::RegisterGameObj(EVT_STOP_BG_MUSIC.ID);
     */
     
+    // level specific audio events
+    play_bg = AudioManager::instance().get_registed_object("BackGround_Music");
+    plat_land = AudioManager::instance().register_object("Platform_Landing", "BackGround_Music");
+    hazard_hit = AudioManager::instance().register_object("Destroy_Hazzard", "BackGround_Music");
+    upbeat_change =AudioManager::instance().register_object("Change_To_Upbeat", "BackGround_Music");
+    intensity_obj =AudioManager::instance().register_object("Intensity", "BackGround_Music");
+
+   
+    
     // starting music
-    AK::SoundEngine::PostEvent(EVT_PLAY_BG_MUSIC.EventName.data(), EVT_PLAY_BG_MUSIC.ID);
+    //AK::SoundEngine::PostEvent(EVT_PLAY_BG_MUSIC.EventName.data(), EVT_PLAY_BG_MUSIC.ID);
+    AK::SoundEngine::PostEvent(play_bg.Name.data(), play_bg.ID);
     
     
     //initializing spawn zone
@@ -85,7 +95,8 @@ void level::setup_spawners()
     
     std::unique_ptr<object_spawner> spawner;
     // initial scenery spawner # 1
-    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery, EVT_PLAT_LANDING);
+    //spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery, EVT_PLAT_LANDING);
+    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery, plat_land);
     spawner->setPosition(plat_spawn_pos);
     spawner->set_start_spawn_rate(MIN_SPWN_RATE * 1.5);
     spawner->set_start_speed(MIN_OBJ_SPEED);
@@ -94,7 +105,8 @@ void level::setup_spawners()
     spawners_.push_back(std::move(spawner));
     
     // initial hazard spawner
-    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, hazard, EVT_DESTROY_HAZARD);
+    //spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, hazard, EVT_DESTROY_HAZARD);
+    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, hazard, hazard_hit);
     spawner->setPosition(hazard_spawn_pos);
     spawner->set_start_spawn_rate(MIN_SPWN_RATE  * 2);
     //spawner->set_spawn_rate(MIN_SPWN_RATE  * 2);
@@ -106,7 +118,8 @@ void level::setup_spawners()
     
     
     // initial scenery spawner # 2
-    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery, EVT_PLAT_LANDING);
+    //spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery, EVT_PLAT_LANDING);
+    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery, plat_land);
     spawner->setPosition(plat2_spawn_pos);
     spawner->set_start_spawn_rate(MIN_SPWN_RATE * 0.75);
     spawner->set_start_speed(MIN_OBJ_SPEED);
@@ -165,7 +178,8 @@ void level::update_audio()
         //need to reset after state switching
         prev_intensity = 0;
    
-        AK::SoundEngine::PostEvent(EVT_CHANGE_TO_UP_BEAT.EventName.data(), EVT_CHANGE_TO_UP_BEAT.Associated_ID);
+        //AK::SoundEngine::PostEvent(EVT_CHANGE_TO_UP_BEAT.EventName.data(), EVT_CHANGE_TO_UP_BEAT.Associated_ID);
+        AK::SoundEngine::PostEvent(upbeat_change.Name.data(), upbeat_change.ID);
     }
     
     // handles how audio intensity is handled depending on level state
@@ -182,7 +196,8 @@ void level::update_audio()
     
     if ( prev_intensity <= new_audio_intensity)
     {
-        const AKRESULT result = AK::SoundEngine::SetRTPCValue(EVT_INTENSITY.EventName.data(), new_audio_intensity);
+        //const AKRESULT result = AK::SoundEngine::SetRTPCValue(EVT_INTENSITY.EventName.data(), new_audio_intensity);
+        const AKRESULT result = AK::SoundEngine::SetRTPCValue(intensity_obj.Name.data(), new_audio_intensity);
         
         if (result != AK_Success)
         {

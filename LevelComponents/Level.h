@@ -8,7 +8,8 @@
 #include "../Constants/ObstaclesConsts.h"
 #include "../WwiseWrapper.h"
 #include "../Utilities/SATDetection.h"
-#include "../Constants/AudioObjects.h"
+//#include "../Constants/AudioObjects.h"
+#include "../LevelComponents/AudioManager.h"
 #include "../LevelComponents/Menu.h"
 
 class level
@@ -57,4 +58,13 @@ private:
     
     enum class level_state { slow, high };
     level_state level_state_ = level_state::slow;
+    
+    // Audio events (need asscociating ID from AudioManager
+    AudioObject plat_land;
+    AudioObject hazard_hit;
+    AudioObject upbeat_change;
+    AudioObject intensity_obj;
+    AudioObject play_bg;
+
+    AudioObject stop_bg;
 };
