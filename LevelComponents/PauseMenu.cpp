@@ -31,12 +31,13 @@ pause_menu::pause_menu( sf::RenderWindow& win,  sf::View& v, const sf::Font& fon
 
 void pause_menu::handle_input(float dt)
 {
+    
     while (const std::optional event = window_ref_.pollEvent())
     {
         if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
         {
             // pause detection
-            if (!active_)
+             if (!active_)
             {
                 if (keyPressed->scancode == sf::Keyboard::Scancode::P)
                 {
@@ -63,7 +64,6 @@ void pause_menu::handle_input(float dt)
             }
         }
     }
-    
 }
 
 // should only be called when pause is activated

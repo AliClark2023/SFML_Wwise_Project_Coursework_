@@ -89,8 +89,9 @@ int main()
 		}
 
 		
-		AudioManager::instance().handle_input(deltaTime);
+		
 		Level->handle_input(deltaTime);
+		AudioManager::instance().handle_input(deltaTime);
 		Level->update(deltaTime);
 
 		// render cycle

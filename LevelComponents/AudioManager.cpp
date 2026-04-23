@@ -64,6 +64,21 @@ void AudioManager::deregister_audio_object(std::string obj_name)
 // handles audio controls (volume implemented only)
 void AudioManager::handle_input(float dt)
 {
+    // volume adjustment when player input is detected
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up))
+    {
+        volume_level_ += volume_rate_ * dt;
+        volume_level_ = std::clamp(volume_level_, 0.f, 100.f);
+        AK::SoundEngine::SetRTPCValue(volume_event.data(), volume_level_);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down))
+    {
+        volume_level_ -= volume_rate_ * dt;
+        volume_level_ = std::clamp(volume_level_, 0.f, 100.f);
+        AK::SoundEngine::SetRTPCValue(volume_event.data(), volume_level_);
+    }
+    
+    /*
     while (const std::optional event = window_ref_.pollEvent())
     {
         if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
@@ -84,6 +99,7 @@ void AudioManager::handle_input(float dt)
             
         }
     }   
+    */
 }
 
 AudioManager::AudioManager(sf::RenderWindow& window, sf::View& view): window_ref_(window), view_ref_(view)
