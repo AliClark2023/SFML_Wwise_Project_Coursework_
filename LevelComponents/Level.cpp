@@ -17,11 +17,11 @@ level::level( sf::RenderWindow& win,  sf::View& v, menu_ui& menu) : window_ref_(
     */
     
     // level specific audio events
-    play_bg = AudioManager::instance().get_registed_object("Play_Background_Music");
-    plat_land = AudioManager::instance().register_object("Platform_Landing", "Play_Background_Music");
-    hazard_hit = AudioManager::instance().register_object("Destroy_Hazzard", "Play_Background_Music");
-    upbeat_change =AudioManager::instance().register_object("Change_To_Upbeat", "Play_Background_Music");
-    intensity_obj =AudioManager::instance().register_object("Intensity", "Play_Background_Music");
+    play_bg = AudioManager::instance().get_registed_object(play_music_event.data());
+    plat_land = AudioManager::instance().register_object(plat_event.data(), play_music_event.data());
+    hazard_hit = AudioManager::instance().register_object(hazard_event.data(), play_music_event.data());
+    upbeat_change =AudioManager::instance().register_object(upbeat_event.data(), play_music_event.data());
+    intensity_obj =AudioManager::instance().register_object(intensity_event.data(), play_music_event.data());
 
    
     

@@ -10,6 +10,7 @@
 #include "Obstacles/Scenery.h"
 #include "WwiseWrapper.h"
 #include "LevelComponents/AudioManager.h"
+#include "Constants/AudioObjects.h"
 
 int main()
 {
@@ -53,8 +54,10 @@ int main()
 	window->setFramerateLimit(60);
 
 	// Audio setup (must be done first)
-	AudioObject bg_music{ AudioManager::instance().register_object("Play_Background_Music","")};
-	AudioObject stop_bg_music{AudioManager::instance().register_object("Stop_Background_Music", "Play_Background_Music")};
+	//AudioObject bg_music{ AudioManager::instance().register_object("Play_Background_Music","")};
+	AudioObject bg_music{ AudioManager::instance().register_object(play_music_event.data(),"")};
+	//AudioObject stop_bg_music{AudioManager::instance().register_object("Stop_Background_Music", "Play_Background_Music")};
+	AudioObject stop_bg_music{AudioManager::instance().register_object(stop_music_event.data(), "Play_Background_Music")};
 	// game functionality
 	std::unique_ptr<menu_ui> ui(new menu_ui(*window,*view));
 	std::unique_ptr<level> Level(new level(*window,*view, *ui));
