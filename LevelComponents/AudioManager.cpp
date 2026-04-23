@@ -1,9 +1,18 @@
 ﻿#include "AudioManager.h"
 
+AudioManager* AudioManager::instance_ = nullptr;
+
+void AudioManager::initialize(sf::RenderWindow& window_ref, sf::View& view_ref)
+{
+    if (!instance_)
+    {
+        instance_ = new AudioManager(window_ref, view_ref);
+    }
+}
+
 AudioManager& AudioManager::instance()
 {
-    static AudioManager instance;
-    return instance;
+    return *instance_;
 }
 
 AudioObject AudioManager::register_object(const std::string& obj_name, const std::string& obj_associated_name)
@@ -35,7 +44,7 @@ AudioObject AudioManager::register_object(const std::string& obj_name, const std
     return obj;
 }
 
-AudioObject AudioManager::get_registed_object(const std::string& obj_name)
+AudioObject AudioManager::get_registered_object(const std::string& obj_name)
 {
     AudioObject obj;
     auto it = registered_objects_.find(obj_name);
@@ -52,6 +61,33 @@ void AudioManager::deregister_audio_object(std::string obj_name)
 {
 }
 
+// handles audio controls (volume implemented only)
 void AudioManager::handle_input(float dt)
 {
+    while (const std::optional event = window_ref_.pollEvent())
+    {
+        if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
+        {
+            // volume adjustment when player input is detected
+            if (keyPressed->scancode == sf::Keyboard::Scancode::Up)
+            {
+                volume_level_ += volume_rate_ * dt;
+                volume_level_ = std::clamp(volume_level_, 0.f, 100.f);
+                AK::SoundEngine::SetRTPCValue(volume_event.data(), volume_level_);
+            }
+            if (keyPressed->scancode == sf::Keyboard::Scancode::Down)
+            {
+                volume_level_ -= volume_rate_ * dt;
+                volume_level_ = std::clamp(volume_level_, 0.f, 100.f);
+                AK::SoundEngine::SetRTPCValue(volume_event.data(), volume_level_);
+            }
+            
+        }
+    }   
+}
+
+AudioManager::AudioManager(sf::RenderWindow& window, sf::View& view): window_ref_(window), view_ref_(view)
+{
+    bg_music = register_object(play_music_event.data(),"");
+    bg_volume = register_object(volume_event.data(),play_music_event.data());
 }

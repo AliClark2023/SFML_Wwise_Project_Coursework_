@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{D586EC88-24D7-4A03-A18B-8352411C673F}",
     "Language": "SFX",
-    "Hash": "{CCEA8FEF-1F93-06BA-98D0-80C613F44617}",
+    "Hash": "{6767DB73-C269-154E-2AF2-660347507CCF}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\ProjectSoundbank",
     "ShortName": "ProjectSoundbank",
     "Path": "ProjectSoundbank.bnk",
@@ -656,6 +656,12 @@
     ],
     "GameParameters": [
      {
+      "Id": "2415836739",
+      "Name": "Volume",
+      "ObjectPath": "\\Game Parameters\\Music Parameters\\Volume",
+      "GUID": "{DA4ADBC9-6504-4E10-89F4-F833D5583AB1}"
+     },
+     {
       "Id": "2470328564",
       "Name": "Intensity",
       "ObjectPath": "\\Game Parameters\\Music Parameters\\Intensity",
@@ -706,6 +712,6 @@
     ]
    }
   ],
-  "FileHash": "{571E8A1D-FAA0-EFBE-B7DF-3913E01EABC3}"
+  "FileHash": "{2054C005-444D-B36B-ED9D-0A7843DBF679}"
  }
 }

@@ -17,8 +17,8 @@ menu_ui::menu_ui( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_
     pause_ui_ = std::make_unique<pause_menu>(window_ref_, view_ref_, font_);
     
     // audio events
-    pause_bg =AudioManager::instance().register_object("Pause_Background_Music", "Play_Background_Music");
-    resume_bg = AudioManager::instance().register_object("Resume_Background_Music", "Play_Background_Music");
+    pause_bg =AudioManager::instance().register_object(pause_music_event.data(), play_music_event.data());
+    resume_bg = AudioManager::instance().register_object(resume_music_event.data(), play_music_event.data());
 }
 
 void menu_ui::handle_input(float dt)

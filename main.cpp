@@ -54,8 +54,10 @@ int main()
 	window->setFramerateLimit(60);
 
 	// Audio setup (must be done first)
+	AudioManager::initialize(*window, *view);
 	//AudioObject bg_music{ AudioManager::instance().register_object("Play_Background_Music","")};
-	AudioObject bg_music{ AudioManager::instance().register_object(play_music_event.data(),"")};
+	//AudioObject bg_music{ AudioManager::instance().register_object(play_music_event.data(),"")};
+	AudioObject bg_music{ AudioManager::instance().get_registered_object(play_music_event.data())};
 	//AudioObject stop_bg_music{AudioManager::instance().register_object("Stop_Background_Music", "Play_Background_Music")};
 	AudioObject stop_bg_music{AudioManager::instance().register_object(stop_music_event.data(), "Play_Background_Music")};
 	// game functionality
@@ -85,7 +87,9 @@ int main()
 			Level = std::make_unique<level>(*window,*view, *ui);
 			ui->reset_UI();
 		}
+
 		
+		AudioManager::instance().handle_input(deltaTime);
 		Level->handle_input(deltaTime);
 		Level->update(deltaTime);
 
@@ -95,6 +99,7 @@ int main()
 		Level->render();
 		
 		window->display();
+		
 	}
 
 	//--Wwise code--------------------------------------------------------------

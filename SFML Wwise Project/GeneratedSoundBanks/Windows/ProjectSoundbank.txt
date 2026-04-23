@@ -18,6 +18,7 @@ State	ID	Name	State Group			Notes
 	4090965798	UpBeat	Game_State			
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
+	2415836739	Volume			\Music Parameters\Volume	
 	2470328564	Intensity			\Music Parameters\Intensity	
 
 Trigger	ID	Name			Wwise Object Path	Notes

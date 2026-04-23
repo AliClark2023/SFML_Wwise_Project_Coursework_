@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{1103251E-E569-C14A-200D-5A01D17044B3}",
+    "Hash": "{85309C62-98F0-D823-FA34-0D6D2059F6AB}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -43,6 +43,12 @@
      }
     ],
     "GameParameters": [
+     {
+      "Id": "2415836739",
+      "Name": "Volume",
+      "ObjectPath": "\\Game Parameters\\Music Parameters\\Volume",
+      "GUID": "{DA4ADBC9-6504-4E10-89F4-F833D5583AB1}"
+     },
      {
       "Id": "2470328564",
       "Name": "Intensity",
@@ -80,6 +86,6 @@
     ]
    }
   ],
-  "FileHash": "{A35B1968-CDF0-970F-DF55-73E7DDA96905}"
+  "FileHash": "{5D8B35BA-41B2-918B-739B-A45BEB8ED4A4}"
  }
 }
