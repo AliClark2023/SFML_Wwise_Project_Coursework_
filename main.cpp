@@ -52,11 +52,11 @@ int main()
 	window->setView(*view);
 	window->setFramerateLimit(60);
 
+	// Audio setup (must be done first)
+	AudioObject bg_music{ AudioManager::instance().register_object("Play_Background_Music","")};
+	AudioObject stop_bg_music{AudioManager::instance().register_object("Stop_Background_Music", "Play_Background_Music")};
 	// game functionality
 	std::unique_ptr<menu_ui> ui(new menu_ui(*window,*view));
-	AudioObject bg_music{ AudioManager::instance().register_object("BackGround_Music","")};
-	AudioObject stop_bg_music{AudioManager::instance().register_object("Stop_Background_Music", "BackGround_Music")};
-	
 	std::unique_ptr<level> Level(new level(*window,*view, *ui));
 
 	

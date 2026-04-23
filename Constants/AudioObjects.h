@@ -2,6 +2,11 @@
 #include <cstdint>
 
 /*
+ * Will contain all string definitions for wwise events
+ */
+
+
+/*
  * Defines all Wwise IDs and their corresponding event names
  * Game Components can then register needed events
  * Processed at compile time

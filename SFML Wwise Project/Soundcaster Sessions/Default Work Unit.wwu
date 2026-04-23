@@ -14,6 +14,10 @@
 							<Position X="0" Y="1"/>
 						</Module>
 						<Module>
+							<ObjectRef Name="Set_Background_Intensity" ID="{2B871084-A18E-45A1-B70D-0D3DA2C43396}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
+							<Position X="0" Y="2"/>
+						</Module>
+						<Module>
 							<ObjectRef Name="Change_To_Downbeat" ID="{F2AEF4A7-529D-4D38-8E2C-03E1CEFA3272}" WorkUnitID="{B03C5B15-8464-437D-851B-23FC751A7D31}"/>
 							<Position X="1" Y="0"/>
 						</Module>

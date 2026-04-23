@@ -19,22 +19,32 @@ AudioObject AudioManager::register_object(const std::string& obj_name, const std
         
         obj.Name = obj_name;
         obj.ID = id_value_;
-        registered_objects_.insert(std::pair<std::string, int>(obj.Name, obj.ID));
+        registered_objects_.insert(std::pair<std::string, AkAudioObjectID>(obj.Name, obj.ID));
         id_value_ ++;
     }
-    
-    // registered objects requires an existing object to work
-    obj.Name = obj_name;
-    obj.ID = registered_objects_.find(obj_associated_name)->second;
-    
+    else{
+        // registered objects requires an existing object to work
+        auto it = registered_objects_.find(obj_associated_name);
+        if (it != registered_objects_.end())
+        {
+            std::pair<std::string, AkAudioObjectID> entry = *it;
+            obj.Name = obj_name;
+            obj.ID = entry.second;
+        }
+    }
     return obj;
 }
 
 AudioObject AudioManager::get_registed_object(const std::string& obj_name)
 {
     AudioObject obj;
-    obj.Name = registered_objects_.find(obj_name)->first;
-    obj.ID = registered_objects_.find(obj_name)->second;
+    auto it = registered_objects_.find(obj_name);
+    if (it != registered_objects_.end())
+    {
+        std::pair<std::string, AkAudioObjectID> entry = *it;
+        obj.Name = entry.first;
+        obj.ID = entry.second;
+    }
     return obj;
 }
 

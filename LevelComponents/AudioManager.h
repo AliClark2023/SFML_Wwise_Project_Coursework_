@@ -21,5 +21,5 @@ public:
     void handle_input(float dt);
 private:
     std::map<std::string, AkAudioObjectID> registered_objects_;
-    int id_value_;
+    int id_value_ = 1;
 };
