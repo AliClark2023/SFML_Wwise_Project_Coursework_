@@ -3,7 +3,7 @@
 
 // obstacle default speed
 inline constexpr float MIN_OBJ_SPEED = 300.0f;
-inline constexpr float MIN_SPWN_RATE = 0.5f;
+//inline constexpr float MIN_SPWN_RATE = 0.5f;
 
 // obstacle limits
 inline constexpr float MAX_OBJ_SPEED = 1000.0f;
@@ -11,7 +11,9 @@ inline constexpr float MAX_SPWN_RATE = 0.2f;
 
 // spawner constants
 inline constexpr float OBJ_SPEED_MULTIPLIER = 0.2f;
-inline constexpr float OBJ_SPAWN_MULTIPLIER = 0.01f;
+inline constexpr float OBJ_SPAWN_MULTIPLIER = 0.10f;
+inline constexpr float BASE_SPAWN_RATE = 1.5f;
+inline constexpr float MIN_SPAWN_RATE = 0.1f;
 
 // move to audio specific header?
 inline constexpr float AUDIO_INTENSITY_MULTIPLIER = 0.5f;
@@ -20,4 +22,5 @@ inline constexpr float MAX_AUDIO_INTENSITY = 100.0f;
 
 // specific level state header?
 // determines threshold used by level to change state (score based)
-inline constexpr int HIGH_STATE_SCORE_THRESHOLD = 200;
+inline constexpr int HIGH_STATE_SCORE_THRESHOLD = 200; // Change to 150
+inline constexpr int MAX_SCORE = 100;

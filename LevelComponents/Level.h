@@ -48,6 +48,10 @@ private:
     sf::Vector2f spawn_zone_min_ = sf::Vector2f(0.0f, 0.0f);
     sf::Vector2f spawn_zone_max_ = sf::Vector2f(0.0f, 0.0f);
     int object_count_ = 0;
+    float spawn_elapsed_time_ = 0.f;
+    float spawn_rate_ = 1.0f;
+    int spawner_selection = 0;
+    bool ascending = true;
     
     // level UI components
     //timer timer_;

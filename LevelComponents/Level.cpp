@@ -97,7 +97,8 @@ void level::setup_spawners()
     // initial scenery spawner # 1
     spawner = std::make_unique<object_spawner>(window_ref_, view_ref_);
     spawner->setPosition(plat_spawn_pos);
-    spawner->set_start_spawn_rate(MIN_SPWN_RATE * 1.5);
+    //spawner->set_start_spawn_rate(MIN_SPWN_RATE * 1.5);
+    //spawner->set_start_spawn_rate(BASE_SPAWN_RATE);
     spawner->set_start_speed(MIN_OBJ_SPEED);
     spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
@@ -109,7 +110,8 @@ void level::setup_spawners()
     // initial hazard spawner
     spawner = std::make_unique<object_spawner>(window_ref_, view_ref_);
     spawner->setPosition(hazard_spawn_pos);
-    spawner->set_start_spawn_rate(MIN_SPWN_RATE  * 2);
+    //spawner->set_start_spawn_rate(MIN_SPWN_RATE  * 2);
+    //spawner->set_start_spawn_rate(BASE_SPAWN_RATE);
     spawner->set_start_speed(MIN_OBJ_SPEED);
     spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
@@ -122,7 +124,8 @@ void level::setup_spawners()
     // initial scenery spawner # 2
     spawner = std::make_unique<object_spawner>(window_ref_, view_ref_);
     spawner->setPosition(plat2_spawn_pos);
-    spawner->set_start_spawn_rate(MIN_SPWN_RATE * 0.75);
+    //spawner->set_start_spawn_rate(MIN_SPWN_RATE * 0.75);
+    //spawner->set_start_spawn_rate(BASE_SPAWN_RATE);
     spawner->set_start_speed(MIN_OBJ_SPEED);
     spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
@@ -151,6 +154,7 @@ void level::update_spawners(const float& dt)
     float new_obj_speed;
     float new_obj_spwn_rate;
  
+    /*
     for (const auto& spawner : spawners_)
     {
         
@@ -165,6 +169,46 @@ void level::update_spawners(const float& dt)
         }
         
         
+        spawner->update(dt);
+    }
+    */
+    
+    // will activate current spawner when reaching spawn rate threshold
+    // spawning according to spawn rate
+    spawn_elapsed_time_ += dt;
+    // spawn rate calculations here
+    float t = std::clamp(score / MAX_SCORE, 0.f, 1.0f);
+    new_obj_spwn_rate = BASE_SPAWN_RATE + (MIN_SPAWN_RATE - BASE_SPAWN_RATE) * (t * t);
+    
+    //new_obj_spwn_rate = std::clamp( (-score * OBJ_SPAWN_MULTIPLIER) + spawn_rate_, MAX_SPWN_RATE, spawn_rate_);
+    spawn_rate_= new_obj_spwn_rate;
+    int max_num_spawners = static_cast<int>(spawners_.size()) - 1;
+    
+    if (spawn_elapsed_time_ >= spawn_rate_)
+    {
+        new_obj_speed = std::clamp((score * OBJ_SPEED_MULTIPLIER) + spawners_[spawner_selection]->get_start_speed(), spawners_[spawner_selection]->get_start_speed(), MAX_OBJ_SPEED);
+        spawners_[spawner_selection]->set_object_speed(new_obj_speed);
+        
+        spawners_[spawner_selection]->spawn_object();
+        
+        if (ascending)
+        {
+            spawner_selection ++;
+            if (spawner_selection >= max_num_spawners) ascending = false;
+        }else
+        {
+            spawner_selection --;
+            if (spawner_selection <= 0) ascending = true;
+        }
+        spawner_selection = std::clamp( spawner_selection, 0 , max_num_spawners );
+        
+        
+        spawn_elapsed_time_ = 0.0f;
+    }
+    
+    // updating all spawners (and spawned objects)
+    for (const auto& spawner : spawners_)
+    {
         spawner->update(dt);
     }
 }

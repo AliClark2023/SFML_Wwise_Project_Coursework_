@@ -19,11 +19,11 @@ public:
     // directly set spawn & speed
     void set_spawn_rate(const float rate){spawn_rate_ = rate;}
     //called when initialising spawner
-    void set_start_spawn_rate(const float rate){start_spawn_rate_ = rate; set_spawn_rate(start_spawn_rate_);}
+    //void set_start_spawn_rate(const float rate){start_spawn_rate_ = rate; set_spawn_rate(start_spawn_rate_);}
     void set_start_speed(const float speed){ start_speed_ = speed; set_object_speed(start_speed_); }
     void set_hazard_chance(const int chance){hazard_chance = chance;}
     
-    float get_start_spawn_rate() const {return start_spawn_rate_;}
+    //float get_start_spawn_rate() const {return start_spawn_rate_;}
     void set_object_speed(const float speed){ object_speed_ = speed; }
     
     float get_start_speed() const { return start_speed_; }
@@ -49,7 +49,6 @@ private:
     //ObjectType type_to_spawn_;
     float elapsed_time_ = 0.f;
     float spawn_rate_ = 0.5f;
-    float start_spawn_rate_ = 0.f;
     float object_speed_ = 0.f;
     float start_speed_ = 0.f;
     

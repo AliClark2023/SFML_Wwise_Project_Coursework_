@@ -102,6 +102,7 @@ void object_spawner::update_object_speed(const int& score, const float& time)
        
 }
 
+/*
 // need to clamp min/max values (remove?)
 void object_spawner::update_spawn_rate(const int& score, const float& time)
 {
@@ -134,7 +135,7 @@ void object_spawner::update_spawn_rate(const int& score, const float& time)
                 increases_spawn_rate_ = false;
         }
 }
-
+*/
 void object_spawner::render_objects() const
 {
         /*
@@ -210,6 +211,7 @@ void object_spawner::handle_input(float dt)
 
 void object_spawner::update(float dt)
 {
+        /*
         // spawning according to spawn rate
         elapsed_time_ += dt;
         if (elapsed_time_ >= spawn_rate_)
@@ -217,7 +219,8 @@ void object_spawner::update(float dt)
                 spawn_object();
                 elapsed_time_ = 0.0f;
         }
-
+*/
+        
         //updating or removing dead objects from vector
         // no need to increment iterator in loop condition as it gets updated within the loop
         for (auto it = objects_.begin(); it != objects_.end();)
