@@ -95,36 +95,40 @@ void level::setup_spawners()
     
     std::unique_ptr<object_spawner> spawner;
     // initial scenery spawner # 1
-    //spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery, EVT_PLAT_LANDING);
-    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery, plat_land);
+    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_);
     spawner->setPosition(plat_spawn_pos);
     spawner->set_start_spawn_rate(MIN_SPWN_RATE * 1.5);
     spawner->set_start_speed(MIN_OBJ_SPEED);
     spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
+    spawner->set_hazard_chance(10);
+    spawner->set_hazard_sfx(hazard_hit);
+    spawner->set_plat_sfx(plat_land);
     spawners_.push_back(std::move(spawner));
     
     // initial hazard spawner
-    //spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, hazard, EVT_DESTROY_HAZARD);
-    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, hazard, hazard_hit);
+    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_);
     spawner->setPosition(hazard_spawn_pos);
     spawner->set_start_spawn_rate(MIN_SPWN_RATE  * 2);
-    //spawner->set_spawn_rate(MIN_SPWN_RATE  * 2);
-    //spawner->set_object_speed(MIN_OBJ_SPEED);
     spawner->set_start_speed(MIN_OBJ_SPEED);
     spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
+    spawner->set_hazard_chance(50);
+    spawner->set_hazard_sfx(hazard_hit);
+    spawner->set_plat_sfx(plat_land);
     spawners_.push_back(std::move(spawner));
     
     
     // initial scenery spawner # 2
-    //spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery, EVT_PLAT_LANDING);
-    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_, scenery, plat_land);
+    spawner = std::make_unique<object_spawner>(window_ref_, view_ref_);
     spawner->setPosition(plat2_spawn_pos);
     spawner->set_start_spawn_rate(MIN_SPWN_RATE * 0.75);
     spawner->set_start_speed(MIN_OBJ_SPEED);
     spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
+    spawner->set_hazard_chance(5);
+    spawner->set_hazard_sfx(hazard_hit);
+    spawner->set_plat_sfx(plat_land);
     spawners_.push_back(std::move(spawner));
     
     

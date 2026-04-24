@@ -1,31 +1,34 @@
 ﻿#include "ObjSpawner.h"
 
-object_spawner::object_spawner(sf::RenderWindow& win, sf::View& v,
-        const ObjectType& object_to_spawn, const AudioObject& event) : GameObject(win, v)
+object_spawner::object_spawner(sf::RenderWindow& win, sf::View& v) : GameObject(win, v)
 {
         //type_to_spawn_ = object_to_spawn;
-        object_type_ = object_to_spawn;
-        object_triggered_sfx_ = event;
+        //object_type_ = object_to_spawn;
+        srand(time(nullptr));
 }
 
 void object_spawner::spawn_object()
 {
-        /*
-        std::shared_ptr<sf::RenderWindow> window ;
-        std::shared_ptr<sf::View> view ;
         scenery_config scene_config;
-        if (!window_ref_.expired()) window = window_ref_.lock();
-        if (!view_ref_.expired()) view = view_ref_.lock();
+        AudioObject object_triggered_sfx_;
         
-        if (!window_ref_.expired() && !view_ref_.expired())
+        // determining if object will become a hazard or platform (requires chance to be set after initialisation)
+        int chance = rand() % 100;
+        if (chance < hazard_chance)
         {
-                
+                scene_config.type = ObjectType::hazard;
+                object_type_ = hazard;
+                // set sfx
+                object_triggered_sfx_ = hazard_triggered_sfx;
+        }else
+        {
+                scene_config.type = ObjectType::scenery;
+                object_type_ = scenery;
+                //set sfx
+                object_triggered_sfx_ = plat_triggered_sfx_;
         }
+ 
         
-        window.reset();
-        view.reset();
-        */
-        scenery_config scene_config;
         switch (object_type_)
         {
         case scenery:
@@ -37,7 +40,7 @@ void object_spawner::spawn_object()
                 scene_config.velocity = sf::Vector2f(-1, 0);
                 scene_config.move_speed = object_speed_;
                 scene_config.color = sf::Color::Cyan;
-                scene_config.type = ObjectType::scenery;
+                //scene_config.type = ObjectType::scenery;
                 scene_config.audio_event_sfx = object_triggered_sfx_;
                 objects_.emplace_back(std::make_unique<Scenery>(window_ref_, view_ref_, scene_config));
                 objects_.back()->set_alive(true);
@@ -51,7 +54,7 @@ void object_spawner::spawn_object()
                 scene_config.velocity = sf::Vector2f(-1, 0);
                 scene_config.move_speed = object_speed_;
                 scene_config.color = sf::Color::Yellow;
-                scene_config.type = ObjectType::hazard;
+                //scene_config.type = ObjectType::hazard;
                 scene_config.audio_event_sfx = object_triggered_sfx_;
                 objects_.emplace_back(std::make_unique<Scenery>(window_ref_, view_ref_, scene_config));
                 objects_.back()->set_alive(true);

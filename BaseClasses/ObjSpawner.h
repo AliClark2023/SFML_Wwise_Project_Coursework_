@@ -13,8 +13,7 @@
 class object_spawner : public GameObject
 {
 public:
-    object_spawner(sf::RenderWindow& win, sf::View& v,
-        const ObjectType& object_to_spawn, const AudioObject& event);
+    object_spawner(sf::RenderWindow& win, sf::View& v);
     
     void spawn_object();
     // directly set spawn & speed
@@ -22,6 +21,7 @@ public:
     //called when initialising spawner
     void set_start_spawn_rate(const float rate){start_spawn_rate_ = rate; set_spawn_rate(start_spawn_rate_);}
     void set_start_speed(const float speed){ start_speed_ = speed; set_object_speed(start_speed_); }
+    void set_hazard_chance(const int chance){hazard_chance = chance;}
     
     float get_start_spawn_rate() const {return start_spawn_rate_;}
     void set_object_speed(const float speed){ object_speed_ = speed; }
@@ -36,6 +36,11 @@ public:
     void set_score_threshold(const sf::Vector2f& threshold_pos){ score_threshold_pos_ = threshold_pos; }
     void set_despawn_threshold(const sf::Vector2f& despawn_pos){ despawn_threshold = despawn_pos; }
     int get_objects_scored();
+    
+    // setting audio events
+    void set_hazard_sfx (const AudioObject& event) { hazard_triggered_sfx = event; }
+    void set_plat_sfx (const AudioObject& event) { plat_triggered_sfx_ = event; }
+    
     // revert/remove
     void handle_input(float dt) override;
     void update(float dt) override;
@@ -47,6 +52,9 @@ private:
     float start_spawn_rate_ = 0.f;
     float object_speed_ = 0.f;
     float start_speed_ = 0.f;
+    
+    // chance of making object a hazard
+    int hazard_chance = 0;
     
     // change to x pos only ?
     sf::Vector2f score_threshold_pos_;
@@ -60,5 +68,6 @@ private:
     bool increased_speed_ = false;
     bool increases_spawn_rate_ = false;
     //Object triggered SFX Event & ID
-    AudioObject object_triggered_sfx_;
+    AudioObject hazard_triggered_sfx;
+    AudioObject plat_triggered_sfx_;
 };
