@@ -6,10 +6,10 @@ pause_menu::pause_menu( sf::RenderWindow& win,  sf::View& v, const sf::Font& fon
     font_ = font;
     
     // text pos offsets
-    sf::Vector2f pause_pos {view_ref_.getCenter().x -100,view_ref_.getCenter().y -100};
-    sf::Vector2f reset_pos {view_ref_.getCenter().x -300,view_ref_.getCenter().y};
-    sf::Vector2f resume_pos {view_ref_.getCenter().x -100,view_ref_.getCenter().y};
-    sf::Vector2f quit_pos {view_ref_.getCenter().x + 150,view_ref_.getCenter().y};
+    sf::Vector2f pause_pos {view_ref_.getCenter().x -100,view_ref_.getCenter().y - 250};
+    sf::Vector2f reset_pos {view_ref_.getCenter().x -300,view_ref_.getCenter().y - 150};
+    sf::Vector2f resume_pos {view_ref_.getCenter().x -100,view_ref_.getCenter().y - 150};
+    sf::Vector2f quit_pos {view_ref_.getCenter().x + 150,view_ref_.getCenter().y - 150};
     
     // Text initialisation
     paused_text_ = std::make_unique<sf::Text>(font_);

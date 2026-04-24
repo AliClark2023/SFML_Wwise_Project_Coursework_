@@ -8,7 +8,7 @@ menu_ui::menu_ui( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_
     
     // UI positions
     const sf::Vector2f score_pos { view_ref_.getCenter().x - view_ref_.getSize().x /2 + 50, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 10};
-    const sf::Vector2f timer_pos { view_ref_.getCenter().x, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 20};
+    const sf::Vector2f timer_pos { view_ref_.getCenter().x - 20, view_ref_.getCenter().y - view_ref_.getSize().y / 2 + 20};
 
     score_ui_ = std::make_unique<score>(font_);
     score_ui_->set_pos(score_pos);
