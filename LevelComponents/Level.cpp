@@ -177,7 +177,7 @@ void level::update_spawners(const float& dt)
     // spawning according to spawn rate
     spawn_elapsed_time_ += dt;
     // spawn rate calculations here
-    float t = std::clamp(score / MAX_SCORE, 0.f, 1.0f);
+    float t = std::clamp(score / HIGH_STATE_SCORE_THRESHOLD, 0.f, 1.0f);
     new_obj_spwn_rate = BASE_SPAWN_RATE + (MIN_SPAWN_RATE - BASE_SPAWN_RATE) * (t * t);
     
     //new_obj_spwn_rate = std::clamp( (-score * OBJ_SPAWN_MULTIPLIER) + spawn_rate_, MAX_SPWN_RATE, spawn_rate_);
@@ -218,6 +218,7 @@ void level::update_audio()
 {
     const float score = static_cast<float>(menu_ref_.get_score());
     float new_audio_intensity = 0.f;
+    float t = 0;
     
     // change state (apply to whole level)
     if (level_state_ != level_state::high && score >= HIGH_STATE_SCORE_THRESHOLD)
@@ -234,11 +235,16 @@ void level::update_audio()
     switch (level_state_)
     {
         case level_state::slow:
-            new_audio_intensity = std::clamp(score * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
+            // using same smooth curve formula as spawn rate
+            t = std::clamp(score / HIGH_STATE_SCORE_THRESHOLD, 0.f, 1.0f);
+            //new_audio_intensity = std::clamp(score * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
+            new_audio_intensity = START_AUDIO_INTENSITY + (MAX_AUDIO_INTENSITY - START_AUDIO_INTENSITY) * t;
             break;
         // high state
         default:
-            new_audio_intensity = std::clamp((score - HIGH_STATE_SCORE_THRESHOLD) * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
+            t = std::clamp((score - HIGH_STATE_SCORE_THRESHOLD) / HIGH_STATE_SCORE_THRESHOLD, 0.f, 1.0f);
+            //new_audio_intensity = std::clamp((score - HIGH_STATE_SCORE_THRESHOLD) * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
+            new_audio_intensity = START_AUDIO_INTENSITY + (MAX_AUDIO_INTENSITY - START_AUDIO_INTENSITY) * t;
             break;
     }
     
