@@ -24,6 +24,8 @@ public:
     void set_velocity(const sf::Vector2f& vel) {velocity_ = vel;}
     void set_velocity(const float& vx, const float& vy){velocity_.x = vx;velocity_.y = vy;}
     sf::Vector2f get_velocity() const {return velocity_;}
+    void set_speed(float speed) { speed_ = speed; }
+    float get_Speed() const {return speed_;}
     
     // Object states
     bool is_alive() const { return alive_; }
@@ -50,7 +52,7 @@ public:
 protected:
     // properties
     sf::Vector2f velocity_{0.0f,0.0f };
-    
+    float speed_{0.0f};
     // flags to determine state of object
     bool alive_ = true;
     /*

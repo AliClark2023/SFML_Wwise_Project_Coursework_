@@ -15,6 +15,7 @@ struct scenery_config
     float rotation = 0.0f;
     sf::Vector2f position = sf::Vector2f(0.0f, 0.0f);
     sf::Vector2f velocity = sf::Vector2f(0.0f, 0.0f);
+    float move_speed = 0.0f;
     sf::Color color = sf::Color::Black;
     ObjectType type = scenery;
     AudioObject audio_event_sfx;
@@ -42,8 +43,9 @@ private:
     // can add in obstacle only flags (counted, activated) from base game object
     bool counted_ = false;
     bool activated_ = false;
-    AudioObject audio_sfx_event;
     
+    // audio features
+    AudioObject audio_sfx_event;
     // Wwise call back adapted from: https://www.audiokinetic.com/en/public-library/2025.1.6_9117/?source=SDK&id=soundengine_music_callbacks.html
     static void AudioEventCallback(
         AkCallbackType in_eType,

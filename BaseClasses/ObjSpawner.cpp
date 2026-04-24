@@ -34,7 +34,8 @@ void object_spawner::spawn_object()
                 scene_config.origin = sf::Vector2f( scene_config.radius,  scene_config.radius);
                 scene_config.rotation = 45;
                 scene_config.position = getPosition();
-                scene_config.velocity = sf::Vector2f(-object_speed_, 0);
+                scene_config.velocity = sf::Vector2f(-1, 0);
+                scene_config.move_speed = object_speed_;
                 scene_config.color = sf::Color::Cyan;
                 scene_config.type = ObjectType::scenery;
                 scene_config.audio_event_sfx = object_triggered_sfx_;
@@ -47,7 +48,8 @@ void object_spawner::spawn_object()
                 scene_config.origin = sf::Vector2f( scene_config.radius,  scene_config.radius);
                 scene_config.rotation = 0;
                 scene_config.position = getPosition();
-                scene_config.velocity = sf::Vector2f(-object_speed_, 0);
+                scene_config.velocity = sf::Vector2f(-1, 0);
+                scene_config.move_speed = object_speed_;
                 scene_config.color = sf::Color::Yellow;
                 scene_config.type = ObjectType::hazard;
                 scene_config.audio_event_sfx = object_triggered_sfx_;
@@ -224,6 +226,13 @@ void object_spawner::update(float dt)
                 {
                         if (*it)
                         {
+                                // update object with new speed if not already at it
+                                float it_speed = (*it)->get_Speed();
+                                // would only work assuming velocity direction, better to have a speed variable within to compare to
+                                if (it_speed < object_speed_)
+                                {
+                                        (*it)->set_speed(object_speed_);
+                                }
                                 (*it)->update(dt);
                                 ++it;
                         }

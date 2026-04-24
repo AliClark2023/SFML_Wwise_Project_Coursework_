@@ -19,6 +19,7 @@ Scenery::Scenery(sf::RenderWindow& win, sf::View& v,
     setOrigin(config.origin);
     setRotation(sf::degrees(config.rotation));
     setPosition(config.position);
+    set_speed(config.move_speed);
     set_velocity(config.velocity);
     setFillColor(config.color);
     object_type_ = config.type;
@@ -35,8 +36,8 @@ void Scenery::handle_input(float dt)
 
 void Scenery::update(float dt)
 {
-    // update position based on velocity
-    move(velocity_ * dt);
+    // update position based on velocity (assumes vel is just a direction vector)
+    move(velocity_ * speed_ * dt);
 }
 
 // needs to indicate whether player has collided with object
