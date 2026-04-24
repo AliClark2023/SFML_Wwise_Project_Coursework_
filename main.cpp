@@ -22,7 +22,8 @@ int main()
 	//Note: Wwise expects wide strings when loading soundbanks on Windows. The
 	//		AKTEXT macro converts our soundbank path to the correct string type
 	//		for the current platform.
-	if (!wwise.initSoundEngine(AKTEXT("SFML Wwise Project/GeneratedSoundBanks/Windows")))
+	//if (!wwise.initSoundEngine(AKTEXT("SFML Wwise Project/GeneratedSoundBanks/Windows")))
+	if (!wwise.initSoundEngine(AKTEXT("./SFML Wwise Project/GeneratedSoundBanks/Windows")))
 	{
 		std::cout << "Could not initialise Wwise. Exiting." << std::endl;
 		return 1;

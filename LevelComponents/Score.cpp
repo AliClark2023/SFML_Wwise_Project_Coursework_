@@ -4,7 +4,7 @@
 score::score()
 {
     // replace with desired font (note: the directory is vital to loading correctly)
-    const std::string font_name = "Assets/Fonts/Montserrat-Regular.ttf";
+    const std::string font_name = "./Assets/Fonts/Montserrat-Regular.ttf";
     FileLoading::load_font(score_font_, font_name);
     score_text_ = std::make_unique<sf::Text>(score_font_);
 }

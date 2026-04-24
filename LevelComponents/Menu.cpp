@@ -3,7 +3,7 @@
 menu_ui::menu_ui( sf::RenderWindow& win,  sf::View& v) : window_ref_(win), view_ref_(v)
 {
     // replace with desired font (note: the directory is vital to loading correctly)
-    const std::string font_name = "Assets/Fonts/Montserrat-Regular.ttf";
+    const std::string font_name = "./Assets/Fonts/Montserrat-Regular.ttf";
     FileLoading::load_font(font_, font_name);
     
     // UI positions
