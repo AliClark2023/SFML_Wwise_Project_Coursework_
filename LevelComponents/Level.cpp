@@ -153,40 +153,24 @@ void level::update_spawners(const float& dt)
     // CLAMP THESE
     float new_obj_speed;
     float new_obj_spwn_rate;
- 
-    /*
-    for (const auto& spawner : spawners_)
-    {
-        
-        // seperate out speed & rate for scenery & hazards
-        if (spawner->get_object_type() == scenery)
-        {
-            new_obj_speed = std::clamp((score * OBJ_SPEED_MULTIPLIER) + spawner->get_start_speed(), spawner->get_start_speed(), MAX_OBJ_SPEED);
-            new_obj_spwn_rate = std::clamp( (-score * OBJ_SPAWN_MULTIPLIER) + spawner->get_start_spawn_rate(), MAX_SPWN_RATE, spawner->get_start_spawn_rate());
-            
-            spawner->set_object_speed(new_obj_speed);
-            spawner->set_spawn_rate(new_obj_spwn_rate);
-        }
-        
-        
-        spawner->update(dt);
-    }
-    */
     
     // will activate current spawner when reaching spawn rate threshold
     // spawning according to spawn rate
     spawn_elapsed_time_ += dt;
-    // spawn rate calculations here
-    float t = std::clamp(score / HIGH_STATE_SCORE_THRESHOLD, 0.f, 1.0f);
-    new_obj_spwn_rate = BASE_SPAWN_RATE + (MIN_SPAWN_RATE - BASE_SPAWN_RATE) * (t * t);
+    // spawn rate calculations, similar to intensity calculation, uses slow -> fast curve (t2)
+    float spawn_t = std::clamp(score / (HIGH_STATE_SCORE_THRESHOLD * 2), 0.f, 1.0f);
+    new_obj_spwn_rate = BASE_SPAWN_RATE + (MIN_SPAWN_RATE - BASE_SPAWN_RATE) * (spawn_t * spawn_t);
     
-    //new_obj_spwn_rate = std::clamp( (-score * OBJ_SPAWN_MULTIPLIER) + spawn_rate_, MAX_SPWN_RATE, spawn_rate_);
     spawn_rate_= new_obj_spwn_rate;
     int max_num_spawners = static_cast<int>(spawners_.size()) - 1;
     
     if (spawn_elapsed_time_ >= spawn_rate_)
     {
-        new_obj_speed = std::clamp((score * OBJ_SPEED_MULTIPLIER) + spawners_[spawner_selection]->get_start_speed(), spawners_[spawner_selection]->get_start_speed(), MAX_OBJ_SPEED);
+        // new object speed based on score, using linear calculation
+        //new_obj_speed = std::clamp((score * OBJ_SPEED_MULTIPLIER) + spawners_[spawner_selection]->get_start_speed(), spawners_[spawner_selection]->get_start_speed(), MAX_OBJ_SPEED);
+        // new speed calculation, similar to intensity & spawn rate (slow -> fast curve)
+        float  new_obj_speed_t = std::clamp(score / (HIGH_STATE_SCORE_THRESHOLD * 2), 0.f, 1.0f);
+        new_obj_speed = MIN_OBJ_SPEED + (MAX_OBJ_SPEED - MIN_OBJ_SPEED) * (new_obj_speed_t * new_obj_speed_t);
         spawners_[spawner_selection]->set_object_speed(new_obj_speed);
         
         spawners_[spawner_selection]->spawn_object();
@@ -218,7 +202,7 @@ void level::update_audio()
 {
     const float score = static_cast<float>(menu_ref_.get_score());
     float new_audio_intensity = 0.f;
-    float t = 0;
+    float intensity_t = 0;
     
     // change state (apply to whole level)
     if (level_state_ != level_state::high && score >= HIGH_STATE_SCORE_THRESHOLD)
@@ -226,8 +210,6 @@ void level::update_audio()
         level_state_ = level_state::high;
         //need to reset after state switching
         prev_intensity = 0;
-   
-        //AK::SoundEngine::PostEvent(EVT_CHANGE_TO_UP_BEAT.EventName.data(), EVT_CHANGE_TO_UP_BEAT.Associated_ID);
         AK::SoundEngine::PostEvent(upbeat_change.Name.data(), upbeat_change.ID);
     }
     
@@ -236,21 +218,19 @@ void level::update_audio()
     {
         case level_state::slow:
             // using same smooth curve formula as spawn rate
-            t = std::clamp(score / HIGH_STATE_SCORE_THRESHOLD, 0.f, 1.0f);
-            //new_audio_intensity = std::clamp(score * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
-            new_audio_intensity = START_AUDIO_INTENSITY + (MAX_AUDIO_INTENSITY - START_AUDIO_INTENSITY) * t;
+            intensity_t = std::clamp(score / HIGH_STATE_SCORE_THRESHOLD, 0.f, 1.0f);
+            new_audio_intensity = START_AUDIO_INTENSITY + (MAX_AUDIO_INTENSITY - START_AUDIO_INTENSITY) * intensity_t;
             break;
         // high state
         default:
-            t = std::clamp((score - HIGH_STATE_SCORE_THRESHOLD) / HIGH_STATE_SCORE_THRESHOLD, 0.f, 1.0f);
-            //new_audio_intensity = std::clamp((score - HIGH_STATE_SCORE_THRESHOLD) * AUDIO_INTENSITY_MULTIPLIER, START_AUDIO_INTENSITY, MAX_AUDIO_INTENSITY);
-            new_audio_intensity = START_AUDIO_INTENSITY + (MAX_AUDIO_INTENSITY - START_AUDIO_INTENSITY) * t;
+            intensity_t = std::clamp((score - HIGH_STATE_SCORE_THRESHOLD) / HIGH_STATE_SCORE_THRESHOLD, 0.f, 1.0f);
+            new_audio_intensity = START_AUDIO_INTENSITY + (MAX_AUDIO_INTENSITY - START_AUDIO_INTENSITY) * intensity_t;
             break;
     }
     
     if ( prev_intensity <= new_audio_intensity)
     {
-        //const AKRESULT result = AK::SoundEngine::SetRTPCValue(EVT_INTENSITY.EventName.data(), new_audio_intensity);
+
         const AKRESULT result = AK::SoundEngine::SetRTPCValue(intensity_obj.Name.data(), new_audio_intensity);
         
         if (result != AK_Success)

@@ -53,7 +53,7 @@ void object_spawner::spawn_object()
                 scene_config.position = getPosition();
                 scene_config.velocity = sf::Vector2f(-1, 0);
                 scene_config.move_speed = object_speed_;
-                scene_config.color = sf::Color::Yellow;
+                scene_config.color = sf::Color::Magenta;
                 //scene_config.type = ObjectType::hazard;
                 scene_config.audio_event_sfx = object_triggered_sfx_;
                 objects_.emplace_back(std::make_unique<Scenery>(window_ref_, view_ref_, scene_config));
@@ -64,6 +64,7 @@ void object_spawner::spawn_object()
         }
        
 }
+/*
 //need to clamp min/max values (remove?)
 void object_spawner::update_object_speed(const int& score, const float& time)
 {
@@ -101,7 +102,7 @@ void object_spawner::update_object_speed(const int& score, const float& time)
         
        
 }
-
+*/
 /*
 // need to clamp min/max values (remove?)
 void object_spawner::update_spawn_rate(const int& score, const float& time)
@@ -138,14 +139,7 @@ void object_spawner::update_spawn_rate(const int& score, const float& time)
 */
 void object_spawner::render_objects() const
 {
-        /*
-        if (!window_ref_.expired())
-        {
-                std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
-                
-                window.reset();
-        }
-        */
+
         for (const auto& object : objects_)
         {
                 if (object->is_alive())

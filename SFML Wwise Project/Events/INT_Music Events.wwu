@@ -116,6 +116,16 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{76243190-5DFC-4DC4-B342-631EBAAB671D}" ShortID="139638263">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="22"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="DownBeat" ID="{B759455B-536E-41C1-89BF-4FDF977B077E}" WorkUnitID="{292E542A-3870-4D00-AB79-C5C7237FCABC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 					</ChildrenList>
 				</Event>
 				<Event Name="Pause_Background_Music" ID="{C63B3D65-52E4-4634-B202-FABD7EB97593}">

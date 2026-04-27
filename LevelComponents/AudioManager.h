@@ -35,8 +35,9 @@ private:
     sf::RenderWindow& window_ref_;
     sf::View& view_ref_;
     std::map<std::string, AkAudioObjectID> registered_objects_;
-    int id_value_ = 1;
     
+    // default values
+    int id_value_ = 1;
     float volume_level_ = 20;
     // units per second
     const float volume_rate_ = 30.f;

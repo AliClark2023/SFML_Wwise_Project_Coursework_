@@ -28,8 +28,8 @@ public:
     
     float get_start_speed() const { return start_speed_; }
     // calculation function to set spawn rate & speed (add parameters for timer)
-    void update_object_speed(const int& score, const float& time);
-    void update_spawn_rate(const int& score, const float& time);
+    //void update_object_speed(const int& score, const float& time);
+    //void update_spawn_rate(const int& score, const float& time);
     
     void render_objects() const;
     void detect_collision(const std::unique_ptr<Player>& player);

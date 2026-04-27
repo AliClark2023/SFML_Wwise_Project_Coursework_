@@ -56,11 +56,9 @@ int main()
 
 	// Audio setup (must be done first)
 	AudioManager::initialize(*window, *view);
-	//AudioObject bg_music{ AudioManager::instance().register_object("Play_Background_Music","")};
-	//AudioObject bg_music{ AudioManager::instance().register_object(play_music_event.data(),"")};
+
 	AudioObject bg_music{ AudioManager::instance().get_registered_object(play_music_event.data())};
-	//AudioObject stop_bg_music{AudioManager::instance().register_object("Stop_Background_Music", "Play_Background_Music")};
-	AudioObject stop_bg_music{AudioManager::instance().register_object(stop_music_event.data(), "Play_Background_Music")};
+	AudioObject stop_bg_music{AudioManager::instance().register_object(stop_music_event.data(), play_music_event.data())};
 	// game functionality
 	std::unique_ptr<menu_ui> ui(new menu_ui(*window,*view));
 	std::unique_ptr<level> Level(new level(*window,*view, *ui));

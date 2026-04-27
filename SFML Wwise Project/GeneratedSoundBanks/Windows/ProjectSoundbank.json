@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{D586EC88-24D7-4A03-A18B-8352411C673F}",
     "Language": "SFX",
-    "Hash": "{E9C7CB3A-D44C-B576-2246-53A0DEA4069A}",
+    "Hash": "{1CE83522-7F19-71E2-6089-6C49B853F8CA}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\ProjectSoundbank",
     "ShortName": "ProjectSoundbank",
     "Path": "ProjectSoundbank.bnk",
@@ -651,6 +651,15 @@
          }
         ]
        }
+      ],
+      "ActionSetState": [
+       {
+        "GroupId": "766723505",
+        "Id": "1500425445",
+        "Name": "DownBeat",
+        "ObjectPath": "\\States\\Default Work Unit\\Game_State\\DownBeat",
+        "GUID": "{B759455B-536E-41C1-89BF-4FDF977B077E}"
+       }
       ]
      }
     ],
@@ -712,6 +721,6 @@
     ]
    }
   ],
-  "FileHash": "{E17A9708-C115-1A88-7AA9-9419DA3B37D2}"
+  "FileHash": "{F1B196F5-FCBA-DDBF-5BC1-CC8DFABA88F1}"
  }
 }

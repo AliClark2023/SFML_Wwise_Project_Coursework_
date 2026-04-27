@@ -1251,9 +1251,6 @@
 									<Reference>
 										<Local>
 											<MusicStinger Name="" ID="{F1E86E18-4723-4130-A947-BBCC0A1C44BA}">
-												<PropertyList>
-													<Property Name="PlaySegmentAt" Type="int16" Value="3"/>
-												</PropertyList>
 												<ReferenceList>
 													<Reference Name="Segment">
 														<ObjectRef Name="HazardStinger" ID="{E72163D6-075D-4135-8934-C94FA9D2111D}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>
@@ -1268,9 +1265,6 @@
 									<Reference>
 										<Local>
 											<MusicStinger Name="" ID="{05235641-C4ED-42BB-AAA9-284BBB5F0C83}">
-												<PropertyList>
-													<Property Name="PlaySegmentAt" Type="int16" Value="3"/>
-												</PropertyList>
 												<ReferenceList>
 													<Reference Name="Segment">
 														<ObjectRef Name="LandingStinger" ID="{8974C82A-60EA-4B26-AA73-0521A6C854E1}" WorkUnitID="{E9DFC856-E175-4B2C-855E-9EB81ECF1591}"/>

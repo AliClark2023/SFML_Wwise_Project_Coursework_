@@ -32,7 +32,7 @@ AudioObject AudioManager::register_object(const std::string& obj_name, const std
         id_value_ ++;
     }
     else{
-        // registered objects requires an existing object to work
+        // obj_name requires an existing object to work, doesn't require registering to sound engine, just needs ID of a registered object it will affect
         auto it = registered_objects_.find(obj_associated_name);
         if (it != registered_objects_.end())
         {
@@ -78,30 +78,10 @@ void AudioManager::handle_input(float dt)
         AK::SoundEngine::SetRTPCValue(volume_event.data(), volume_level_);
     }
     
-    /*
-    while (const std::optional event = window_ref_.pollEvent())
-    {
-        if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
-        {
-            // volume adjustment when player input is detected
-            if (keyPressed->scancode == sf::Keyboard::Scancode::Up)
-            {
-                volume_level_ += volume_rate_ * dt;
-                volume_level_ = std::clamp(volume_level_, 0.f, 100.f);
-                AK::SoundEngine::SetRTPCValue(volume_event.data(), volume_level_);
-            }
-            if (keyPressed->scancode == sf::Keyboard::Scancode::Down)
-            {
-                volume_level_ -= volume_rate_ * dt;
-                volume_level_ = std::clamp(volume_level_, 0.f, 100.f);
-                AK::SoundEngine::SetRTPCValue(volume_event.data(), volume_level_);
-            }
-            
-        }
-    }   
-    */
+    
 }
 
+// Creates default 
 AudioManager::AudioManager(sf::RenderWindow& window, sf::View& view): window_ref_(window), view_ref_(view)
 {
     bg_music = register_object(play_music_event.data(),"");
