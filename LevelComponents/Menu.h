@@ -32,11 +32,7 @@ public:
 private:
     sf::RenderWindow& window_ref_;
     sf::View& view_ref_;
-    
-    // menu status
-    // make active status to all UI elements
-    // bool active_ = false;
-    
+   
     //used as flag to reset current level, should change to enum to denote which level to reset
     bool reset_level_ = false;
     

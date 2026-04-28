@@ -5,6 +5,9 @@
 #include <SFML/Graphics/Font.hpp>
 #include "../Utilities/FileLoading.h"
 
+/*  Pause functionality component (used in conjunction with Menu UI)
+ *  Handles Input and text display
+ */
 class pause_menu
 {
 public:

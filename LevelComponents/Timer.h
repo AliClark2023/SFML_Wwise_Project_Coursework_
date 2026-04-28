@@ -4,6 +4,7 @@
 
 /*
  * Class that creates timer and contains functions to display and adjust time
+ * (used in conjunction with Menu UI)
  */
 class timer
 {

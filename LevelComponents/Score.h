@@ -2,6 +2,9 @@
 #include <SFML/Graphics/Font.hpp>
 #include "../Utilities/FileLoading.h"
 
+/* Score UI component (used in conjunction with Menu UI)
+ * Updates score text based on function activations
+ */
 class score
 {
 public:

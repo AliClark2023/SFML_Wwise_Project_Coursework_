@@ -28,13 +28,11 @@ void menu_ui::handle_input(float dt)
     // pause/resume timer
     if (pause_ui_->is_active() && timer_ui_->get_clock().isRunning())
     {
-        //AK::SoundEngine::PostEvent(EVT_PAUSE_BG_MUSIC.EventName.data(), EVT_PAUSE_BG_MUSIC.Associated_ID);
         AK::SoundEngine::PostEvent(pause_bg.Name.data(), pause_bg.ID);
         timer_ui_->pause_timer();
     }
     if (!pause_ui_->is_active() && !timer_ui_->get_clock().isRunning())
     {
-       // AK::SoundEngine::PostEvent(EVT_RESUME_BG_MUSIC.EventName.data(), EVT_RESUME_BG_MUSIC.Associated_ID);
         AK::SoundEngine::PostEvent(resume_bg.Name.data(), resume_bg.ID);
         timer_ui_->resume_timer();
     }
