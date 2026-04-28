@@ -2,6 +2,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+/*  Helper class to load in file assets, currently only loading font is implemented
+ */
 class FileLoading
 {
 public:

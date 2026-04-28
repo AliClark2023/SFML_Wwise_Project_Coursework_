@@ -42,11 +42,12 @@ bool sat_detection::projection_overlap(const float min_a, const float max_a, con
 }
 
 /*
-   * Performs Separate axis theorem to detect if there's a collision between two shapes 
-   * and determines which orientation the collision came from using minimal translation vector MTV
-   */
-// collision assumes shape A will be the object to move out of shape Bs way
-// works with convex shapes only
+* Performs Separate axis theorem to detect if there's a collision between two shapes 
+* and determines which orientation the collision came from using minimal translation vector MTV
+* 
+* Collision assumes shape A will be the object to move out of shape Bs way 
+* Works with convex shapes only
+*/
 bool sat_detection::sat_collision(const sf::Shape& shape_a, const sf::Shape& shape_b, sf::Vector2f& mtv)
 {
     std::vector <sf::Vector2f> points_a = get_transformed_points(shape_a);
@@ -93,7 +94,6 @@ bool sat_detection::sat_collision(const sf::Shape& shape_a, const sf::Shape& sha
         if (!projection_overlap(min_a, max_a, min_b, max_b)) return false;
         
         float overlap = std::min(max_a, max_b) - std::max(min_a, min_b);
-        //float overlap = std::min(min_a, min_b) - std::max(max_a, max_b);
         if (overlap < smallest_overlap)
         {
             smallest_overlap = overlap;

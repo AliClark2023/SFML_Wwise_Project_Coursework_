@@ -9,6 +9,7 @@
  * Uses circle shape to define custom polygons (less setup than convex shape)
  * derived from: https://www.youtube.com/watch?v=IkdGcvKXNJw
  * & Co-pilot
+ * Produces more overhead than bounding boxes but allows for any type of shape to be created or rotated
  */
 
 class sat_detection
