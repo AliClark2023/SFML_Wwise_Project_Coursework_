@@ -5,7 +5,7 @@
 #include "../Constants/AudioObjects.h"
 #include "../LevelComponents/AudioManager.h"
 
-// make general to use between obstacle types
+// Config struct to specify characteristics of object when instantiating
 struct scenery_config
 {   // Needs to be in this precise order for collision to be accurate
     size_t point_count = 4;
@@ -21,7 +21,9 @@ struct scenery_config
     AudioObject audio_event_sfx;
 };
 
-// Handles platforms the player can land on top of
+/* Handles platforms the player can land on top of or creates hazards depending on config struct
+ * Ideally should be split into 2 separate classes (platforms and hazards)
+ */ 
 class Scenery : public GameObject
 {
 public:

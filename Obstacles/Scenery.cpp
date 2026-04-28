@@ -47,31 +47,24 @@ void Scenery::collision_response(GameObject* collider, const sf::Vector2f& mtv)
     switch (object_type_)
     {
         case scenery:
-            // alter so that only an upward collision will change colour/gain points
             collision_align = mtv.x * UP.x + mtv.y * UP.y;
             //landing from above
             if (collision_align > 0.5f)
             {
                 if (!has_been_activated())
                 {
-                    // audio trigger (pass in ID) (create ID system)
-                    //AK::SoundEngine::PostEvent(AKTEXT("Platform_Landing"), 1);
                     AK::SoundEngine::PostEvent(audio_sfx_event.Name.data(), audio_sfx_event.ID, AK_EndOfEvent, AudioEventCallback, this);
-                    //set_activated(true);
-                    //setFillColor(sf::Color::Green);
                 }
             }
         break;
         case hazard:
-            //AK::SoundEngine::PostEvent(AKTEXT("Destroy_Hazzard"), 1);
             AK::SoundEngine::PostEvent(audio_sfx_event.Name.data(), audio_sfx_event.ID, AK_EndOfEvent, AudioEventCallback, this);
-            //set_alive(false);
         break;
         default:
         break;
     }
 }
-
+// attempted to sync object changing colour with audio trigget
 void Scenery::AudioEventCallback(AkCallbackType in_eType, AkCallbackInfo* in_pCallbackInfo)
 {
     if (in_eType & AK_EndOfEvent)

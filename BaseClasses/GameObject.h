@@ -5,6 +5,7 @@
 /*
  *  Names determining which type of object
  *  Ideally should be handled by derived classes but is fine for this small scale
+ *  
  */
 enum ObjectType
 {
