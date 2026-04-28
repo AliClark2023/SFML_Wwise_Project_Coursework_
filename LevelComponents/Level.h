@@ -12,6 +12,9 @@
 #include "../LevelComponents/AudioManager.h"
 #include "../LevelComponents/Menu.h"
 
+/*
+ *  Level class manages spawner activation and updates ui according to collisions detected
+ */
 class level
 {
 public:
@@ -35,15 +38,11 @@ private:
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Scenery> ground_;
-    
-    // remove after testing is done
-    std::vector<std::unique_ptr<GameObject>> obstacles_;
-    
+
     std::vector<std::unique_ptr<object_spawner>> spawners_;
     /*
      * spawned object parameters
      */
-    // speed variable to adjust all spawned objects by
     float object_speed_ = 300.0f;
     sf::Vector2f spawn_zone_min_ = sf::Vector2f(0.0f, 0.0f);
     sf::Vector2f spawn_zone_max_ = sf::Vector2f(0.0f, 0.0f);
@@ -53,22 +52,19 @@ private:
     int spawner_selection = 0;
     bool ascending = true;
     
-    // level UI components
-    //timer timer_;
-    //score score_;
-    
-    // testing
-    float prev_intensity = 0.0f;
-    
+    // level states
     enum class level_state { slow, high };
     level_state level_state_ = level_state::slow;
     
+    /*
+     *Audio parameters
+     */
+    float prev_intensity = 0.0f;
     // Audio events (need asscociating ID from AudioManager
     AudioObject plat_land;
     AudioObject hazard_hit;
     AudioObject upbeat_change;
     AudioObject intensity_obj;
     AudioObject play_bg;
-
     AudioObject stop_bg;
 };

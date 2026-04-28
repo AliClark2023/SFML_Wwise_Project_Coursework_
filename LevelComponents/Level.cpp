@@ -4,31 +4,16 @@ level::level( sf::RenderWindow& win,  sf::View& v, menu_ui& menu) : window_ref_(
 {
     player_ = std::make_unique<Player>(win, v);
     ground_ = std::make_unique<Scenery>(win, v);
-    
-    // Audio initialisation (create function)
-    // registering objects used within level
-    /*
-    AK::SoundEngine::RegisterGameObj(EVT_PLAY_BG_MUSIC.ID);
-    AK::SoundEngine::RegisterGameObj(EVT_CHANGE_TO_UP_BEAT.ID);
-    AK::SoundEngine::RegisterGameObj(EVT_INTENSITY.ID);
-    AK::SoundEngine::RegisterGameObj(EVT_PLAT_LANDING.ID);
-    AK::SoundEngine::RegisterGameObj(EVT_DESTROY_HAZARD.ID);
-    AK::SoundEngine::RegisterGameObj(EVT_STOP_BG_MUSIC.ID);
-    */
-    
-    // level specific audio events
+ 
+    // level specific audio events, acquiring IDs of events
     play_bg = AudioManager::instance().get_registered_object(play_music_event.data());
     plat_land = AudioManager::instance().register_object(plat_event.data(), play_music_event.data());
     hazard_hit = AudioManager::instance().register_object(hazard_event.data(), play_music_event.data());
     upbeat_change =AudioManager::instance().register_object(upbeat_event.data(), play_music_event.data());
     intensity_obj =AudioManager::instance().register_object(intensity_event.data(), play_music_event.data());
-
-   
     
     // starting music
-    //AK::SoundEngine::PostEvent(EVT_PLAY_BG_MUSIC.EventName.data(), EVT_PLAY_BG_MUSIC.ID);
     AK::SoundEngine::PostEvent(play_bg.Name.data(), play_bg.ID);
-    
     
     //initializing spawn zone
     spawn_zone_min_ = view_ref_.getCenter();
@@ -37,9 +22,9 @@ level::level( sf::RenderWindow& win,  sf::View& v, menu_ui& menu) : window_ref_(
     spawn_zone_max_ = sf::Vector2f(0.0f, 0.0f);
     
     setup_spawners();
-    
 }
 
+// handling player and UI input
 void level::handle_input(float dt)
 {
     if (!menu_ref_.is_pause_active()) player_->handle_input(dt);
@@ -54,7 +39,6 @@ void level::update(float dt)
     // component updates
     player_->update(dt);
     ground_->update(dt);
-    // make function/calculation to account for multiple spawners
     menu_ref_.add_to_score(update_score());
     
     update_audio();
@@ -74,46 +58,36 @@ void level::update(float dt)
 
 void level::render()
 {
-    // UI elements first
-    //timer_.render_timer(window_ref_);
     render_spawners();
-    //score_.render_score(window_ref_);
     window_ref_.draw(*player_);
     window_ref_.draw(*ground_);
-    
 }
 
 // initialises all spawners and moves to container for easy alterations
 void level::setup_spawners()
 {
-    // spawner config (create function)
-    // add these to constants (make unique pos for different spawners)
+    // spawner config 
     sf::Vector2f plat_spawn_pos = sf::Vector2f(view_ref_.getCenter().x + view_ref_.getSize().x, view_ref_.getCenter().y - 50);
     sf::Vector2f hazard_spawn_pos = sf::Vector2f(view_ref_.getCenter().x + view_ref_.getSize().x, view_ref_.getCenter().y );
     sf::Vector2f plat2_spawn_pos = sf::Vector2f(view_ref_.getCenter().x + view_ref_.getSize().x, view_ref_.getCenter().y + 50);
     sf::Vector2f despawn_pos = sf::Vector2f(view_ref_.getCenter().x - view_ref_.getSize().x, view_ref_.getCenter().y);
     
     std::unique_ptr<object_spawner> spawner;
-    // initial scenery spawner # 1
+    
+    // initial scenery spawner #1
     spawner = std::make_unique<object_spawner>(window_ref_, view_ref_);
     spawner->setPosition(plat_spawn_pos);
-    //spawner->set_start_spawn_rate(MIN_SPWN_RATE * 1.5);
-    //spawner->set_start_spawn_rate(BASE_SPAWN_RATE);
     spawner->set_start_speed(MIN_OBJ_SPEED);
-    //spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
     spawner->set_hazard_chance(10);
     spawner->set_hazard_sfx(hazard_hit);
     spawner->set_plat_sfx(plat_land);
     spawners_.push_back(std::move(spawner));
     
-    // initial hazard spawner
+    // initial hazard spawner (higher hazard chance)
     spawner = std::make_unique<object_spawner>(window_ref_, view_ref_);
     spawner->setPosition(hazard_spawn_pos);
-    //spawner->set_start_spawn_rate(MIN_SPWN_RATE  * 2);
-    //spawner->set_start_spawn_rate(BASE_SPAWN_RATE);
     spawner->set_start_speed(MIN_OBJ_SPEED);
-    //spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
     spawner->set_hazard_chance(50);
     spawner->set_hazard_sfx(hazard_hit);
@@ -121,20 +95,15 @@ void level::setup_spawners()
     spawners_.push_back(std::move(spawner));
     
     
-    // initial scenery spawner # 2
+    // initial scenery spawner #2
     spawner = std::make_unique<object_spawner>(window_ref_, view_ref_);
     spawner->setPosition(plat2_spawn_pos);
-    //spawner->set_start_spawn_rate(MIN_SPWN_RATE * 0.75);
-    //spawner->set_start_spawn_rate(BASE_SPAWN_RATE);
     spawner->set_start_speed(MIN_OBJ_SPEED);
-    //spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
     spawner->set_hazard_chance(5);
     spawner->set_hazard_sfx(hazard_hit);
     spawner->set_plat_sfx(plat_land);
     spawners_.push_back(std::move(spawner));
-    
-    
 }
 
 int level::update_score() const
@@ -150,7 +119,7 @@ int level::update_score() const
 void level::update_spawners(const float& dt)
 {
     const float score = static_cast<float>(menu_ref_.get_score());
-    // CLAMP THESE
+    // CLAMP THESE, now handled by curve calculation and min/max values in ObstaclesConst.h
     float new_obj_speed;
     float new_obj_spwn_rate;
     
@@ -166,8 +135,6 @@ void level::update_spawners(const float& dt)
     
     if (spawn_elapsed_time_ >= spawn_rate_)
     {
-        // new object speed based on score, using linear calculation
-        //new_obj_speed = std::clamp((score * OBJ_SPEED_MULTIPLIER) + spawners_[spawner_selection]->get_start_speed(), spawners_[spawner_selection]->get_start_speed(), MAX_OBJ_SPEED);
         // new speed calculation, similar to intensity & spawn rate (slow -> fast curve)
         float  new_obj_speed_t = std::clamp(score / (HIGH_STATE_SCORE_THRESHOLD * 2), 0.f, 1.0f);
         new_obj_speed = MIN_OBJ_SPEED + (MAX_OBJ_SPEED - MIN_OBJ_SPEED) * (new_obj_speed_t * new_obj_speed_t);
@@ -175,6 +142,7 @@ void level::update_spawners(const float& dt)
         
         spawners_[spawner_selection]->spawn_object();
         
+        // progresses through spawners ascending -> descending before reversing
         if (ascending)
         {
             spawner_selection ++;
@@ -217,7 +185,7 @@ void level::update_audio()
     switch (level_state_)
     {
         case level_state::slow:
-            // using same smooth curve formula as spawn rate
+            // using same smooth curve formula as spawn rate & speed
             intensity_t = std::clamp(score / HIGH_STATE_SCORE_THRESHOLD, 0.f, 1.0f);
             new_audio_intensity = START_AUDIO_INTENSITY + (MAX_AUDIO_INTENSITY - START_AUDIO_INTENSITY) * intensity_t;
             break;
