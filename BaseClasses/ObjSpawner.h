@@ -8,7 +8,8 @@
 #include "../Constants/AudioObjects.h"
 #include "../LevelComponents/AudioManager.h"
 /*
- * Base Class that spawns specified object type at a specified rate & speed
+ * Spawner that instantiates specified object type at a specified rate & speed
+ * Can update spawned objects characteristics 
  */
 class object_spawner : public GameObject
 {
@@ -16,37 +17,36 @@ public:
     object_spawner(sf::RenderWindow& win, sf::View& v);
     
     void spawn_object();
-    // directly set spawn & speed
+    
+    /* Setting spawner properties
+     */
     void set_spawn_rate(const float rate){spawn_rate_ = rate;}
-    //called when initialising spawner
-    //void set_start_spawn_rate(const float rate){start_spawn_rate_ = rate; set_spawn_rate(start_spawn_rate_);}
+ 
+    /* Spawned object properties
+     */
     void set_start_speed(const float speed){ start_speed_ = speed; set_object_speed(start_speed_); }
     void set_hazard_chance(const int chance){hazard_chance = chance;}
-    
-    //float get_start_spawn_rate() const {return start_spawn_rate_;}
     void set_object_speed(const float speed){ object_speed_ = speed; }
-    
-    float get_start_speed() const { return start_speed_; }
-    // calculation function to set spawn rate & speed (add parameters for timer)
-    //void update_object_speed(const int& score, const float& time);
-    //void update_spawn_rate(const int& score, const float& time);
-    
-    void render_objects() const;
-    void detect_collision(const std::unique_ptr<Player>& player);
-    void set_score_threshold(const sf::Vector2f& threshold_pos){ score_threshold_pos_ = threshold_pos; }
-    void set_despawn_threshold(const sf::Vector2f& despawn_pos){ despawn_threshold = despawn_pos; }
-    int get_objects_scored();
-    
     // setting audio events
     void set_hazard_sfx (const AudioObject& event) { hazard_triggered_sfx = event; }
     void set_plat_sfx (const AudioObject& event) { plat_triggered_sfx_ = event; }
+    float get_start_speed() const { return start_speed_; }
+    // handles were to despawn, instantiated objects
+    void set_despawn_threshold(const sf::Vector2f& despawn_pos){ despawn_threshold = despawn_pos; }
     
-    // revert/remove
-    void handle_input(float dt) override;
+    int get_objects_scored();
+    
+    // requires use of SAT utility suite
+    void detect_collision(const std::unique_ptr<Player>& player);
     void update(float dt) override;
+    void render_objects() const;
+    
+    
+    // not in use but required to be defined
+    void handle_input(float dt) override;
     void collision_response(GameObject* collider, const sf::Vector2f& mtv) override;
+    
 private:
-    //ObjectType type_to_spawn_;
     float elapsed_time_ = 0.f;
     float spawn_rate_ = 0.5f;
     float object_speed_ = 0.f;
@@ -55,12 +55,10 @@ private:
     // chance of making object a hazard
     int hazard_chance = 0;
     
-    // change to x pos only ?
     sf::Vector2f score_threshold_pos_;
     sf::Vector2f despawn_threshold;
     
     int objects_scored_ = 0;
-    // change to obstacle/scenery class
     std::vector<std::unique_ptr<Scenery>> objects_;
     
     // flags for determining if variable has been altered

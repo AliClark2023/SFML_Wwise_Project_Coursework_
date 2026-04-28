@@ -100,7 +100,7 @@ void level::setup_spawners()
     //spawner->set_start_spawn_rate(MIN_SPWN_RATE * 1.5);
     //spawner->set_start_spawn_rate(BASE_SPAWN_RATE);
     spawner->set_start_speed(MIN_OBJ_SPEED);
-    spawner->set_score_threshold(view_ref_.getCenter());
+    //spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
     spawner->set_hazard_chance(10);
     spawner->set_hazard_sfx(hazard_hit);
@@ -113,7 +113,7 @@ void level::setup_spawners()
     //spawner->set_start_spawn_rate(MIN_SPWN_RATE  * 2);
     //spawner->set_start_spawn_rate(BASE_SPAWN_RATE);
     spawner->set_start_speed(MIN_OBJ_SPEED);
-    spawner->set_score_threshold(view_ref_.getCenter());
+    //spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
     spawner->set_hazard_chance(50);
     spawner->set_hazard_sfx(hazard_hit);
@@ -127,7 +127,7 @@ void level::setup_spawners()
     //spawner->set_start_spawn_rate(MIN_SPWN_RATE * 0.75);
     //spawner->set_start_spawn_rate(BASE_SPAWN_RATE);
     spawner->set_start_speed(MIN_OBJ_SPEED);
-    spawner->set_score_threshold(view_ref_.getCenter());
+    //spawner->set_score_threshold(view_ref_.getCenter());
     spawner->set_despawn_threshold(despawn_pos);
     spawner->set_hazard_chance(5);
     spawner->set_hazard_sfx(hazard_hit);
