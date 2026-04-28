@@ -159,7 +159,7 @@ void level::update_spawners(const float& dt)
     spawn_elapsed_time_ += dt;
     // spawn rate calculations, similar to intensity calculation, uses slow -> fast curve (t2)
     float spawn_t = std::clamp(score / (HIGH_STATE_SCORE_THRESHOLD * 2), 0.f, 1.0f);
-    new_obj_spwn_rate = BASE_SPAWN_RATE + (MIN_SPAWN_RATE - BASE_SPAWN_RATE) * (spawn_t * spawn_t);
+    new_obj_spwn_rate = MAX_SPAWN_RATE + (MIN_SPAWN_RATE - MAX_SPAWN_RATE) * (spawn_t * spawn_t);
     
     spawn_rate_= new_obj_spwn_rate;
     int max_num_spawners = static_cast<int>(spawners_.size()) - 1;
