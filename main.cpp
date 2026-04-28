@@ -39,13 +39,6 @@ int main()
 		}
 	}
 	
-	// registering wwise game objects (using IDs and names from AudioObjects.h)
-	// only 1 main audio object is required (background music)
-	{
-		//AK::SoundEngine::RegisterGameObj(EVT_PLAY_BG_MUSIC.ID);
-		
-	}
-	
 	// game initialisation
 	std::unique_ptr<sf::RenderWindow> window(new sf::RenderWindow (sf::VideoMode({ 1280, 720 }), "Audio Coursework"));
 	std::unique_ptr<sf::View> view(new sf::View);
