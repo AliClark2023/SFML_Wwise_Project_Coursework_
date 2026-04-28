@@ -4,13 +4,11 @@
 
 Player::Player(sf::RenderWindow& win, sf::View& v):  GameObject(win, v)
 {
-    //set_window(win);
-    //set_view(v);
+
     setPointCount(4);
     setRadius(25.f);
     setOrigin(sf::Vector2f(getRadius(), getRadius()));
     setRotation(sf::degrees(45));
-    // use in constant, should be updateable
     spawn_point = sf::Vector2f(win.getView().getCenter().x, win.getView().getCenter().y - 200.f);
     setPosition(spawn_point);
     setFillColor(sf::Color::Yellow);
@@ -23,10 +21,6 @@ Player::Player(sf::RenderWindow& win, sf::View& v):  GameObject(win, v)
     is_jumping_ = false;
     //movement
     velocity_ = sf::Vector2f(2.f, 0) * PLAYER_V_SCALE;
-    //object_type_ = player_controlled;
-    
-    // collision setup
-    //collision_box_ = getGlobalBounds();
 }
 
 Player::~Player()
@@ -35,20 +29,13 @@ Player::~Player()
 
 void Player::handle_input(float dt)
 {
-    /*
-    if (!window_ref_.expired())
-    {
-        // debug code
-        std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
-        
-        window.reset();
-    }
-    */
     
     if(window_ref_.hasFocus())
     {
         //jumping
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && !is_key_held_) {
+            
+            // disabled to allow multiple jumps in air
             if (!is_jumping_) {
                 /*
                 y_velocity_ = jump_vector_;
@@ -57,8 +44,7 @@ void Player::handle_input(float dt)
                 //jump sound
                 */
             }
-                
-            // testing jumping 
+            
             y_velocity_ = jump_vector_;
             is_jumping_ = true;
             is_key_held_ = true;
@@ -81,28 +67,22 @@ void Player::handle_input(float dt)
 
 void Player::update(float dt)
 {
-    ////Updating gravity
-    //s=ut + 1/2at^2
+    //Updating gravity
     
     if (is_on_ground_) y_velocity_ = sf::Vector2f(0, 0);
     sf::Vector2f pos = y_velocity_ * dt + 0.5f * gravity_ * dt * dt;
-    // v = u +at note its += not =
     y_velocity_ += gravity_ * dt;
     setPosition(getPosition() + pos);
     //required to constantly apply gravity when a collision is not occuring
     if (is_on_ground_) is_on_ground_ = false;
     
-    // viewport boundary collision check
-    /*
-    if (!window_ref_.expired())
-    {
-        std::shared_ptr<sf::RenderWindow> window = window_ref_.lock();
-        
-    }
-    */
     float window_width = window_ref_.getView().getSize().x;
     float window_height = window_ref_.getView().getSize().y;
     sf::Vector2f window_centre = window_ref_.getView().getCenter();
+    
+    /*
+     * Window/view boundaries
+     */
     // left border
     if (getPosition().x < window_centre.x - (window_width / 2))
     {
@@ -142,7 +122,6 @@ void Player::collision_response(GameObject* collider, const sf::Vector2f& mtv)
         {
             is_on_ground_ = false;
             y_velocity_.y = std::max(y_velocity_.y, 0.f);
-            //if (y_velocity_.y < 0.f) y_velocity_.y = 0.f;
         }else
         {
             is_on_ground_ = false;
