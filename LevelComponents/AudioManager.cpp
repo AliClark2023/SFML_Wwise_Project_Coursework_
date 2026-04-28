@@ -22,8 +22,15 @@ AudioObject AudioManager::register_object(const std::string& obj_name, const std
     // game object/event that doesn't rely on other registered audio objects
     if (obj_associated_name.empty())
     {
-        //requires check if object has been registered before
-        
+        // checks if its been registered before and returns if true
+        auto it = registered_objects_.find(obj_name);
+        if (it != registered_objects_.end())
+        {
+            std::pair<std::string, AkAudioObjectID> entry = *it;
+            obj.Name = obj_name;
+            obj.ID = entry.second;
+            return obj;
+        }
         AK::SoundEngine::RegisterGameObj(id_value_);
         
         obj.Name = obj_name;
@@ -81,7 +88,7 @@ void AudioManager::handle_input(float dt)
     
 }
 
-// Creates default 
+// Creates default audio event
 AudioManager::AudioManager(sf::RenderWindow& window, sf::View& view): window_ref_(window), view_ref_(view)
 {
     bg_music = register_object(play_music_event.data(),"");

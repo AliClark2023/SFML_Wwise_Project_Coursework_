@@ -11,8 +11,9 @@ struct AudioObject
     AkAudioObjectID ID;
 };
 
-// manages registering wwise objects and their associating IDs
-// contains user input controls to adjust audio in game (volume currently implemented)
+/*  Manages registering wwise objects and their associating IDs
+ *  Contains user input controls to adjust audio in game (volume currently implemented)
+*/
 class AudioManager
 {
 public:
